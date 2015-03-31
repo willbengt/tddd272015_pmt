@@ -1,1 +1,38 @@
-This is a README file
+README
+
+1 PROJECT DESCRIPTION
+Project Management Tool as part of the course TDDD27 Advanced webprogramming at 
+Linkoping university during the spring of 2015
+
+2 PROJECT MEMBERS
+Rasmus Kling rasmus.kling@gmail.com
+Teddy Wallen tedwa306@student.liu.se
+William Bengtsson mail@williambengtsson.com
+
+3 FUNCTIONAL SPECIFICATION
+3.1 PROJECT VISION
+To create an amazing project managment tool intended to help project members 
+keep track of their project’s status.
+
+3.2 CORE FUNCTIONS
+Timereporting
+Multiple authentication levels, e.g. admin, project member, project leader etc.
+Visualization of progress and different metrics for the project, e.g. burn down 
+chart
+
+4 TECHNOLOGICAL SPECIFICATION
+4.1 CLIENT-SIDE FRAMEWORK
+AngularJS
+
+4.2 SERVER-SIDE FRAMEWORK
+Ruby on Rails
+
+4.3 AUTHENTICATION
+OpenID/OAuth
+
+4.4 DATA AND USER MANAGEMENT
+MongoDB
+
+4.5 TESTING FRAMEWORK
+Selenium
+
