@@ -4,9 +4,9 @@ Linkoping university during the spring of 2015. The ambition of the project is
 to be graded 5.
 
 # Project members
-Rasmus Kling rasmus.kling@gmail.com
-Teddy Wallen tedwa306@student.liu.se
-William Bengtsson mail@williambengtsson.com
+- Rasmus Kling rasmus.kling@gmail.com
+- Teddy Wallen tedwa306@student.liu.se
+- William Bengtsson mail@williambengtsson.com
 
 # Functional specification
 ## Project vision
