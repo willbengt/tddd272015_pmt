@@ -15,16 +15,16 @@
 
 	</head>
 
-	<body ng-app="flapperNews" ng-controller="MainCtrl">
+	<body ng-app="flapperNews" ng-controller="MainCtrl"> <!-- The ng-app directive initializes an AngularJS applicatio in app.js. If ng-app is removed the expressions below won't be evaluated. -->
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="page-header">
 					<h1>Flapper News</h1>
 				</div>
-				<div ng-repeat="post in posts | orderBy:'-upvotes'">
-					<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>
+				<div ng-repeat="post in posts | orderBy:'-upvotes'"> <!-- The ng-repeat directive repeats an HTML element as many times as there is elements in "posts" specified in the app. "post" is the iteration variable --> 
+					<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span> <!-- The iteration variable 'post' is passed by reference to the incrementUpvotes functions specified in the app. -->
 					{{post.upvotes}}
-					<a ng-show="post.link" href="{{post.link}}"> <!-- Hide the link if it the user has added one -->
+					<a ng-show="post.link" href="{{post.link}}"> <!-- Show the link if it the user has added one -->
 						{{post.title}}
 					</a>
 					<span ng-hide="post.link"> <!-- Hide the link if it the user hasn't added anyone -->
@@ -35,7 +35,7 @@
 					<h3>Add a new post</h3>
 
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Title" ng-model="title"></input>
+						<input type="text" class="form-control" placeholder="Title" ng-model="title"></input> <!--The ng-model directive binds the value of the text box to $scope so thtat it can be accesse by the application. -->
 			        </div>
 			        <div class="form-group">
 			          <input type="text" class="form-control" placeholder="Link" ng-model="link"></input>
