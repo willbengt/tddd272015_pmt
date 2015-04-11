@@ -293,4 +293,3 @@ WELCOME_CONTENTS
   end
   run welcome
 end
-
