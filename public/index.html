@@ -10,16 +10,23 @@
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 		<script src="js/app.js"></script>
 	</head>
 
-	<body ng-app="pmt" ng-controller="MainCtrl"> 
+	<body ng-app="pmt" > 
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
-				<div class="page-header">
-					<h1>Project Management Tool</h1>
-				</div>
-				<h3>Time report</h3>
+				<ui-view></ui-view>
+    		</div>
+ 	 	</div>
+
+		<script type="text/ng-template" id="/home.html">
+			<div class="page-header">
+				<h1>Project Management Tool</h1>
+			</div>
+			<h3>Time report</h3>
+			<form id="addForm" ng-submit="addTimeElement()">
 				<table class="table">
 					<tr>
 						<th>Date</th>
@@ -43,16 +50,14 @@
 						<td><button type="button" class="btn btn-primary">Edit</button></td>
 					</tr>
 					<tr>
-						<form id="addForm" ng-submit="addTimeElement()">
-							<td><input type="text" class="form-control" placeholder="Date" ng-model="date"></input></td>
-							<td><input type="text" class="form-control" placeholder="Name" ng-model="name"></input></td>
-							<td><input type="text" class="form-control" placeholder="Start" ng-model="start"></td>
-							<td><input type="text" class="form-control" placeholder="End" ng-model="end"></td>
-							<td><button type="submit" class="btn btn-success">Add</button></td>
-						</form>
+						<td><input type="text" class="form-control" placeholder="Date" ng-model="date"></input></td>
+						<td><input type="text" class="form-control" placeholder="Name" ng-model="name"></input></td>
+						<td><input type="text" class="form-control" placeholder="Start" ng-model="start"></td>
+						<td><input type="text" class="form-control" placeholder="End" ng-model="end"></td>
+						<td><button type="submit" class="btn btn-success">Add</button></td>
 					</tr>
 				</table>
-			</div>
-		</div>
+			</form>
+		</script>
 	</body>
 </html>
