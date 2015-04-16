@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Project Management Tool</title>
+
+		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+		<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+		<script src="js/app.js"></script>
+	</head>
+
+	<body ng-app="pmt" ng-controller="MainCtrl"> 
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="page-header">
+					<h1>Project Management Tool</h1>
+				</div>
+				<h3>Time report</h3>
+				<table class="table">
+					<tr>
+						<th>Date</th>
+						<th>Name</th>
+						<th>Start</th>
+						<th>End</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td>2015-04-15</td>
+						<td>William</td>
+						<td>09:00</td>
+						<td>10:00</td>
+						<td><button type="button" class="btn btn-primary">Edit</button></td>
+					</tr>
+					<tr ng-repeat="timeElement in timeElements | limitTo:-3">
+						<td>{{timeElement.date}}</td>
+						<td>{{timeElement.name}}</td>
+						<td>{{timeElement.start}}</td>
+						<td>{{timeElement.end}}</td>
+						<td><button type="button" class="btn btn-primary">Edit</button></td>
+					</tr>
+					<tr>
+						<form id="addForm" ng-submit="addTimeElement()">
+							<td><input type="text" class="form-control" placeholder="Date" ng-model="date"></input></td>
+							<td><input type="text" class="form-control" placeholder="Name" ng-model="name"></input></td>
+							<td><input type="text" class="form-control" placeholder="Start" ng-model="start"></td>
+							<td><input type="text" class="form-control" placeholder="End" ng-model="end"></td>
+							<td><button type="submit" class="btn btn-success">Add</button></td>
+						</form>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
