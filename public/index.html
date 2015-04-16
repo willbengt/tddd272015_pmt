@@ -47,7 +47,11 @@
 						<td>{{timeElement.name}}</td>
 						<td>{{timeElement.start}}</td>
 						<td>{{timeElement.end}}</td>
-						<td><button type="button" class="btn btn-primary">Edit</button></td>
+						<td>
+							<span>
+								<a href="#/timeelements/{{$index}}">Edit</a>
+							</span>
+						</td>
 					</tr>
 					<tr>
 						<td><input type="text" class="form-control" placeholder="Date" ng-model="date"></input></td>
@@ -58,6 +62,29 @@
 					</tr>
 				</table>
 			</form>
+		</script>
+		<script type="text/ng-template" id="/timeelements.html">
+			<div class="page-header">
+				<h3>Edit Time Elements</h3>
+			</div>
+			<table class="table">
+				<tr>
+					<td><b>Date:</b></td>
+					<td>{{timeElement.date}}</td>
+				</tr>
+				<tr>
+					<td><b>Name:</b></td>
+					<td>{{timeElement.name}}</td>
+				</tr>
+				<tr>
+					<td><b>Start:</b></td>
+					<td>{{timeElement.start}}</td>
+				</tr>
+				<tr>
+					<td><b>End:</b></td>
+					<td>{{timeElement.end}}</td>
+				</tr>
+			</table>
 		</script>
 	</body>
 </html>

@@ -1,4 +1,5 @@
 angular.module('pmt', ['ui.router'])
+
 .config([
   '$stateProvider',
   '$urlRouterProvider',
@@ -8,8 +9,14 @@ angular.module('pmt', ['ui.router'])
       .state('home', {
         url: '/home',
         templateUrl: '/home.html',
-        controller: 'MainCtrl'
-      });
+        controller: 'ReportCtrl'
+      })
+
+      .state('timeelements', {
+        url: '/timeelements/{id}',
+        templateUrl: '/timeelements.html',
+        controller: 'EditCtrl'
+      })
 
     $urlRouterProvider.otherwise('home');
   }
@@ -22,11 +29,13 @@ angular.module('pmt', ['ui.router'])
   return o;
 }])
 
-.controller('MainCtrl', [
+.controller('ReportCtrl', [
   '$scope', 
   'timeElements',
   function($scope, timeElements){ 
-    $scope.timeElements = timeElements.elements; 
+    $scope.timeElements = timeElements.elements;
+    //console.log($scope.timeElements);
+    //$scope.timeElement = timeElements.elements[$stateParams.id];
     $scope.addTimeElement = function(){   	
       $scope.timeElements.push({
         date: $scope.date,
@@ -36,4 +45,26 @@ angular.module('pmt', ['ui.router'])
     	});
     };
   }
+])
+
+.controller('EditCtrl', [
+  '$scope',
+  '$stateParams',
+  'timeElements',
+  function($scope, $stateParams, timeElements) {
+      $scope.timeElement = timeElements.elements[$stateParams.id];
+  /*
+      $scope.addComment = function(){
+          if($scope.body === '') { return; }
+          $scope.post.comments.push({
+              body: $scope.body,
+              author: 'user',
+              upvotes: 0
+          });
+          $scope.body = '';
+      };
+
+  */
+  }
 ]);
+
