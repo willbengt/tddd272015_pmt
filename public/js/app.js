@@ -35,15 +35,16 @@ angular.module('pmt', ['ui.router'])
   function($scope, timeElements){ //we inject our timeElements service by adding it as a parameter
     $scope.timeElements = timeElements.elements; //$scope.timeElements in our controller is binded to the elements array in our service. Any change or modification made to $scope.timeElements will be stored in the service.
 
-    $scope.timeElements.push({ //for testing. just one timeElement as an example. 
-      date: '2015-04-16', 
-      name: 'William', 
-      start: "09:00", 
-      end: "10:00"
-    });
+    if($scope.timeElements.length === 0) { //for testing. just one timeElement as an example. 
+      $scope.timeElements.push({ 
+        date: '2015-04-16', 
+        name: 'William', 
+        start: "09:00", 
+        end: "10:00"
+      });
+    }
 
     $scope.addTimeElement = function(){  
-      console.log("$scope.date: " + $scope.date); 	
       $scope.timeElements.push({
         date: $scope.date,
         name: $scope.name, 
@@ -66,6 +67,12 @@ angular.module('pmt', ['ui.router'])
       if(angular.isDefined($scope.name)){$scope.timeElement.name = $scope.name;}
       if(angular.isDefined($scope.start)){$scope.timeElement.start = $scope.start;}
       if(angular.isDefined($scope.end)){$scope.timeElement.end = $scope.end;}
+      if(angular.isDefined($scope.comment)){  
+        $scope.timeElement.comment = $scope.comment;
+      }
+      else {
+        $scope.timeElement.push({comment: $scope.comment});
+      }
     };
   }
 ]);
