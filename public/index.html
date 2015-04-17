@@ -35,13 +35,6 @@
 						<th>End</th>
 						<th></th>
 					</tr>
-					<tr>
-						<td>2015-04-15</td>
-						<td>William</td>
-						<td>09:00</td>
-						<td>10:00</td>
-						<td><button type="button" class="btn btn-primary">Edit</button></td>
-					</tr>
 					<tr ng-repeat="timeElement in timeElements | limitTo:-3">
 						<td>{{timeElement.date}}</td>
 						<td>{{timeElement.name}}</td>
@@ -56,8 +49,8 @@
 					<tr>
 						<td><input type="text" class="form-control" placeholder="Date" ng-model="date"></input></td>
 						<td><input type="text" class="form-control" placeholder="Name" ng-model="name"></input></td>
-						<td><input type="text" class="form-control" placeholder="Start" ng-model="start"></td>
-						<td><input type="text" class="form-control" placeholder="End" ng-model="end"></td>
+						<td><input type="text" class="form-control" placeholder="Start" ng-model="start"></input></td>
+						<td><input type="text" class="form-control" placeholder="End" ng-model="end"></input></td>
 						<td><button type="submit" class="btn btn-success">Add</button></td>
 					</tr>
 				</table>
@@ -67,24 +60,28 @@
 			<div class="page-header">
 				<h3>Edit Time Elements</h3>
 			</div>
-			<table class="table">
-				<tr>
-					<td><b>Date:</b></td>
-					<td>{{timeElement.date}}</td>
-				</tr>
-				<tr>
-					<td><b>Name:</b></td>
-					<td>{{timeElement.name}}</td>
-				</tr>
-				<tr>
-					<td><b>Start:</b></td>
-					<td>{{timeElement.start}}</td>
-				</tr>
-				<tr>
-					<td><b>End:</b></td>
-					<td>{{timeElement.end}}</td>
-				</tr>
-			</table>
+			<form id="editForm" ng-submit="editTimeElement()">
+				<table class="table">
+					<tr>
+						<td><b>Date:</b></td>
+						<td><input type="text" class="form-control" placeholder="{{timeElement.date}}" ng-model="date"></td>
+					</tr>
+					<tr>
+						<td><b>Name:</b></td>
+						<td><input type="text" class="form-control" placeholder="{{timeElement.name}}" ng-model="name"></td>
+					</tr>
+					<tr>
+						<td><b>Start:</b></td>
+						<td><input type="text" class="form-control" placeholder="{{timeElement.start}}" ng-model="start"></td>
+					</tr>
+					<tr>
+						<td><b>End:</b></td>
+						<td><input type="text" class="form-control" placeholder="{{timeElement.end}}" ng-model="end"></td>
+					</tr>
+				</table>
+				<button type="submit" class="btn btn-primary">Edit</button>
+				<button type="button" class="btn btn-link"><a href="#/home.html">Tillbaka</a></button> 
+			</form>
 		</script>
 	</body>
 </html>
