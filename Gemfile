@@ -41,3 +41,12 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'angular-rails-templates'
 gem 'bower-rails'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.1.0'
+end
+
+group :test do
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+end
