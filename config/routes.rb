@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'reports/index'
+
   namespace :api do
     resources :reports, defaults: { format: :json }
   end
