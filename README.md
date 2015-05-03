@@ -1,6 +1,6 @@
 # Testapp 16 #
 
-## Instuctions ##
+## Instructions ##
 
 Clone project:
 ```
