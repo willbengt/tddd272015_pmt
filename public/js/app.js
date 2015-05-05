@@ -1,3 +1,3 @@
-var app = angular.model('TimeReportApp', []);
+var app = angular.module("TimeReportApp", []);
 
 
