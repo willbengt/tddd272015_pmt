@@ -7,3 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Report.create(number: 1, title: "hej")
+
+Timereport.create(name: 'Rasmus', project: 1, time: 1, text:" Trollar lite grann" )
+Timereport.create(name: 'Teddy', project: 1, time: 3, text:" Grejar på! " )
+

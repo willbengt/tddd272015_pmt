@@ -1,9 +1,13 @@
 class ReportController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
+
   def index
-    @report = Report.all
+  #  @report = Report.all
+    puts 'index has been initiated'
+    render json: Report.all
   end
+
   def create
     puts 'hej'
 
@@ -16,10 +20,15 @@ class ReportController < ApplicationController
   def show
 
   end
-  def hejsan
-    report = Report.create(title: params[:title])
+  #def hejsan
+  #  report = Report.create(title: params[:title])
+  #
+  #  render json: report
+  #end
 
-    render json: report
+  def fetchData
+    puts "enter fetch data"
+    data = Timereport.all
+    render json: data
   end
-
 end
