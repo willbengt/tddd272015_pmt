@@ -2064,3 +2064,192 @@ Started GET "/fetchdata" for ::1 at 2015-05-05 17:11:09 +0200
 Processing by ReportController#show as HTML
   [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
 Completed 200 OK in 4ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:15:45 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (1.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:15:46 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:15:50 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 4ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:15:51 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:15:52 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 4ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:16:08 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (4.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:16:08 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (1.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:16:09 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 5ms (Views: 3.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:16:13 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:01 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:02 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:02 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:03 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:03 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:04 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:04 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 4ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:05 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (4.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:07 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (4.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:08 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 4ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:26 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:28 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 4ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:17:45 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 16ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:20:21 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (1.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 6ms (Views: 3.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:20:50 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:20:51 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 4ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:20:54 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 4ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "reports" ("number", "title", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["number", 1], ["title", "hej"], ["created_at", "2015-05-05 15:26:37.577169"], ["updated_at", "2015-05-05 15:26:37.577169"]]
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "timereports" ("name", "project", "time", "text", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Rasmus"], ["project", 1], ["time", 1], ["text", " Trollar lite grann"], ["created_at", "2015-05-05 15:26:37.680006"], ["updated_at", "2015-05-05 15:26:37.680006"]]
+  [1m[36m (5.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "timereports" ("name", "project", "time", "text", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Teddy"], ["project", 1], ["time", 3], ["text", " Grejar po! "], ["created_at", "2015-05-05 15:26:37.690879"], ["updated_at", "2015-05-05 15:26:37.690879"]]
+  [1m[35m (4.7ms)[0m  commit transaction
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:26:56 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 4ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "reports" ("number", "title", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["number", 1], ["title", "hej"], ["created_at", "2015-05-05 15:27:24.671263"], ["updated_at", "2015-05-05 15:27:24.671263"]]
+  [1m[35m (0.0ms)[0m  commit transaction
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "timereports" ("name", "project", "time", "text", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Rasmus"], ["project", 1], ["time", 1], ["text", " Trollar lite grann"], ["created_at", "2015-05-05 15:27:24.776579"], ["updated_at", "2015-05-05 15:27:24.776579"]]
+  [1m[36m (6.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "timereports" ("name", "project", "time", "text", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Teddy"], ["project", 1], ["time", 3], ["text", " Grejar po! "], ["created_at", "2015-05-05 15:27:24.788700"], ["updated_at", "2015-05-05 15:27:24.788700"]]
+  [1m[35m (5.5ms)[0m  commit transaction
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:27:31 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (4.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 4.0ms)

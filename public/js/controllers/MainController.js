@@ -18,8 +18,8 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http){
         $http.get('/fetchdata').
             success(
             function(response){
-                $scope.headingshow ="TROLL",
-                $scope.responsdata = response,
+                $scope.headingshow =response,
+                $scope.responsdata = response.name,
                 $scope.timereport.name = response.name,
                 $scope.timereport.proj = response.project,
                 $scope.timereport.time = response.time,
