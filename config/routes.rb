@@ -62,5 +62,6 @@ Rails.application.routes.draw do
   resources :report
 
   post 'report/hejsan' => 'report#hejsan'
-  get 'report/fetchdata' => 'report#fetchData'
+
+  get '/fetchdata' => 'report#show'
 end

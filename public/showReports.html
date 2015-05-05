@@ -10,7 +10,8 @@
 
 <div ng-controller='MainController' class="col-xs-8">
     <h1>{{ headingshow }}</h1>
-    <table ng-if="reports" class="table table-hover table-striped">
+    <h2>{{responsdata}}</h2>
+    <table ng-if="timereport" class="table table-hover table-striped">
         <thead>
         <th>Name</th>
         <th>Project</th>
@@ -18,15 +19,16 @@
         <th>Text</th>
         </thead>
         <tbody>
-        <tr ng-repeat="report in timereports">
+        <tr ng-repeat="report in timereport">
+
             <td>{{report.name}}</td>
-            <td>{{report.project}}</td>
+            <td>{{report.proj}}</td>
             <td>{{report.time}}</td>
             <td>{{report.text}}</td>
         </tr>
         </tbody>
     </table>
-    <button ng-click="fetchData()"> HEJ</button>
+    <button ng-click="fetchData()"> fetch that data bro!</button>
 </div>
 
 

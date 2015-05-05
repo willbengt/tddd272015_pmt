@@ -17,17 +17,14 @@ class ReportController < ApplicationController
   def new
 
   end
-  def show
-
-  end
   #def hejsan
   #  report = Report.create(title: params[:title])
   #
   #  render json: report
   #end
 
-  def fetchData
-    puts "enter fetch data"
+  def show
+    puts "-------------------------------------------------enter fetch data"
     data = Timereport.all
     render json: data
   end
