@@ -14,7 +14,7 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http){
 
 app.controller('AddReportController', ['$http', function($http){
     this.form = {}
-    this.msg = 'hej'
+    this.msg = 'New Post'
 
     this.addReport = function(report){
         this.msg = 'Enter function';

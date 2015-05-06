@@ -4748,3 +4748,91 @@ Processing by ReportController#create as HTML
   [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "timereports" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "sdsd"], ["created_at", "2015-05-06 21:09:19.100373"], ["updated_at", "2015-05-06 21:09:19.100373"]]
   [1m[35m (17.0ms)[0m  commit transaction
 Completed 200 OK in 23ms (Views: 0.0ms | ActiveRecord: 18.0ms)
+
+
+Started GET "/fetchdata" for 127.0.0.1 at 2015-05-06 23:12:56 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (15.6ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 16ms (Views: 0.0ms | ActiveRecord: 15.6ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:13:58 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (1.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 8ms (Views: 6.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:15:18 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:15:41 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (1.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 8ms (Views: 5.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:15:41 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 8ms (Views: 8.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:15:42 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 10ms (Views: 9.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:16:12 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 8ms (Views: 8.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:16:59 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 11ms (Views: 9.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:20:00 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 9ms (Views: 7.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:20:28 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 6ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:23:51 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (2.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 14ms (Views: 10.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:24:43 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 23:25:41 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 11ms (Views: 10.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/senddata" for ::1 at 2015-05-06 23:25:48 +0200
+Processing by ReportController#create as HTML
+  Parameters: {"name"=>"sdsdffd", "report"=>{}}
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "timereports" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "sdsdffd"], ["created_at", "2015-05-06 21:25:48.841917"], ["updated_at", "2015-05-06 21:25:48.841917"]]
+  [1m[36m (27.1ms)[0m  [1mcommit transaction[0m
+Completed 200 OK in 46ms (Views: 0.0ms | ActiveRecord: 28.0ms)

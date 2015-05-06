@@ -4,54 +4,40 @@
     <meta charset="UTF-8">
     <title>Trollboll</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/app.js"></script>
+    <script src="js/controllers/MainController.js"></script>
 </head>
 <body ng-app="TimeReportApp">
+    <div ng-controller='MainController' data-ng-init="fetchData()" class="col-xs-8">
+        <h1>Time reporting</h1>
 
-<div ng-controller='MainController' data-ng-init="fetchData()" class="col-xs-8">
-    <h1>{{ header }}</h1>
-    <h2>{{subheader}}</h2>
-
-    <table ng-if="tableInformation" class="table table-hover table-striped">
-        <thead>
-            <th>Name</th>
-            <th>Project</th>
-            <th>Time</th>
-            <th>Text</th>
-        </thead>
-        <tbody>
-            <tr ng-repeat="report in tableInformation">
-
-                <td>{{report.name}}</td>
-                <td>{{report.project}}</td>
-                <td>{{report.time}}</td>
-                <td>{{report.text}}</td>
-            </tr>
-        </tbody>
-    </table>
-       <form name='addReportForm' ng-controller="AddReportController as addReportCtrl" ng-submit="addReportCtrl.addReport(tableInformation)" novalidate>
-            <h2>{{ addReportCtrl.msg }}</h2>
-            <input type="text" ng-model="addReportCtrl.form.name">
-            <input type="text" ng-model="addReportCtrl.form.project">
-            <input type="text" ng-model="addReportCtrl.form.time">
-            <input type="text" ng-model="addReportCtrl.form.text">
-            <input type="submit" value="Submit" />
+        <table ng-if="tableInformation" class="table table-hover table-striped">
+            <thead>
+                <th>Name</th>
+                <th>Project</th>
+                <th>Time</th>
+                <th>Text</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="report in tableInformation">
+                    <td>{{report.name}}</td>
+                    <td>{{report.project}}</td>
+                    <td>{{report.time}}</td>
+                    <td>{{report.text}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>{{ addReportCtrl.msg }}</h2>
+        <form name='addReportForm' ng-controller="AddReportController as addReportCtrl" ng-submit="addReportCtrl.addReport(tableInformation)" novalidate>
+            <table class="table">
+                <td><input type="text" class="form-control" placeholder="Name" ng-model="addReportCtrl.form.name"></td>
+                <td><input type="text" class="form-control" placeholder="Project" ng-model="addReportCtrl.form.project"></td>
+                <td><input type="text" class="form-control" placeholder="Time" ng-model="addReportCtrl.form.time"></td>
+                <td><input type="text" class="form-control" placeholder="Text" ng-model="addReportCtrl.form.text"></td>
+                <td><input type="submit" value="Submit" class="btn btn-primary" /></td>
+            </table>
         </form>
-    <button ng-click="fetchData()"> fetch that data bro!</button>
-   <!-- <button ng-click="inputData(nameInput, projInput, timeInput, textInput)"> Put that data where it belong!</button>-->
-
-</div>
-
-
-<!-- Modules -->
-<script src="js/app.js"></script>
-
-<!-- controllers -->
-<script src="js/controllers/MainController.js"></script>
-
-<!-- Directives -->
-
-
-
+    </div>
 </body>
 </html>
