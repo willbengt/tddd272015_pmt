@@ -67,4 +67,6 @@ Rails.application.routes.draw do
 
   post '/senddata' => 'report#create'
 
+  put '/deletedata' => 'report#delete'
+
 end

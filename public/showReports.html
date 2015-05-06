@@ -3,6 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Trollboll</title>
+    <link rel="stylesheet" href="css/showReports.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 
 </head>
@@ -21,24 +22,26 @@
         </thead>
         <tbody>
             <tr ng-repeat="report in tableInformation">
-
                 <td>{{report.name}}</td>
                 <td>{{report.project}}</td>
                 <td>{{report.time}}</td>
                 <td>{{report.text}}</td>
+                <td ng-controller="HandleReportController as HRCtrl">
+                    <button ng-click="HRCtrl.deleteReport(report, tableInformation)">Delete</button>
+                    <!--<p>{{ HRCtrl.msg }}</p>-->
+                </td>
             </tr>
         </tbody>
     </table>
-       <form name='addReportForm' ng-controller="AddReportController as addReportCtrl" ng-submit="addReportCtrl.addReport(tableInformation)" novalidate>
+       <form name='addReportForm' ng-controller="AddReportController as addReportCtrl" ng-submit="addReportForm.$valid && addReportCtrl.addReport(tableInformation)" novalidate>
             <h2>{{ addReportCtrl.msg }}</h2>
-            <input type="text" ng-model="addReportCtrl.form.name">
-            <input type="text" ng-model="addReportCtrl.form.project">
-            <input type="text" ng-model="addReportCtrl.form.time">
-            <input type="text" ng-model="addReportCtrl.form.text">
+            <input type="text" ng-model="addReportCtrl.form.name" required>
+            <input type="number" ng-model="addReportCtrl.form.project" required>
+            <input type="number" ng-model="addReportCtrl.form.time" required>
+            <input type="text" ng-model="addReportCtrl.form.text" required>
             <input type="submit" value="Submit" />
-        </form>
+       </form>
     <button ng-click="fetchData()"> fetch that data bro!</button>
-   <!-- <button ng-click="inputData(nameInput, projInput, timeInput, textInput)"> Put that data where it belong!</button>-->
 
 </div>
 

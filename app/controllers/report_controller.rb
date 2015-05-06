@@ -9,10 +9,9 @@ class ReportController < ApplicationController
   end
 
   def create
-    puts 'hej_______________________________________________'
     #report = Timereport.create(name: "hej", project: 1, time: 8, text: "trollboll" )
     @report = Timereport.create(name: params[:name], project: params[:project], time: params[:time], text: params[:text])
-    render json: 'ok'
+    render json: {msg: 'ok'}
   end
 
 
@@ -25,8 +24,14 @@ class ReportController < ApplicationController
   #end
 
   def show
-    puts "-------------------------------------------------enter fetch data"
     data = Timereport.all
     render json: data
+  end
+
+  def delete
+    puts params[:id]
+    @report = Timereport.find(params[:id]).destroy
+    #Timereport.find(name: params[:name], project: params[:project], time: params[:time], text: params[:text]).destroy
+    render json: {msg: 'ok'}
   end
 end
