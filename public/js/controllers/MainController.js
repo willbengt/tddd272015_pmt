@@ -35,7 +35,7 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http){
             }
         ).
             error(
-            $scope.headingshow = "nah, this aint wokring perfect"
+            $scope.headingshow = "nah, this aint working perfect"
         );
     }
 

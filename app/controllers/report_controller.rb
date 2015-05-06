@@ -10,7 +10,7 @@ class ReportController < ApplicationController
 
   def create
     puts 'hej_______________________________________________'
-
+    report = Timereport.create(name: "hej", project: 1, time: 8, text: "trollboll" )
 
 
   end
