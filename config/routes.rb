@@ -65,6 +65,6 @@ Rails.application.routes.draw do
 
   get '/fetchdata' => 'report#show'
 
-  post 'postdata' => 'report#create'
+  post '/senddata' => 'report#create'
 
 end

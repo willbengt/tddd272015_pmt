@@ -8,36 +8,37 @@
 </head>
 <body ng-app="TimeReportApp">
 
-<div ng-controller='MainController' class="col-xs-8">
-    <h1>{{ headingshow }}</h1>
-    <h2>{{subheadershow}}</h2>
-    <table ng-if="timereport" class="table table-hover table-striped">
+<div ng-controller='MainController' data-ng-init="fetchData()" class="col-xs-8">
+    <h1>{{ header }}</h1>
+    <h2>{{subheader}}</h2>
+
+    <table ng-if="tableInformation" class="table table-hover table-striped">
         <thead>
-        <th>Name</th>
-        <th>Project</th>
-        <th>Time</th>
-        <th>Text</th>
+            <th>Name</th>
+            <th>Project</th>
+            <th>Time</th>
+            <th>Text</th>
         </thead>
         <tbody>
-        <tr ng-repeat="report in tableInformation">
+            <tr ng-repeat="report in tableInformation">
 
-            <td>{{report.name}}</td>
-            <td>{{report.project}}</td>
-            <td>{{report.time}}</td>
-            <td>{{report.text}}</td>
-        </tr>
+                <td>{{report.name}}</td>
+                <td>{{report.project}}</td>
+                <td>{{report.time}}</td>
+                <td>{{report.text}}</td>
+            </tr>
         </tbody>
-        <td><input type="text" ng-model="nameInput"></td>
-        <td><input type="text" ng-model="projInput"></td>
-        <td><input type="text" ng-model="timeInput"></td>
-        <td><input type="text" ng-model="textInput"></td>
-
-
     </table>
+       <form name='addReportForm' ng-controller="AddReportController as addReportCtrl" ng-submit="addReportCtrl.addReport(tableInformation)" novalidate>
+            <h2>{{ addReportCtrl.msg }}</h2>
+            <input type="text" ng-model="addReportCtrl.form.name">
+            <input type="text" ng-model="addReportCtrl.form.project">
+            <input type="text" ng-model="addReportCtrl.form.time">
+            <input type="text" ng-model="addReportCtrl.form.text">
+            <input type="submit" value="Submit" />
+        </form>
     <button ng-click="fetchData()"> fetch that data bro!</button>
-    <button ng-click="inputData(nameInput, projInput, timeInput, textInput)"> Put that data where it belong!</button>
-
-
+   <!-- <button ng-click="inputData(nameInput, projInput, timeInput, textInput)"> Put that data where it belong!</button>-->
 
 </div>
 

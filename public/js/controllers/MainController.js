@@ -1,9 +1,8 @@
 app.controller('MainController', ['$scope', '$http', function($scope, $http){
     $scope.name = "Time Reporting shit"
-    $scope.headingshow ="header with no other purpose"
-    $scope.subheadershow="subheader for now"
-    $scope.tableInformation =""
-    $scope.responsdata ="responsdata"
+    $scope.header ="header with no other purpose"
+    $scope.subheader="subheader for now"
+    $scope.tableInformation = []
     $scope.timereport = [
         {
             name: "name",
@@ -13,17 +12,15 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http){
 
         }]
 
-
-
     $scope.fetchData = function() {
         $http.get('/fetchdata').
             success(
             function(response){
-                $scope.tableInformation =response
+                $scope.tableInformation = response
                }
         ).
             error(
-            $scope.responsdata = "Bad response"
+            $scope.subheader = "Bad response"
         );
     }
 
@@ -31,12 +28,24 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http){
         $http.post('/postdata').
             success(
             function(name, proj, time, text){
-                $scope.headingshow = "some kind of success"
+                $scope.subheader = "some kind of success"
             }
         ).
             error(
-            $scope.headingshow = "nah, this aint working perfect"
+            $scope.subheader = "nah, this aint working perfect"
         );
     }
 
+}]);
+
+app.controller('AddReportController', ['$http', function($http){
+    this.form = {}
+    this.msg = 'hej'
+
+    this.addReport = function(report){
+        this.msg = 'Enter function';
+        report.push(this.form);
+        $http.post('/senddata', this.form).success(this.msg = 'Success');
+        this.form = {};
+    };
 }]);
