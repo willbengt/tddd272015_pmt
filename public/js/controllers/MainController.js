@@ -1,6 +1,8 @@
 app.controller('MainController', ['$scope', '$http', function($scope, $http){
     $scope.name = "Time Reporting shit"
     $scope.headingshow ="Headingshow"
+    $scope.subheadershow="subheader for now"
+    $scope.tableInformation ="troll"
     $scope.responsdata ="responsdata"
     $scope.timereport = [
         {
@@ -18,13 +20,8 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http){
         $http.get('/fetchdata').
             success(
             function(response){
-                $scope.headingshow =response,
-                $scope.responsdata = response.name,
-                $scope.timereport.name = response.name,
-                $scope.timereport.proj = response.project,
-                $scope.timereport.time = response.time,
-                $scope.timereport.text = response.text
-            }
+                $scope.tableInformation =response
+               }
         ).
             error(
             $scope.headingshow = "Bad response"

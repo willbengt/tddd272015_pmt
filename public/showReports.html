@@ -10,7 +10,7 @@
 
 <div ng-controller='MainController' class="col-xs-8">
     <h1>{{ headingshow }}</h1>
-    <h2>{{responsdata}}</h2>
+    <h2>{{subheadershow}}</h2>
     <table ng-if="timereport" class="table table-hover table-striped">
         <thead>
         <th>Name</th>
@@ -19,7 +19,7 @@
         <th>Text</th>
         </thead>
         <tbody>
-        <tr ng-repeat="report in headingshow">
+        <tr ng-repeat="report in tableInformation">
 
             <td>{{report.name}}</td>
             <td>{{report.project}}</td>
@@ -27,6 +27,7 @@
             <td>{{report.text}}</td>
         </tr>
         </tbody>
+        <td></td>
     </table>
     <button ng-click="fetchData()"> fetch that data bro!</button>
 </div>

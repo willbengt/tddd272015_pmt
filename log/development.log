@@ -2253,3 +2253,267 @@ Started GET "/fetchdata" for ::1 at 2015-05-05 17:27:31 +0200
 Processing by ReportController#show as HTML
   [1m[35mTimereport Load (4.0ms)[0m  SELECT "timereports".* FROM "timereports"
 Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-05 17:34:46 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (4.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 09:25:33 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 09:25:34 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 8ms (Views: 8.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 09:25:34 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 09:25:35 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (4.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 8ms (Views: 4.5ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 09:25:35 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 09:25:35 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 09:25:35 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 09:25:36 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 8ms (Views: 8.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:50:45 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 9ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:50:46 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:50:46 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:50:48 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 7ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:51:26 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:51:30 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (2.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 8ms (Views: 5.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:53:57 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:53:58 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 5ms (Views: 3.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:54:27 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 7ms (Views: 5.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:54:28 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 8ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:55:13 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 7ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:56:25 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:56:48 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 9ms (Views: 6.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:56:50 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:58:03 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 7ms (Views: 4.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:58:03 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 10:59:04 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 8ms (Views: 6.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:01:00 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (1.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 7ms (Views: 5.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:01:01 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.6ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 3ms (Views: 0.0ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:03:15 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (15.6ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 16ms (Views: 0.0ms | ActiveRecord: 15.6ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:03:59 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 8ms (Views: 6.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:04:03 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (1.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 8ms (Views: 5.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:05:09 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 7ms (Views: 5.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:05:23 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 7ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:05:23 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 3ms (Views: 1.2ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:05:23 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 7ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:05:23 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 7ms (Views: 4.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:05:24 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:06:26 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:06:27 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:06:31 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (1.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 7ms (Views: 4.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:07:10 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 7ms (Views: 5.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:08:59 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 7ms (Views: 5.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:10:11 +0200
+Processing by ReportController#show as HTML
+  [1m[36mTimereport Load (0.0ms)[0m  [1mSELECT "timereports".* FROM "timereports"[0m
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/fetchdata" for ::1 at 2015-05-06 11:11:02 +0200
+Processing by ReportController#show as HTML
+  [1m[35mTimereport Load (0.0ms)[0m  SELECT "timereports".* FROM "timereports"
+Completed 200 OK in 0ms (Views: 0.0ms | ActiveRecord: 0.0ms)
