@@ -9,7 +9,7 @@ class ReportController < ApplicationController
   end
 
   def create
-    puts 'hej'
+    puts 'hej_______________________________________________'
 
 
 

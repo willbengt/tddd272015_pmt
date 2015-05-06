@@ -1,8 +1,8 @@
 app.controller('MainController', ['$scope', '$http', function($scope, $http){
     $scope.name = "Time Reporting shit"
-    $scope.headingshow ="Headingshow"
+    $scope.headingshow ="header with no other purpose"
     $scope.subheadershow="subheader for now"
-    $scope.tableInformation ="troll"
+    $scope.tableInformation =""
     $scope.responsdata ="responsdata"
     $scope.timereport = [
         {
@@ -16,7 +16,6 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http){
 
 
     $scope.fetchData = function() {
-        $scope.headingshow = "Nat annat"
         $http.get('/fetchdata').
             success(
             function(response){
@@ -24,7 +23,20 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http){
                }
         ).
             error(
-            $scope.headingshow = "Bad response"
+            $scope.responsdata = "Bad response"
         );
     }
+
+    $scope.inputData = function(){
+        $http.post('/postdata').
+            success(
+            function(name, proj, time, text){
+                $scope.headingshow = "some kind of success"
+            }
+        ).
+            error(
+            $scope.headingshow = "nah, this aint wokring perfect"
+        );
+    }
+
 }]);
