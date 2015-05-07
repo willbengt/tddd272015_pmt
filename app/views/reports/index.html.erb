@@ -1,0 +1,20 @@
+<div ng-app='app.reportApp' ng-controller='ReportListCtrl' class="col-xs-8">
+  <h1>Reports List</h1>
+  <table ng-if="reports" class="table table-hover table-striped">
+    <thead>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Start time</th>
+      <th>End time</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="report in reports">
+        <td>{{report.date}}</td>
+        <td>{{report.name}}</td>
+        <td>{{report.starttime}}</td>
+        <td>{{report.endtime}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <btn ng-btn=""></btn>
+</div>
