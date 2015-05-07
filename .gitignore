@@ -12,9 +12,10 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*
+/log
+/log/*.log
 !/log/.keep
 /tmp
 
-# Ignore RubyMind .idea files for macOSX.
+#Ignore .idea folder that holds files assosiated with RubyMine in OSX
 /.idea/*
