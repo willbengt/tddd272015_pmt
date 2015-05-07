@@ -1,2 +1,0 @@
-timereport = angular.module('timereport',[
-])
