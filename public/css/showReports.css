@@ -3,5 +3,6 @@
 }
 
 .ng-dirty.ng-valid{
-    border-color: green;
+    border-color: blue;
 }
+
