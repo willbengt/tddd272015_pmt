@@ -1,0 +1,22 @@
+{
+  "name": "tddd272015_webproject",
+  "version": "0.0.1",
+  "authors": [
+    "Teddy <tedwa306@student.liu.se>"
+  ],
+  "description": "ReportApp",
+  "moduleType": [
+    "node"
+  ],
+  "license": "Liu",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs-oauth2": "*"
+  }
+}

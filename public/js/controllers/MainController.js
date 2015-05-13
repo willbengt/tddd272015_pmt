@@ -1,4 +1,5 @@
 app.controller('MainController', ['$scope', '$http', function($scope, $http){
+    $tableInformation = {}
     $scope.fetchData = function() {
         $http.get('/fetchdata').
             success(
