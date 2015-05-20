@@ -28,4 +28,5 @@ app.controller('ReportController', ['$scope', '$http', function($scope, $http){
         });
         $scope.form = {};
     };
+
 }]);

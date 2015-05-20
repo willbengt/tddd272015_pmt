@@ -18,4 +18,3 @@ var app = angular.module("TimeReportApp", ['ui.router']).config([
 
 	  $urlRouterProvider.otherwise('home');
 	}]);
-
