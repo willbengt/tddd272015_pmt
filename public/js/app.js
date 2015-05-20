@@ -1,9 +1,21 @@
-var app = angular.module("TimeReportApp", []);
+var app = angular.module("TimeReportApp", ['ui.router']).config([
+	'$stateProvider',
+	'$urlRouterProvider',
+	function($stateProvider, $urlRouterProvider) {
 
-var authApp = angular.module('Authentication', ['ui.router']);
+	  $stateProvider
+	    .state('home', {
+	      url: '/home',
+	      templateUrl: '/views/home.html',
+	      controller: 'MainController'
+	    })
 
-authApp.config(function($stateProvider, $urlRouterProvider){
-    $stateProvider
+	    .state('reports', {
+	      url: '/reports',
+	      templateUrl: '/views/reports.html',
+	      controller: 'ReportController'
+	    })
+          
         .state('login', {
             url: '/login',
             templateUrl: 'login_test.html',
@@ -19,12 +31,10 @@ authApp.config(function($stateProvider, $urlRouterProvider){
 
 });
 
-authApp.controller('LoginController', function($scope){
+app.controller('LoginController', function($scope){
     window.location.href = "https://api.imgur.com/oauth2/authorize?client_id=" + "772e4e0d393959b" + "&response_type=token"
 });
 
-authApp.controller("SecureController", function($scope) {
-
+app.controller("SecureController", function($scope){
     $scope.accessToken = JSON.parse(window.localStorage.getItem("imgur")).oauth.access_token;
-
 });
