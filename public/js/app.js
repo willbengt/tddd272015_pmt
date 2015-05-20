@@ -7,7 +7,8 @@ var app = angular.module("TimeReportApp", ['ui.router']).config([
 	    .state('home', {
 	      url: '/home',
 	      templateUrl: '/views/home.html',
-	      controller: 'MainController'
+	      controller: 'MainController',
+		  directive: 'd3.js'
 	    })
 
 	    .state('reports', {
