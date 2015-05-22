@@ -13,6 +13,7 @@
                 <td>{{report.project}}</td>
                 <td>{{report.time}}</td>
                 <td>{{report.text}}</td>
+                <td>{{report.median}}</td>
                 <td>
                     <button ng-click="deleteReport(report, tableInformation)">Delete</button>
                 </td>
@@ -31,4 +32,6 @@
 </div>
 
 
-    <cr-d3-bars data='myData'></cr-d3-bars>
+    <median-chart></median-chart>
+
+
