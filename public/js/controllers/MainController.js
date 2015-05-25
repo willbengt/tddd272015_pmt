@@ -1,6 +1,8 @@
-//app.controller('MainController', ['$scope', function($scope){
-//}]);
+app.controller('MainController', ['$scope', function($scope){
+}]);
 
+
+/*
 app.controller('MainController', ['$scope', function($scope){
     // controller "knows" nothing about donut charts
     $scope.shared = { data: [1] };
@@ -9,3 +11,4 @@ app.controller('MainController', ['$scope', function($scope){
         $scope.shared.data = d3.range(n).map(function(d){ return Math.random(); });
     }
 }]);
+*/

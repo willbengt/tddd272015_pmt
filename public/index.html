@@ -39,21 +39,7 @@
 
 
 </head>
-<style>
-/*
-    body, html{
-        margin: 0;
-        width: 100%;
-        height: 100%;
-    }
-    donut-chart{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-    }
-*/
 
-</style>
 <body ng-app="TimeReportApp">
 
   <nav class="navbar navbar-default">
@@ -91,70 +77,6 @@
   </div>
 
 
-
-  <!-- Här kommer D3 -->
-<!--
-<donut-chart></donut-chart>
-<hello-world></hello-world>
-
-<!--
-<script>
-      var app = angular.module('TimeReportApp', [])
-
-      app.directive('donutChart', function(){
-          function link(scope, el){
-            d3.select(el[0]).append('svg')
-          }
-          return {
-              link: link,
-              restrict: 'E'
-          }
-      })
-
-     /* var dataArray=[20, 40, 50, 60];
-      var width = 500;
-      var height = 500;
-
-      var widthScale = d3.scale.linear()
-              .domain([0, 60])
-              .range([0, width]);
-
-      var color = d3.scale.linear()
-              .domain([0, 60])
-              .range(["red", "blue"]);
-
-      var axis = d3.svg.axis()
-              .ticks(5)
-              .scale(widthScale);
-
-      var canvas = d3.select("body")
-              .append("svg")
-              .attr("width", width)
-              .attr("height", height)
-              .append("g")
-              .attr("transform", "translate(20, 0)") //flytta, rotera o sånt
-
-      var bars = canvas.selectAll("rect")
-              .data(dataArray)
-              .enter()
-              .append("rect")
-              .attr("width", function(d) { return widthScale(d); })
-              .attr("height", 50)
-              .attr("fill", function(d) { return color(d) })
-              .attr("y", function(d, i) { return i * 100 });
-
-      canvas.append("g")
-              .attr("transform", "translate(0, 400)")
-              .call(axis);
-*/
-
-  </script>
-
-<!--  https://www.youtube.com/watch?v=aqHBLS_6gF8  -->
-<!-- 26:30->>
--->
 </body>
-
-
 
 </html>
