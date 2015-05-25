@@ -11,29 +11,30 @@ app.directive('helloWorld', function() {
 
 app.directive('burndownChart', function() {
     function link(scope, el) {
-        d3.json("js/directive/mydata.json", function (data) {
 
-            var canvas = d3.select("body").append("svg")
-                .attr("width", 500)
-                .attr("height", 500);
+        var width = 1500;
+        var height = 1500;
+        var canvas = d3.select("body")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
 
-            canvas.selectAll("rect")
-                .data(data)
-                .enter()
-                .append("rect")
-                .attr("width", function (d) { return d.time * 20; } )
-                .attr("height", 48)
-                .attr("y", function (d, i) { return i * 50; })
-                .attr("fill", "blue");
 
-            canvas.selectAll("text")
-                .data(data)
-                .enter()
-                .append("text")
-                .attr("fill", "white")
-                .attr("y", function (d, i) { return i * 50 + 24; })
-                .text(function (d) {return d.name;})
-        })
+        var group = canvas.append("g")
+            .attr("transform", "translate(300,300)");
+
+        var data = [10, 40, 50]
+        var r = 300;
+        var p = Math.PI * 2;
+
+        var arc = d3.svg.arc()
+            .innerRadius(r-20)
+            .outerRadius(r)
+            .startAngle(0)
+            .endAngle(p);
+
+        group.append("path")
+            .attr("d", arc);
     }
 //d3.sum(data)
 /*
