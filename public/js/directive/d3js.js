@@ -28,7 +28,7 @@ app.directive('burndownChart', function() {
         var p = Math.PI * 2;
 
         var arc = d3.svg.arc()
-            .innerRadius(r-20)
+            .innerRadius(r-50)
             .outerRadius(r)
             .startAngle(0)
             .endAngle(p);
