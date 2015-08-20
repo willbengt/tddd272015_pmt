@@ -1,6 +1,10 @@
 <html>
 <head>
+
+    <!-- Storing the authentication token from url -->
     <script>
+/*        var originSite = ((document.URL).split(':')[1]).split('.')[0];*/
+        var originSite = 'imgur';
         var callbackResponse = (document.URL).split("#")[1];
         var responseParameters = (callbackResponse).split("&");
         var parameterMap = [];
@@ -10,13 +14,14 @@
         if(parameterMap.access_token !== undefined && parameterMap.access_token !== null) {
             var imgur = {
                 oauth: {
+                    originSite: originSite,
                     access_token: parameterMap.access_token,
                     expires_in: parameterMap.expires_in,
                     account_username: parameterMap.account_username
                 }
             };
             window.localStorage.setItem("imgur", JSON.stringify(imgur));
-            window.location.href = "http://localhost/index.html#/secure";
+            window.location.href = "/#secure";
         } else {
             alert("Problem authenticating");
         }

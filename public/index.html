@@ -9,10 +9,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!-- Scripts for auth2 authentication-->
+    <script src="bower_components/angular-cookie/angular-cookie.min.js"></script>
+    <script src="bower_components/query-string/query-string.js"></script>
+    <script src="bower_components/angular-oauth2/dist/angular-oauth2.min.js"></script>
+
+    <!-- Enables angular to access localStorage in browser-->
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 
@@ -25,43 +33,48 @@
     <script src="js/controllers/MainController.js"></script>
     <script src="js/controllers/ReportController.js"></script>
 
-    <script src="views/home.html" type="text/ng-template" id="/home.html"></script>
+    <!--<script src="views/home.html" type="text/ng-template" id="/home.html"></script>-->
 
-    <script src="views/reports.html" type="text/ng-template" id="/reports.html"></script>
+    <!--<script src="views/reports.html" type="text/ng-template" id="/reports.html"></script>-->
+
+
 </head>
 <body ng-app="TimeReportApp">
 
-  <nav class="navbar navbar-default">
+<nav class="navbar navbar-default">
     <div class="container-fluid">
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#/home">Home<span class="sr-only">(current)</span></a></li>
-          <li><a href="#/reports">Reports</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-              <li class="divider"></li>
-              <li><a href="#">One more separated link</a></li>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#/home">Home<span class="sr-only">(current)</span></a></li>
+                <li><a href="#/reports">Reports</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#/secure">Secure</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
             </ul>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Login</a></li>
-          <li><a href="#">Register</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
+            <div ng-controller="SessionController">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" ng-click="login()">Login</a></li>
+                    <li><a href="#" ng-click="logout()">Logout</a></li>
+                    <li><a href="#">Register</a></li>
+                </ul>
+            </div>
+        </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
-  </nav>
-  <div class="col-xs-12">
-    <ui-view></ui-view>
-  </div>
+</nav>
+<div class="col-xs-12">
+    <div ui-view></div>
+</div>
 
 </body>
 </html>
