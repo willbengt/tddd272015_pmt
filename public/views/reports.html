@@ -7,6 +7,7 @@
             <th>Time</th>
             <th>Text</th>
         </thead>
+        <text>{{tableInformation}}</text>
         <tbody>
             <tr ng-repeat="report in tableInformation">
                 <td>{{report.name}}</td>
@@ -20,6 +21,7 @@
         </tbody>
     </table>
 
+
     <form name='addReportForm' ng-submit="addReportForm.$valid && addReport(tableInformation)" novalidate>
         <input type="text" ng-model="form.name" placeholder="Name" required>
         <input type="number" ng-model="form.project" placeholder="Project Number" required>
@@ -28,7 +30,27 @@
         <input type="submit" value="Submit" />
     </form>
 
+
 </div>
+    <div data-ng-init="fetchData()">
+        <text>{{tableInformation}}</text>
+-
+        -
+        -
+        -
 
 
-<burndown-chart></burndown-chart>
+        <text>{{salesData}}</text>
+    <test-chart val = "tableInformation"></test-chart>
+</div>
+    <!-- <gh-visualization val="data"></gh-visualization> >-->
+
+<!--<bar-chart val = tableInformation></bar-chart>
+
+
+    <!--<hello-world val = "tableInformation[0].time">  </hello-world>
+
+    <!-- <div ng-controller="ChartController">
+
+    </div>
+    -->
