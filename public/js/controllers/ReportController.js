@@ -4,6 +4,10 @@ app.controller('ReportController', ['$scope', '$http', function($scope, $http){
         $http.get('/fetchdata').success(
             function(response){
                 $scope.tableInformation = response;
+                $scope.$watch('tableInformation', function() {
+                    alert('hey, table has changed!');
+                });
+
             }
         ).error(
             $scope.subheader = "Bad response"
@@ -37,6 +41,9 @@ app.controller('ReportController', ['$scope', '$http', function($scope, $http){
         $http.put('/deletedata', reportEntry).success(function(msg) {
             if(msg != 'ok'){
                 $scope.msg = 'Something went wrong when trying to store in database';
+            }
+            else{
+                $scope.fetchData();
             }
         });
     };

@@ -36,7 +36,7 @@ app.directive('helloWorld', function() {
     }
     }
 });
-
+/*
 app.directive('burndownChart', function() {
     function link(scope, el) {
         var data = [1,2,3];
@@ -79,7 +79,7 @@ app.directive('burndownChart', function() {
     }
 });
 
-
+*/
 
   /*      var canvas = d3.select("body")
             .append("svg")
@@ -200,8 +200,7 @@ app.directive('barChart', function(){
 
 app.directive('testChart', function($window){
     function link(scope, elem, attrs) {
-        var salesDataToPlot=scope[attrs.val];
-        alert(salesDataToPlot);
+        var dataToPlot=scope[attrs.val];
         var padding = 20;
         var pathClass = "path";
         var xScale, yScale, xAxisGen, yAxisGen, lineFun;
@@ -210,13 +209,14 @@ app.directive('testChart', function($window){
         var rawSvg = elem.find("svg")[0];
         var svg = d3.select(rawSvg);
 
+
         function setChartParameters(){
             xScale = d3.scale.linear()
-                .domain([salesDataToPlot[0].project, salesDataToPlot[salesDataToPlot.length - 1].project])
+                .domain([dataToPlot[0].project, dataToPlot[dataToPlot.length - 1].project])
                 .range([padding + 5, rawSvg.clientWidth - padding]);
 
             yScale = d3.scale.linear()
-                .domain([0, d3.max(salesDataToPlot, function (d) {
+                .domain([0, d3.max(dataToPlot, function (d) {
                     return d.time;
                 })])
                 .range([rawSvg.clientHeight - padding, 0]);
@@ -224,7 +224,7 @@ app.directive('testChart', function($window){
             xAxisGen = d3.svg.axis()
                 .scale(xScale)
                 .orient("bottom")
-                .ticks(salesDataToPlot.length - 1);
+                .ticks(dataToPlot.length - 1);
 
             yAxisGen = d3.svg.axis()
                 .scale(yScale)
@@ -257,13 +257,15 @@ app.directive('testChart', function($window){
 
             svg.append("svg:path")
                 .attr({
-                    d: lineFun(salesDataToPlot),
+                    d: lineFun(dataToPlot),
                     "stroke": "blue",
                     "stroke-width": 2,
                     "fill": "none",
                     "class": pathClass
                 });
         }
+
+
 
         drawLineChart();
     }
@@ -275,3 +277,183 @@ app.directive('testChart', function($window){
 
         }
 });
+
+
+//First only one project.
+app.directive('burndownChart', function($window){
+    function link(scope, elem, attrs) {
+        var dataToPlot=scope[attrs.val]; //data from our database
+        var padding = 40;
+        var pathClass = "path";
+        var xScale, yScale, xAxisGen, yAxisGen, lineFun;
+        //give the project 100 hours for work. For the moment
+        var totalProjectTime = 100;
+        var newProjectTime = 0;
+        var d3 = $window.d3;
+        var rawSvg = elem.find("svg")[0];
+        var svg = d3.select(rawSvg);
+        var numberOfInputs = -1;
+
+/*        scope.$watch('scope[attrs.val]', function() {
+            alert('hey, table has changed!');
+        });
+*/
+        function setChartParameters(){
+            xScale = d3.scale.linear()
+                .domain([0, dataToPlot.length-1])
+                .range([padding + 5, rawSvg.clientWidth - padding]);
+
+
+            yScale = d3.scale.linear()
+                .domain([0, totalProjectTime])
+                .range([rawSvg.clientHeight - padding, 0]);
+
+            yScale = d3.scale.linear()
+                .domain([0, totalProjectTime])
+                .range([rawSvg.clientHeight - padding, 0]);
+
+            xAxisGen = d3.svg.axis()
+                .scale(xScale)
+                .orient("bottom")
+                .ticks(dataToPlot.length - 1);
+
+            yAxisGen = d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .ticks(5);
+
+            newProjectTime = totalProjectTime;
+            lineFun = d3.svg.line()
+                .x(function (d) {
+                    numberOfInputs = numberOfInputs + 1;
+                    return xScale(numberOfInputs);
+                })
+                .y(function (d) {
+                    newProjectTime = newProjectTime - d.time;
+                    return yScale(newProjectTime);
+                })
+                .interpolate("basis");
+        }
+
+        function drawLineChart() {
+
+            setChartParameters();
+
+            svg.append("svg:g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0,180)")
+                .call(xAxisGen);
+
+
+            svg.append("svg:g")
+                .attr("class", "y axis")
+                .attr("transform", "translate(40,0)")
+                .call(yAxisGen);
+
+            svg.append("svg:path")
+                .attr({
+                    d: lineFun(dataToPlot),
+                    "stroke": "blue",
+                    "stroke-width": 2,
+                    "fill": "none",
+                    "class": pathClass
+                });
+        }
+
+        function redrawLineChart() {
+
+            setChartParameters();
+            svg.selectAll("g.y.axis").call(yAxisGen);
+            svg.selectAll("g.x.axis").call(xAxisGen);
+
+            svg.selectAll("." + pathClass)
+                .attr({
+                    d: lineFun(dataToPlot)
+                });
+        }
+        drawLineChart();
+    }
+    return {
+        restrict: 'EA',
+        template: "<svg width='850' height='220'></svg>",
+        link: link
+
+
+    }
+});
+
+/*
+
+
+
+app.directive('burndownChart', function($window){
+    function link(scope, elem, attrs) {
+        var rawData = scope[attrs.val]; //data from our database
+        var r = 300;
+        var width = 500;
+        var height = 500;
+
+        var canvas = d3.select("body")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        //select all the rects ( empty selection)
+        var bars = canvas.selectAll("rect")
+            .data(rawData)
+            .enter()
+            .append("rect")
+            .attr("width", function(d) { return d.time; })
+            .attr("height", 50);
+    }
+
+    return {
+        restrict: 'EA',
+        template: "<svg width='850' height='220'></svg>",
+        link: link
+
+
+    }
+});
+
+
+/*
+ var height = 80;
+ var width = 80;
+
+
+ var circle = canvas.append("circle")
+ .attr("cx", 50)
+ .attr("cy", 100)
+ .attr("r", 25);
+
+ var circles = canvas.selectAll("circle")
+ .data(data)
+ .attr("fill", "red")
+ .enter()// skapar DOM av den data som ej redan har ett DOM objekt kopplat itll sig.
+ .append("circle")
+ .attr("cx", 50)
+ .attr("cy", 50)
+ .attr("fill", "green")
+ .attr("r", 25);
+
+ circle.transition()
+ .duration(1500)
+ .attr("cx", 150)
+ .attr("cy", 150)
+ .attr("fill", "pink")
+ .each("end", function(){ d3.select(this).attr("fill", "blue") } );
+
+ }
+
+ canvas.append("svg")
+ .attr("width", width)
+ .attr("height", height);
+
+
+ return {
+ link: link,
+ restrict: 'E'
+ }
+ });
+ */

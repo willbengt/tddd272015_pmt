@@ -1,6 +1,6 @@
     <div data-ng-init="fetchData()">
     <h1>Time reporting</h1>
-        <text>{{tableInformation}}</text>
+     <!--   <text>{{tableInformation}}</text> -->
 
         <table ng-if="tableInformation" class="table table-hover table-striped">
         <thead>
@@ -16,7 +16,7 @@
                 <td>{{report.time}}</td>
                 <td>{{report.text}}</td>
                 <td>
-                    <button ng-click="deleteReport(report, tableInformation)">Delete</button>
+                    <button ng-click="deleteReport(report, tableInformation); fetchdata()">Delete</button>
                 </td>
             </tr>
         </tbody>
@@ -34,10 +34,8 @@
 
 </div>
 <div ng-init="fetchData()">
-
     <div ng-if= "tableInformation">
-    <text>{{tableInformation}}</text>
-    <test-chart val = tableInformation></test-chart>
+    <burndown-chart val = tableInformation></burndown-chart>
     </div>
 </div>
     <!-- <gh-visualization val="data"></gh-visualization> >-->
