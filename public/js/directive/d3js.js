@@ -201,6 +201,7 @@ app.directive('barChart', function(){
 app.directive('testChart', function($window){
     function link(scope, elem, attrs) {
         var salesDataToPlot=scope[attrs.val];
+        alert(salesDataToPlot);
         var padding = 20;
         var pathClass = "path";
         var xScale, yScale, xAxisGen, yAxisGen, lineFun;

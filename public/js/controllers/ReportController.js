@@ -10,6 +10,14 @@ app.controller('ReportController', ['$scope', '$http', function($scope, $http){
         );
     };
 
+    //test scope lists to be removed.
+
+
+    $scope.troll = [
+        {project: 1, time:2, hej:2},
+        {project: 2, time:10, hej:23}
+    ];
+
     $scope.salesData = [
         {hour: 1,sales: 54},
         {hour: 2,sales: 66},
@@ -22,6 +30,7 @@ app.controller('ReportController', ['$scope', '$http', function($scope, $http){
         {hour: 9,sales: 55},
         {hour: 10,sales: 30}
     ];
+//-----remove to this point
 
     $scope.deleteReport = function(reportEntry, report){
         report.splice(report.indexOf(reportEntry), 1);
