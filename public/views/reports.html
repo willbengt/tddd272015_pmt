@@ -16,11 +16,12 @@
                 <td>{{report.time}}</td>
                 <td>{{report.text}}</td>
                 <td>
-                    <button ng-click="deleteReport(report, tableInformation); fetchdata()">Delete</button>
+                    <button ng-click="deleteReport(report, tableInformation)">Delete</button>
                 </td>
             </tr>
+
         </tbody>
-    </table>
+        </table>
 
 
     <form name='addReportForm' ng-submit="addReportForm.$valid && addReport(tableInformation)" novalidate>
@@ -32,12 +33,21 @@
     </form>
 
 
+        <div ng-if= "tableInformation">
+            <my-chart val = tableInformation></my-chart>
+          <!--  <burndown-chart val = tableInformation></burndown-chart> -->
+        </div>
+</div>
+
+<!--
 </div>
 <div ng-init="fetchData()">
     <div ng-if= "tableInformation">
     <burndown-chart val = tableInformation></burndown-chart>
     </div>
 </div>
+    -->
+
     <!-- <gh-visualization val="data"></gh-visualization> >-->
 
 <!--<bar-chart val = tableInformation></bar-chart>

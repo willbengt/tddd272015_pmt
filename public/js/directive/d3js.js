@@ -278,6 +278,76 @@ app.directive('testChart', function($window){
         }
 });
 
+app.directive('myChart', function($window){
+
+    function link(scope, elem, attrs){
+
+        //making data into arrays. Seperated different tupples in database.
+        var rawData=scope[attrs.val]; //data from our database
+        var dataTime = [];
+        var dataProject = [];
+        var testArray = [];
+        var filtered = rawData.filter(function(item) {
+            return item.project == 1;
+        });
+        for(var x in filtered){
+            testArray.push(filtered[x].time);
+        }
+
+        for(var x in rawData){
+            dataTime.push(rawData[x].time);
+        }
+        for(var x in rawData){
+            dataProject.push(rawData[x].project);
+        }
+
+        //getting all the unique projects in an array
+        var uniqueProjects = dataProject.filter(function(item, i, ar){
+            return ar.indexOf(item) === i;
+        });
+        alert(uniqueProjects);
+        //get total time for all unique projects
+        var timeInEachProject = [];
+        for(var x in uniqueProjects){
+            var sum = 0;
+            /*            for(var y in rawData){
+                if (rawData[y].project == x){
+                    sum += rawData[y].time;
+                }
+            }
+             */
+            for (i = 0; i < rawData.length; i++) {  //loop through the array
+                if (rawData[i].project == uniqueProjects[x]){
+                    sum += rawData[i].time;
+                }
+            }
+            timeInEachProject.push(sum);
+        }
+
+
+        alert (timeInEachProject);
+        var canvas = d3.select("body")
+            .append("svg")
+            .attr("width", 500)
+            .attr("height", 800);
+
+        var bars = canvas.selectAll("rect")
+            .data(timeInEachProject)
+            .enter()
+            .append("rect")
+            .attr("width", function(d) {return d * 10})
+            .attr("height", 50)
+            .attr("y", function(d, i){return i * 100});
+
+    }
+    return {
+        restrict: 'EA',
+    //    template: "<svg width='850' height='220'></svg>",
+        link: link
+    }
+
+});
+
 
 //First only one project.
 app.directive('burndownChart', function($window){
@@ -294,10 +364,7 @@ app.directive('burndownChart', function($window){
         var svg = d3.select(rawSvg);
         var numberOfInputs = -1;
 
-/*        scope.$watch('scope[attrs.val]', function() {
-            alert('hey, table has changed!');
-        });
-*/
+
         function setChartParameters(){
             xScale = d3.scale.linear()
                 .domain([0, dataToPlot.length-1])
