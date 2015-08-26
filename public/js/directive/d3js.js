@@ -474,11 +474,11 @@ app.directive('myChart', function($window){
                 return xScale(i);
             })
             .y(function (d) {
-                alert(startTime)
+
                 startTime = startTime - d
                 return yScale(startTime);
             })
-            .interpolate("basis");
+            .interpolate("crispEdges");
 
          for (var x in uniqueProjects) {
               //alert(uniqueProjects[x]);
@@ -493,17 +493,18 @@ app.directive('myChart', function($window){
 
          }
 
-         /*
+
+        /*
 
 
-         var bars = canvas.selectAll("rect")
-         .data(timeInEachProject)
-         .enter()
-         .append("rect")
-         .attr("width", function(d) {return d * 10})
-         .attr("height", 50)
-         .attr("y", function(d, i){return i * 100});
-         */
+        var bars = canvas.selectAll("rect")
+        .data(timeInEachProject)
+        .enter()
+        .append("rect")
+        .attr("width", function(d) {return d * 10})
+        .attr("height", 50)
+        .attr("y", function(d, i){return i * 100});
+        */
 
         /*
 
