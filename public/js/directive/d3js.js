@@ -278,7 +278,7 @@ app.directive('testChart', function($window){
         }
 });
 
-app.directive('myChart', function($window){
+app.directive('myChart2', function($window){
 
     function link(scope, elem, attrs){
 
@@ -305,46 +305,241 @@ app.directive('myChart', function($window){
         var uniqueProjects = dataProject.filter(function(item, i, ar){
             return ar.indexOf(item) === i;
         });
-        alert(uniqueProjects);
-        //get total time for all unique projects
-        var timeInEachProject = [];
-        for(var x in uniqueProjects){
-            var sum = 0;
-            /*            for(var y in rawData){
-                if (rawData[y].project == x){
-                    sum += rawData[y].time;
+
+        //get a list with all time for a specific project
+        function getTimeForProject (projectnumber) {
+            var projectTime = [];
+            for ( i = 0; i < rawData.length; i ++) {
+                if (rawData[i].project == projectnumber) {
+                    projectTime.push(rawData[i].time)
                 }
             }
-             */
-            for (i = 0; i < rawData.length; i++) {  //loop through the array
-                if (rawData[i].project == uniqueProjects[x]){
-                    sum += rawData[i].time;
-                }
-            }
-            timeInEachProject.push(sum);
+            return projectTime;
         }
 
 
-        alert (timeInEachProject);
+
+        //get total time for all unique projects
+        /*  var timeInEachProject = [];
+         for(var x in uniqueProjects){
+         //these are the things I would like to do for each different project!
+         for (i = 0; i < rawData.length; i++) {  //loop through the array
+         if (rawData[i].project == uniqueProjects[x]){
+         //code for painting those lines
+
+
+
+         }
+         }
+         */
+
+
+        //  var sum = 0;
+        /*            for(var y in rawData){
+         if (rawData[y].project == x){
+         sum += rawData[y].time;
+         }
+         }
+         */
+        /*     for (i = 0; i < rawData.length; i++) {  //loop through the array
+         if (rawData[i].project == uniqueProjects[x]){
+         sum += rawData[i].time;
+         }
+         }
+         timeInEachProject.push(sum);
+         */
+
+
+        var canvas = d3.select("body")
+            .append("svg")
+            .attr("width", 500)
+            .attr("height", 800);
+        /*
+         var bars = canvas.selectAll("rect")
+         .data(timeInEachProject)
+         .enter()
+         .append("rect")
+         .attr("width", function(d) {return d * 10})
+         .attr("height", 50)
+         .attr("y", function(d, i){return i * 100});
+         */
+
+
+
+        var linefunction = d3.svg.line()
+            .x(function (d) {
+                return Math.random() * 400;
+            })
+            .y(function (d) {
+                return Math.random() * 400;
+            });
+//            .interpolate("linear");
+
+        for(var x in uniqueProjects) {
+            // alert(uniqueProjects[x]);
+            tomte = getTimeForProject(uniqueProjects[x]);
+            alert(tomte);
+
+            //these are the things I would like to do for each different project!
+            canvas.append("path")
+                .data(tomte)
+                .enter()
+                .append("path")
+                .attr("d", function() {return linefunction(tomte)})
+                .attr("class", "line")
+                .style("stroke", "blue" )
+                .attr('fill', 'none');
+        }
+
+    }
+    return {
+        restrict: 'EA',
+        //    template: "<svg width='850' height='220'></svg>",
+        link: link
+    }
+
+});
+
+app.directive('myChart', function($window){
+
+    function link(scope, elem, attrs) {
+
+        //making data into arrays. Seperated different tupples in database.
+        var rawData = scope[attrs.val]; //data from our database
+        var dataTime = [];
+        var dataProject = [];
+        var testArray = [];
+        var filtered = rawData.filter(function (item) {
+            return item.project == 1;
+        });
+        for (var x in filtered) {
+            testArray.push(filtered[x].time);
+        }
+
+        for (var x in rawData) {
+            dataTime.push(rawData[x].time);
+        }
+        for (var x in rawData) {
+            dataProject.push(rawData[x].project);
+        }
+
+        //getting all the unique projects in an array
+        var uniqueProjects = dataProject.filter(function (item, i, ar) {
+            return ar.indexOf(item) === i;
+        });
+
+        //get an array with all time for a specific project
+        function getTimeForProject(projectnumber) {
+            var projectTime = [];
+            for (i = 0; i < rawData.length; i++) {
+                if (rawData[i].project == projectnumber) {
+                    projectTime.push(rawData[i].time)
+                }
+            }
+            return projectTime;
+        }
+
         var canvas = d3.select("body")
             .append("svg")
             .attr("width", 500)
             .attr("height", 800);
 
-        var bars = canvas.selectAll("rect")
-            .data(timeInEachProject)
-            .enter()
-            .append("rect")
-            .attr("width", function(d) {return d * 10})
-            .attr("height", 50)
-            .attr("y", function(d, i){return i * 100});
+        var WIDTH = 1000;
+        var HEIGHT = 500;
+        var MARGINS = {
+            top: 20,
+            right: 20,
+            bottom: 20,
+            left: 50
+        };
 
+        xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0, 20]),
+            yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0, 100]),
+            xAxis = d3.svg.axis()
+                .scale(xScale),
+
+            yAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient("left");
+
+        canvas.append("svg:g")
+            .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+            .call(xAxis);
+        canvas.append("svg:g")
+            .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+            .call(yAxis);
+
+        var lineGen = d3.svg.line()
+            .x(function (d, i) {
+                return xScale(i);
+            })
+            .y(function (d) {
+                alert(startTime)
+                startTime = startTime - d
+                return yScale(startTime);
+            })
+            .interpolate("basis");
+
+         for (var x in uniqueProjects) {
+              //alert(uniqueProjects[x]);
+             var startTime = 100;
+             reportedTimeForProject = getTimeForProject(uniqueProjects[x]);
+             reportedTimeForProject.unshift(0);
+             canvas.append('svg:path')
+                 .attr('d', lineGen(reportedTimeForProject))
+                 .attr('stroke', 'green')
+                 .attr('stroke-width', 2)
+                 .attr('fill', 'none');
+
+         }
+
+         /*
+
+
+         var bars = canvas.selectAll("rect")
+         .data(timeInEachProject)
+         .enter()
+         .append("rect")
+         .attr("width", function(d) {return d * 10})
+         .attr("height", 50)
+         .attr("y", function(d, i){return i * 100});
+         */
+
+        /*
+
+         var linefunction = d3.svg.line()
+         .x(function (d) {
+         return Math.random() * 400;
+         })
+         .y(function (d) {
+         return Math.random() * 400;
+         });
+         //            .interpolate("linear");
+
+         for(var x in uniqueProjects) {
+         // alert(uniqueProjects[x]);
+         tomte = getTimeForProject(uniqueProjects[x]);
+         alert(tomte);
+
+         //these are the things I would like to do for each different project!
+         canvas.append("path")
+         .data(tomte)
+         .enter()
+         .append("path")
+         .attr("d", function() {return linefunction(tomte)})
+         .attr("class", "line")
+         .style("stroke", "blue" )
+         .attr('fill', 'none');
+         }
+
+         }
+         */
     }
-    return {
-        restrict: 'EA',
-    //    template: "<svg width='850' height='220'></svg>",
-        link: link
-    }
+        return {
+            restrict: 'EA',
+            //    template: "<svg width='850' height='220'></svg>",
+            link: link
+        }
 
 });
 
@@ -444,8 +639,6 @@ app.directive('burndownChart', function($window){
         restrict: 'EA',
         template: "<svg width='850' height='220'></svg>",
         link: link
-
-
     }
 });
 
