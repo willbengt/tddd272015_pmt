@@ -31,7 +31,7 @@ class ReportController < ApplicationController
   def delete
     puts params[:id]
     @report = Timereport.find(params[:id]).destroy
-   # render json: {msg: 'ok'}
-    render nothing: true
+    render :json => {msg: 'ok'}
+    #render nothing: true
   end
 end

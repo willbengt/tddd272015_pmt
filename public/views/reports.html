@@ -1,4 +1,4 @@
-    <div data-ng-init="fetchData()">
+<div data-ng-init="fetchData()">
     <h1>Time reporting</h1>
      <!--   <text>{{tableInformation}}</text> -->
 
@@ -32,30 +32,6 @@
         <input type="submit" value="Submit" />
     </form>
 
-
-        <div ng-if= "tableInformation">
-            <my-chart val = tableInformation></my-chart>
-          <!--  <burndown-chart val = tableInformation></burndown-chart> -->
-        </div>
-</div>
-
-<!--
-</div>
-<div ng-init="fetchData()">
-    <div ng-if= "tableInformation">
-    <burndown-chart val = tableInformation></burndown-chart>
-    </div>
-</div>
-    -->
-
-    <!-- <gh-visualization val="data"></gh-visualization> >-->
-
-<!--<bar-chart val = tableInformation></bar-chart>
-
-
-    <!--<hello-world val = "tableInformation[0].time">  </hello-world>
-
-    <!-- <div ng-controller="ChartController">
+    <burndown-chart ng-if="tableInformation" val = tableInformation></burndown-chart>
 
     </div>
-    -->
