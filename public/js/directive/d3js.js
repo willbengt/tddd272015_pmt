@@ -403,7 +403,7 @@ app.directive('myChart2', function($window){
 app.directive('myChart', function($window){
 
     function link(scope, elem, attrs) {
-
+        console.log("running directive with myChart")
         //making data into arrays. Seperated different tupples in database.
         var rawData = scope[attrs.val]; //data from our database
         var dataTime = [];
@@ -444,17 +444,22 @@ app.directive('myChart', function($window){
             .attr("width", 500)
             .attr("height", 800);
 
-        var WIDTH = 1000;
-        var HEIGHT = 500;
-        var MARGINS = {
+        var width = 1000;
+        var height = 500;
+        var margins = {
             top: 20,
             right: 20,
             bottom: 20,
             left: 50
         };
 
-        xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0, 20]),
-            yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0, 100]),
+        var color = d3.scale.linear()
+            .domain([-1, 101])
+            .range(["blue", "red"]);
+
+
+        xScale = d3.scale.linear().range([margins.left, width - margins.right]).domain([0, 20]),
+            yScale = d3.scale.linear().range([height - margins.top, margins.bottom]).domain([0, 100]),
             xAxis = d3.svg.axis()
                 .scale(xScale),
 
@@ -463,10 +468,10 @@ app.directive('myChart', function($window){
                 .orient("left");
 
         canvas.append("svg:g")
-            .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+            .attr("transform", "translate(0," + (height - margins.bottom) + ")")
             .call(xAxis);
         canvas.append("svg:g")
-            .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+            .attr("transform", "translate(" + (margins.left) + ",0)")
             .call(yAxis);
 
         var lineGen = d3.svg.line()
@@ -485,9 +490,14 @@ app.directive('myChart', function($window){
              var startTime = 100;
              reportedTimeForProject = getTimeForProject(uniqueProjects[x]);
              reportedTimeForProject.unshift(0);
+
+             var sumOfProjectTime = reportedTimeForProject.reduce(function(pv, cv) { return pv + cv; }, 0);
+             alert(sumOfProjectTime);
              canvas.append('svg:path')
                  .attr('d', lineGen(reportedTimeForProject))
-                 .attr('stroke', 'green')
+//                 .attr("fill", function(d) { return color(d) })
+                 .attr('stroke', function() { return color(sumOfProjectTime) })
+                //.attr('stroke', "green")
                  .attr('stroke-width', 2)
                  .attr('fill', 'none');
 
