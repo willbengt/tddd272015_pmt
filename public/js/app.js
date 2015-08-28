@@ -32,6 +32,12 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2']).confi
                 url: '/secure',
                 templateUrl: '/views/secure_test.html',
                 controller: 'SecureController'
+            })
+
+            .state('calendar', {
+                url: '/calendar',
+                templateUrl: '/views/calendar.html',
+                controller: 'CalendarController'
             });
 
         $urlRouterProvider.otherwise('/views/home.html');
