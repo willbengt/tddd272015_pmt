@@ -34,7 +34,7 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2']).confi
                 controller: 'SecureController'
             });
 
-        $urlRouterProvider.otherwise('/views/home.html');
+     //   $urlRouterProvider.otherwise('/views/home.html');
     }]);
 
 app.controller("SecureController", function($scope){

@@ -1,18 +1,32 @@
 app.controller('ReportController', ['$scope', '$http', function($scope, $http){
 
+    $scope.set = {
+        time: [ ],
+        project: [ ]
+    };
+
     $scope.fetchData = function() {
-        console.log("fetching data again")
+        console.log("fetching data")
         $http.get('/fetchdata').success(
             function(response){
                 $scope.tableInformation = response;
-                console.log("data fetched");
+                $scope.set.time = [];
+                $scope.set.project = [];
+                _.times($scope.tableInformation.length, function(n) {
+                //    $scope.set.x.push(n + 1);
+                    $scope.set.time.push($scope.tableInformation[n].time);
+                    $scope.set.project.push($scope.tableInformation[n].project);
+                });
+                console.log($scope.set.time);
+                console.log($scope.set.project);
+
             }
         ).error(
             $scope.subheader = "Bad response"
         );
     };
 
-
+// above here is for the chartController
 
     $scope.deleteReport = function(reportEntry, report){
         console.log("deleting report")
