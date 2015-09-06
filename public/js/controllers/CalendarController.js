@@ -1,4 +1,4 @@
-app.controller('CalendarController', ['$scope', function($scope){
+app.controller('CalendarController', ['$scope', 'eventService', function($scope, eventService){
   var CLIENT_ID = '711755136597-5k4ijen3f7j0003088jjimt8knlre2cm.apps.googleusercontent.com';
   var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 
@@ -8,7 +8,7 @@ app.controller('CalendarController', ['$scope', function($scope){
     var singleCalendar = [];
 
     request.execute(function(resp) {
-
+      
       appendPre("\n\n-----CALENDARS-----\n" );
 
       for (var i = 0; i < resp.items.length; i++) {
@@ -53,6 +53,7 @@ app.controller('CalendarController', ['$scope', function($scope){
         appendPre(JSON.stringify(singleEvent) + '\n');
         events.push(singleEvent);
       }
+      //eventService.events = events;
     });
   };
 
@@ -74,7 +75,6 @@ app.controller('CalendarController', ['$scope', function($scope){
 
   $scope.authorize = function() {
     //Initiates the OAuth 2.0 authorization process
-    console.log("$scope.authorize");
     gapi.auth.authorize({
       'client_id': CLIENT_ID, 
       'immediate': false,
