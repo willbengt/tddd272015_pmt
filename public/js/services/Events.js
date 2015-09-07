@@ -1,6 +1,6 @@
 app.factory('eventService', [function(){
   var o = {
-    events : ["hjk", "ghjgj"]
+    events : ["empty"]
   };
   return o;
 }]);
