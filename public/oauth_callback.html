@@ -23,7 +23,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 
     <!-- Modules -->
     <script src="js/app.js"></script>
@@ -32,10 +32,9 @@
     <script src="js/controllers/SessionController.js"></script>
 </head>
 <body ng-controller="SessionController">
-    <div ng-init="callbackHandler()">Redirecting...
-        <h1>{{ callback_msg }}</h1>
-        <p>{{ service_msg }}</p>
-    </div>
+<div ng-init="callbackHandler()">Redirecting...
+    <h1>{{ callback_msg }}</h1>
+</div>
 </body>
 </html>
 

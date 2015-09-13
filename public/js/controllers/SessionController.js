@@ -2,7 +2,7 @@
  * Created by teddy on 18/08/15.
  */
 
-app.controller('SessionController', ['$scope','$http', '$log', 'Test', function($scope, $http, $log, Test){
+app.controller('SessionController', ['$scope','$http', '$log', function($scope, $http, $log){
 
     $scope.login=function() {
         var client_id="462878784674-q643pcp1acsrh17m9ms2s84tkpupgbnn.apps.googleusercontent.com";
@@ -42,7 +42,7 @@ app.controller('SessionController', ['$scope','$http', '$log', 'Test', function(
                 }
             };
             /*$scope.test_msg = $scope.userValidation(google.oauth);*/
-            //$scope.test_msg = test();
+            //$scope.test_msg = Test;
             window.localStorage.setItem("google", JSON.stringify(google));
 
             window.location.href = "/#secure";
