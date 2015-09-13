@@ -1,6 +1,6 @@
-var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2']).config([
-	'$stateProvider',
-	'$urlRouterProvider',
+var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'ngResource'])
+
+    .config(['$stateProvider', '$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
 
         $stateProvider

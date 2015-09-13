@@ -3,14 +3,11 @@
  */
 angular.module('TimeReportApp')
 
-   /* .factory('User', function UserFactory($Resource){
-        return $Resource('/users/:id', {}, {
-            validate: {
-                method: 'GET',
-                params: {token: '@accessToken'}
-            }
+    .factory('User', function UserFactory($resource){
+        return $resource('/users/:id', {params: {token: '@accessToken'}}, {
+            validate: {method: 'GET'}
         });
-    })*/
+    })
 
     .factory('Test', function TestFactory() {
         return {

@@ -2,7 +2,7 @@
  * Created by teddy on 18/08/15.
  */
 
-app.controller('SessionController', ['$scope','$http', '$log', function($scope, $http, $log){
+app.controller('SessionController', ['$scope','$http', function($scope, $http){
 
     $scope.login=function() {
         var client_id="462878784674-q643pcp1acsrh17m9ms2s84tkpupgbnn.apps.googleusercontent.com";
@@ -19,7 +19,7 @@ app.controller('SessionController', ['$scope','$http', '$log', function($scope, 
     }*/
 
     $scope.logout = function() {
-        window.localStorage.removeItem("imgur");
+        window.localStorage.removeItem("google");
     }
 
     $scope.callbackHandler = function() {
@@ -41,8 +41,6 @@ app.controller('SessionController', ['$scope','$http', '$log', function($scope, 
                     account_username: parameterMap.account_username
                 }
             };
-            /*$scope.test_msg = $scope.userValidation(google.oauth);*/
-            //$scope.test_msg = Test;
             window.localStorage.setItem("google", JSON.stringify(google));
 
             window.location.href = "/#secure";
@@ -51,15 +49,15 @@ app.controller('SessionController', ['$scope','$http', '$log', function($scope, 
         }
     };
 
-    $scope.userValidation = function(access_token){
-        $http.put('/authenticate', access_token).success(
-            function (response) {
-                $scope.validationResponse = response;
-            })
-            .error(
-            $scope.validationResponse = "Something wrong with validation"
-        );
-        return $scope.validationResponse;
-    };
+    //$scope.userValidation = function(access_token){
+    //    $http.put('/authenticate', access_token).success(
+    //        function (response) {
+    //            $scope.validationResponse = response;
+    //        })
+    //        .error(
+    //        $scope.validationResponse = "Something wrong with validation"
+    //    );
+    //    return $scope.validationResponse;
+    //};
 
 }]);
