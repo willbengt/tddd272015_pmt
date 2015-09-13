@@ -1,3 +1,19 @@
 <div>
   <h1>People</h1>
+
+  <h2>Add</h2>
+  <form name='addForm' ng-submit="add()">
+    <div class="form-group">
+    	<label for="inputName">Name</label>
+    	<input type="text" class="form-control" ng-model="person.name" placeholder="Name">
+    </div>
+    <div class="form-group">
+    	<label for="inputEmail">Email</label>
+    	<input type="email" class="form-control" ng-model="person.email" placeholder="Email">
+    </div>
+    <div class="btn-group">
+  		<button type="submit" class="btn btn-success">Submit</button>
+  		<button type="reset" class="btn btn-danger">Reset</button>
+		</div>
+  </form>
 </div>
