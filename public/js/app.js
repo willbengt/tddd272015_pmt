@@ -1,4 +1,4 @@
-var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2']).config([
+var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xeditable']).config([
 	'$stateProvider',
 	'$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
