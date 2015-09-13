@@ -64,7 +64,8 @@ Rails.application.routes.draw do
   get '/report', to: 'report#show'
   post '/report', to: 'report#create'
   delete '/report/:id', to: 'report#destroy'
-  
+
+  get '/people', to: 'people#show'
   post '/people', to: 'people#create'
 
   put '/authenticate' => 'session#authenticate'
