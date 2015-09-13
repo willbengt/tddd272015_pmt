@@ -16,6 +16,12 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2']).confi
                 controller: 'ReportController'
             })
 
+            .state('people', {
+                url: '/people',
+                templateUrl: '/views/people.html',
+                controller: 'PeopleController'
+            })
+
             .state('oauth_callback', {
                 url: '/oauth_callback',
                 templateUrl: '/views/oauth_callback.html',

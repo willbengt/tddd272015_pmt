@@ -1,5 +1,5 @@
 <div data-ng-init="fetchData()">
-    <h1>Time reportingjjkkjk</h1>
+    <h1>Time reporting</h1>
      <!--   <text>{{tableInformation}}</text> -->
 
         <table ng-if="tableInformation" class="table table-hover table-striped">
@@ -15,8 +15,6 @@
                 <td>{{report.project}}</td>
                 <td>{{report.time}}</td>
                 <td>{{report.text}}</td>
-                <td>hjhjjh</td>
-                <td>{{$index}}</td>
                 <td>
                     <button ng-click="deleteReport(report.id)">Delete</button> <!-- deleteReport(report, tableInformation, $index) -->
                 </td>
