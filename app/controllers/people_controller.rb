@@ -2,10 +2,15 @@ class PeopleController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
-  def test
-    puts '-----------test-----------'
+  def index
+    puts 'index has been initiated'
+    render json: People.all
+  end
 
-    render :json => {msg: 'ok'}
+  def create
+    puts '-----------people#create-----------'
+    People.create(name: params[:name], email: params[:email])
+    render nothing: true
   end
 
 end
