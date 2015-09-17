@@ -67,6 +67,7 @@ Rails.application.routes.draw do
 
   get '/people', to: 'people#show'
   post '/people', to: 'people#create'
+  put '/people/:id', to: 'people#update'
 
   put '/authenticate' => 'session#authenticate'
 
