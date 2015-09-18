@@ -26,4 +26,10 @@ class PeopleController < ApplicationController
     render nothing: true
   end
 
+  def destroy
+    puts '-----------people#delete-----------'
+    People.find(params[:id]).destroy
+    render nothing: true
+  end
+
 end
