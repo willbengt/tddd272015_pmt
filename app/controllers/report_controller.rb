@@ -12,9 +12,15 @@ class ReportController < ApplicationController
     render nothing: true
   end
 
-  def show
+  def get_all
     data = Timereport.all
     render json: data
+  end
+
+  def get
+    puts params[:id]
+    @report = Timereport.find(params[:id])
+    render :json => @report
   end
 
   def delete
