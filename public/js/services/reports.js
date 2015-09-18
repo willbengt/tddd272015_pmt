@@ -8,4 +8,4 @@ angular.module('TimeReportApp')
         return $resource('/reports/:id', {params: {token: '@accessToken'}}, {
             validate: {method: 'GET'}
         });
-    })
+    });

@@ -2,7 +2,7 @@
 
 angular.module('TimeReportApp')
 
-    .controller('ReportController', ['$scope', '$http', function($scope, Reports){
+    .controller('ReportController', ['$scope', '$http', function($scope, Reports, $http){
 
         $scope.fetchData = function() {
             console.log("fetching data again");
@@ -20,7 +20,7 @@ angular.module('TimeReportApp')
 
 
         $scope.deleteReport = function(reportEntry, report){
-            console.log("deleting report")
+            console.log("deleting report");
             report.splice(report.indexOf(reportEntry), 1);
             $http.put('/deletedata', reportEntry).success(function(msg) {
                 if(msg.msg != 'ok'){
@@ -36,8 +36,8 @@ angular.module('TimeReportApp')
 
         $scope.addReport = function(report){
             report.push($scope.form);
-            Reports.post($scope.form).success(function(msg){
-            //$http.post('/senddata', $scope.form).success(function(msg){
+            //Reports.post($scope.form).success(function(msg){
+            $http.post('/senddata', $scope.form).success(function(msg){
                 if(msg.msg != 'ok'){
                     $scope.msg = 'Something went wrong when trying to store in database';
                 }
