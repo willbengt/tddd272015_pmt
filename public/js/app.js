@@ -1,6 +1,6 @@
-var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2']).config([
-	'$stateProvider',
-	'$urlRouterProvider',
+var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'ngResource'])
+
+    .config(['$stateProvider', '$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
@@ -36,8 +36,3 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2']).confi
 
         $urlRouterProvider.otherwise('/views/home.html');
     }]);
-
-app.controller("SecureController", function($scope){
-    $scope.accessToken = JSON.parse(window.localStorage.getItem("imgur")).oauth.access_token;
-    $scope.test_msg = "Nothing";
-});
