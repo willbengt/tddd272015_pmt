@@ -15,14 +15,14 @@ class PeopleController < ApplicationController
 
   def create
     puts '-----------people#create-----------'
-    People.create(name: params[:name], email: params[:email])
+    People.create(name: params[:name], email: params[:email], project: params[:project])
     id = People.last.id
     render :json => {id: id}
   end
 
   def update
     puts '-----------people#update-----------'
-    People.find(params[:id]).update(:name => params[:name], :email => params[:email])
+    People.find(params[:id]).update(:name => params[:name], :email => params[:email], :project => params[:project])
     render nothing: true
   end
 

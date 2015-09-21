@@ -1,8 +1,7 @@
-app.controller('PeopleController', ['$scope', '$http', function($scope, $http){
+app.controller('PeopleController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
 
   $scope.people = [];
-
-  $scope.loadPeople = function() {
+  loadPeople = function() {
     return $http.get('/people').success(function(data) {
       console.log("success (GET http://localhost:3000/people)");
       $scope.people = data;
@@ -11,13 +10,29 @@ app.controller('PeopleController', ['$scope', '$http', function($scope, $http){
     });
   };
 
-    $scope.loadProjects = function() {
+  $scope.projects = [];
+  loadProjects = function() {
+    console.log("loadProjects");
     return $http.get('/project').success(function(data) {
       console.log("success (GET http://localhost:3000/project)");
       $scope.projects = data;
     }).error(function() {
       console.log("error (GET http://localhost:3000/project)");
     });
+  };
+
+  $scope.init = function() {
+    loadPeople();
+    loadProjects();
+  };
+
+  $scope.showProject = function(person) {
+    if(person.project && $scope.projects.length) {
+      var selected = $filter('filter')($scope.projects, {id: person.project});
+      return selected.length ? selected[0].name : 'Not set';
+    } else {
+      return person.projectName || 'Not set';
+    }
   };
 
   $scope.savePerson = function(data, id) {
