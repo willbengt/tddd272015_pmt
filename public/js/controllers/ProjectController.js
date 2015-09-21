@@ -1,3 +1,12 @@
 app.controller('ProjectController', ['$scope', '$http', function($scope, $http){
-	console.log("ProjectController is running");
+	$scope.projects = [];
+
+  $scope.loadProjects = function() {
+    return $http.get('/project').success(function(data) {
+      console.log("success (GET http://localhost:3000/project)");
+      $scope.project = data;
+    }).error(function() {
+      console.log("error (GET http://localhost:3000/project)");
+    });
+  };
 }]);

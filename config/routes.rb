@@ -70,6 +70,8 @@ Rails.application.routes.draw do
   put '/people/:id', to: 'people#update'
   delete '/people/:id', to: 'people#destroy'
 
+  get '/project', to: 'project#show'
+
   put '/authenticate' => 'session#authenticate'
 
 end
