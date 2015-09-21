@@ -1,3 +1,31 @@
 <div ng-init="loadProjects()">
 	<h1>Projects</h1>
+
+	<table class="table table-striped table-hover table-condensed">
+    <tr style="font-weight: bold">
+      <td style="width:35%">Name</td>
+      <td style="width:25%">Edit</td>
+    </tr>
+    <tr ng-repeat="project in projects">
+      <td>
+        <span editable-text="project.name" e-name="name" e-form="rowform" e-required>
+          {{project.name}}
+        </span>
+      </td>
+      <td>
+        <form editable-form name="rowform" onbeforesave="saveProject($data, project.id)" ng-show="rowform.$visible" shown="inserted == project" class="form-buttons form-inline">
+          <button type="submit" class="btn btn-primary">
+            save
+          </button>
+          <button type="button" ng-click="rowform.$cancel()" class="btn btn-default">
+            cancel
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+          <button class="btn btn-danger" ng-click="removePerson(project.id, $index)">del</button>
+        </div>  
+      </td>
+    </tr>
+  </table>
 </div>

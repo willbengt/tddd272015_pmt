@@ -11,6 +11,15 @@ app.controller('PeopleController', ['$scope', '$http', function($scope, $http){
     });
   };
 
+    $scope.loadProjects = function() {
+    return $http.get('/project').success(function(data) {
+      console.log("success (GET http://localhost:3000/project)");
+      $scope.projects = data;
+    }).error(function() {
+      console.log("error (GET http://localhost:3000/project)");
+    });
+  };
+
   $scope.savePerson = function(data, id) {
     return $http.put('/people/' + id, data).success(function(response) {
       console.log("success (PUT http://localhost:3000/people/" + id + ")");

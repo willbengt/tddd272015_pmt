@@ -4,7 +4,7 @@ app.controller('ProjectController', ['$scope', '$http', function($scope, $http){
   $scope.loadProjects = function() {
     return $http.get('/project').success(function(data) {
       console.log("success (GET http://localhost:3000/project)");
-      $scope.project = data;
+      $scope.projects = data;
     }).error(function() {
       console.log("error (GET http://localhost:3000/project)");
     });

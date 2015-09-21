@@ -4,7 +4,8 @@ class ProjectController < ApplicationController
 
   def show
     puts '-----------project#show-----------'
-    render nothing: true
+    data = Project.all
+    render json: data
   end
 
 end
