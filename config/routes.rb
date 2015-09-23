@@ -73,6 +73,8 @@ Rails.application.routes.draw do
 
   put '/deletedata' => 'report#delete'
 
+  delete '/reports/:id' => 'report#delete'
+
   put '/authenticate' => 'session#authenticate'
 
 end
