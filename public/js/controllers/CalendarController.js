@@ -1,97 +1,77 @@
-app.controller('CalendarController', ['$scope', 'eventService', function($scope, eventService){
+app.controller('CalendarController', ['$scope', 'eventService', '$timeout', function($scope, eventService, $timeout){
   var CLIENT_ID = '711755136597-5k4ijen3f7j0003088jjimt8knlre2cm.apps.googleusercontent.com';
   var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 
-  var calendarFetcher = {
-    results: ["empty"],
+  $scope.calendarsFetched = false;
 
-    fetch: function() {
-      console.log("$(this).results = " + JSON.stringify($(this).results));
-      //console.log("$this.results = " + JSON.stringify($this.results));
-      console.log("this.results = " + JSON.stringify(this.results));
-      
-      /*
-      gapi.client.calendar.calendarList.list({}).then(function(response) {
-        this.results.push(response.result);
-        console.log(response.result.items[1].summary);
-      }, function(reason) {
-        console.error(name, 'was not fetched:', response.result.error.message);
-      }, this);*/
-    }
-  };
-
+  $scope.calendars = [];
   listCalendars = function() {
+
     var request = gapi.client.calendar.calendarList.list({});
-    var calendars = [];
     var singleCalendar = [];
 
-    request.execute(function(response) {
-      
-      appendPre("\n-----CALENDARS-----\n" );
+    $scope.calendars = [];
+
+    return request.execute(function(response) {
 
       for (var i = 0; i < response.items.length; i++) {
-        singleCalendar = [
-          {title : response.items[i].summary}, 
-          {id : response.items[i].id} 
-        ];
-        appendPre(JSON.stringify(singleCalendar) + '\n');
-        calendars.push(singleCalendar);
+        $scope.calendars.push({
+          title : response.items[i].summary, 
+          id : response.items[i].id
+        }); 
       }
+      $scope.calendarsFetched = true;
     });
   };
-           
+    
+  $scope.calendarEvents = [];         
   listCalendarEvents = function() {
-    var maxResults = 2;
     var time_min = "2015-06-01T00:00:00+02:00";
-    var calendarId = "williambengtsson.com_nh203r5l6mbf5cp2c6hp2crjkk@group.calendar.google.com";
     
     //API: https://developers.google.com/google-apps/calendar/v3/reference/events/list
     var request = gapi.client.calendar.events.list({ 
-      'calendarId': calendarId,
+      'calendarId': $scope.calendarSelected,
       'timeMin': time_min,
       'showDeleted': false,
       'singleEvents': true,
-      'maxResults': maxResults,
+      'maxResults': $scope.numberOfEvents,
       'orderBy': 'startTime'
     });
 
+    $scope.calendarEvents = []; 
+
     //API: https://developers.google.com/google-apps/calendar/v3/reference/events#resource
     request.then(function(response) { 
-      var events = []; 
-      var singleEvent = [];
-
-      appendPre("\n-----EVENTS-----\n" );
       
-      for (i = 0; i < maxResults; i++) {
-        singleEvent = [
-          {title : response.result.items[i].summary}, 
-          {start : response.result.items[i].start.dateTime}, 
-          {end : response.result.items[i].end.dateTime}
-        ];
-        appendPre(JSON.stringify(singleEvent) + '\n');
-        events.push(singleEvent);
+      for (i = 0; i < $scope.numberOfEvents; i++) {
+        $scope.calendarEvents.push({
+          title : response.result.items[i].summary, 
+          start : response.result.items[i].start.dateTime, 
+          end : response.result.items[i].end.dateTime
+        });
       }
-      eventService.events = events;
-      console.log("1. eventService.events = " + JSON.stringify(eventService.events));
+      //eventService.events = $scope.calendarsEvents;
     });
-    console.log("2. eventService.events = " + JSON.stringify(eventService.events));
   };
 
-  appendPre = function(message) {
-    var pre = document.getElementById('output');
-    var textContent = document.createTextNode(message);
-    pre.appendChild(textContent);
-  }
+  callCalendarApi = function() {
+    return gapi.client.load('calendar', 'v3', listCalendars);
+  };
 
-  callbackHandler = function(authResult) {
-    if (authResult && !authResult.error) {
-      console.log("Authorization successful");
-      gapi.client.load('calendar', 'v3', listCalendars);
-      gapi.client.load('calendar', 'v3', listCalendarEvents);
-      gapi.client.load('calendar', 'v3', calendarFetcher.fetch);
-    } else {
-      console.log("Authorization not successful");
-    }
+  callCalendarEventsApi = function() {
+    return gapi.client.load('calendar', 'v3', listCalendarEvents);
+  };
+
+  $scope.fetchCalendars = function() {
+    callCalendarApi();
+    //1000 milliseconds delay and then callCalendarApi second time. 
+    $timeout(callCalendarApi, 1000); 
+  };
+
+  $scope.fetchCalendarEvents = function() {
+    callCalendarEventsApi();
+    //1000 milliseconds delay and then callCalendarEventsApi second time. 
+    $timeout(callCalendarEventsApi, 1000); 
   };
 
   $scope.authorize = function() {
@@ -101,6 +81,6 @@ app.controller('CalendarController', ['$scope', 'eventService', function($scope,
       'immediate': false,
       'response_type' : "token",
       'scope': SCOPES, 
-    }, callbackHandler); 
+    }); 
   };
 }]);
