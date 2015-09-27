@@ -15,6 +15,12 @@ class ProjectController < ApplicationController
     render :json => {id: id}
   end
 
+  def update
+    puts '-----------project#update-----------'
+    Project.find(params[:id]).update(:name => params[:name])
+    render nothing: true
+  end
+
   def destroy
     puts '-----------project#delete-----------'
     Project.find(params[:id]).destroy

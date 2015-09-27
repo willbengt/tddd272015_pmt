@@ -10,6 +10,14 @@ app.controller('ProjectController', ['$scope', '$http', function($scope, $http){
     });
   };
 
+  $scope.saveProject = function(data, id) {
+    return $http.put('/project/' + id, data).success(function(response) {
+      console.log("success (PUT http://localhost:3000/project/" + id + ")");
+    }).error(function() {
+      console.log("error (PUT http://localhost:3000/project/" + id + ")");
+    });
+  };
+
   $scope.removeProject = function(id, rowIndex) {
     $scope.projects.splice(rowIndex, 1);
     return $http.delete('/project/' + id).success(function(response) {

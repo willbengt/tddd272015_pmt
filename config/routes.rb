@@ -72,6 +72,7 @@ Rails.application.routes.draw do
 
   get '/project', to: 'project#show'
   post '/project', to: 'project#create'
+  put '/project/:id', to: 'project#update'
   delete '/project/:id', to: 'project#destroy'
 
   put '/authenticate' => 'session#authenticate'
