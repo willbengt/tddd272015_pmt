@@ -1,4 +1,4 @@
-var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2']).config([
+var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xeditable']).config([
 	'$stateProvider',
 	'$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
@@ -14,6 +14,18 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2']).confi
                 url: '/reports',
                 templateUrl: '/views/reports.html',
                 controller: 'ReportController'
+            })
+
+            .state('people', {
+                url: '/people',
+                templateUrl: '/views/people.html',
+                controller: 'PeopleController'
+            })
+
+            .state('projects', {
+                url: '/projects',
+                templateUrl: '/views/projects.html',
+                controller: 'ProjectController'
             })
 
             .state('oauth_callback', {

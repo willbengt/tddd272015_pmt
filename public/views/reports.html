@@ -16,7 +16,7 @@
                 <td>{{report.time}}</td>
                 <td>{{report.text}}</td>
                 <td>
-                    <button ng-click="deleteReport(report, tableInformation)">Delete</button>
+                    <button ng-click="deleteReport(report.id)">Delete</button> <!-- deleteReport(report, tableInformation, $index) -->
                 </td>
             </tr>
 
