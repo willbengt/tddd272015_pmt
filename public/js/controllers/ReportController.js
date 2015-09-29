@@ -37,18 +37,12 @@ app.controller('ReportController', ['$scope', '$http', '$filter', function($scop
         }
     };
 
-    $scope.deleteReport = function(id){
-        console.log("deleting report with id = " + id);
-
-        $http.delete('/report/' + id).success(function(msg) {
-            if(msg.msg != 'ok'){
-                $scope.msg = 'Something went wrong when trying to delete from database';
-            }
-            else{
-                console.log("now refetching data after a deleted report!")
-                fetchData();
-            }
-
+    $scope.removeReport = function(id, rowIndex) {
+        $scope.tableInformation.splice(rowIndex, 1);
+        return $http.delete('/report/' + id).success(function(response) {
+            console.log("success (DELETE http://localhost:3000/report/" + id + ")");
+        }).error(function() {
+            console.log("error (DELETE http://localhost:3000/report/" + id + ")");
         });
     };
 
