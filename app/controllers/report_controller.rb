@@ -10,7 +10,8 @@ class ReportController < ApplicationController
   def create
     puts '-----------create-----------'
     @report = Timereport.create(name: params[:name], project: params[:project], time: params[:time], text: params[:text])
-    render nothing: true
+    id = Timereport.last.id
+    render :json => {id: id}
   end
 
   def show

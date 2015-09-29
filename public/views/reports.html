@@ -24,8 +24,8 @@
                     </span>
                 </td>
                 <td>
-                    <span editable-bstime="report.time" e-show-meridian="false" e-minute-step="10" e-name="name" e-form="rowform" e-required>
-                      {{report.time}}
+                    <span editable-bstime="report.time" e-show-meridian="false" e-minute-step="5" e-name="name" e-form="rowform" e-required>
+                      {{(report.time | date:"HH:mm")||'empty'}}
                     </span>
                 </td>
                 <td>
@@ -51,7 +51,7 @@
         </tbody>
     </table>
 
-    <button class="btn btn-default" ng-click="addProject()">Add row</button>
+    <button class="btn btn-default" ng-click="addReport()">Add row</button>
 
     <burndown-chart ng-if="tableInformation" val = tableInformation></burndown-chart>
 
