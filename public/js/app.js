@@ -1,4 +1,4 @@
-var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xeditable']).config([
+var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xeditable', "ui.bootstrap"]).config([
 	'$stateProvider',
 	'$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
@@ -54,6 +54,10 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
 
         $urlRouterProvider.otherwise('/views/home.html');
     }]);
+
+app.run(function(editableOptions) {
+  editableOptions.theme = 'bs3'; // bootstrap3 theme. 
+});
 
 app.controller("SecureController", function($scope){
     $scope.accessToken = JSON.parse(window.localStorage.getItem("imgur")).oauth.access_token;
