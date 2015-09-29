@@ -1,6 +1,6 @@
-app.controller('ReportController', ['$scope', '$http', function($scope, $http){
+app.controller('ReportController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
 
-    $scope.fetchData = function() {
+    fetchData = function() {
         console.log("fetching data again")
         $http.get('/report').success(
             function(response){
@@ -12,6 +12,31 @@ app.controller('ReportController', ['$scope', '$http', function($scope, $http){
         );
     };
 
+    $scope.projects = [];
+    loadProjects = function() {
+        console.log("loadProjects");
+        return $http.get('/project').success(function(data) {
+            console.log("success (GET http://localhost:3000/project)");
+            $scope.projects = data;
+        }).error(function() {
+            console.log("error (GET http://localhost:3000/project)");
+        });
+    };
+
+    $scope.init = function() {
+        fetchData();
+        loadProjects();
+    };
+
+    $scope.showProject = function(report) {
+        if(report.project && $scope.projects.length) {
+            var selected = $filter('filter')($scope.projects, {id: report.project}); 
+            return selected.length ? selected[0].name : 'Not set';
+        } else {
+            return 'Not set';
+        }
+    };
+
     $scope.deleteReport = function(id){
         console.log("deleting report with id = " + id);
 
@@ -21,7 +46,7 @@ app.controller('ReportController', ['$scope', '$http', function($scope, $http){
             }
             else{
                 console.log("now refetching data after a deleted report!")
-                $scope.fetchData();
+                fetchData();
             }
 
         });
@@ -34,7 +59,7 @@ app.controller('ReportController', ['$scope', '$http', function($scope, $http){
                 $scope.msg = 'Something went wrong when trying to store in database';
             }
         });
-        $scope.fetchData(); // If I dont fetch data here I cannot delete it if there is no new fetch.
+        fetchData(); // If I dont fetch data here I cannot delete it if there is no new fetch.
         $scope.form = {};
     };
 
