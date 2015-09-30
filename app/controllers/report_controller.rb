@@ -14,6 +14,12 @@ class ReportController < ApplicationController
     render :json => {id: id}
   end
 
+  def update
+    puts '-----------report#update-----------'
+    Timereport.find(params[:id]).update(name: params[:name], project: params[:project], time: params[:time], text: params[:text])
+    render nothing: true
+  end
+
   def show
     puts '-----------show-----------'
     data = Timereport.all

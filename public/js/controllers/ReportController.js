@@ -46,32 +46,29 @@ app.controller('ReportController', ['$scope', '$http', '$filter', function($scop
         });
     };
 
-    $scope.addReport2 = function(report){
-        report.push($scope.form);
-        $http.post('/report', $scope.form).success(function(msg){
-            if(msg.msg != 'ok'){
-                $scope.msg = 'Something went wrong when trying to store in database';
-            }
+    $scope.saveReport = function(data, id) {
+        return $http.put('/report/' + id, data).success(function(response) {
+            console.log("success (PUT http://localhost:3000/report/" + id + ")");
+        }).error(function() {
+            console.log("error (PUT http://localhost:3000/report/" + id + ")");
         });
-        fetchData(); // If I dont fetch data here I cannot delete it if there is no new fetch.
-        $scope.form = {};
     };
 
     $scope.addReport = function() {
-    $scope.inserted = {
-        name: '',
-        project: '',
-        time: '',
-        text: ''
-    };
+        $scope.inserted = {
+            name: '',
+            project: '',
+            time: '',
+            text: ''
+        };
 
-    return $http.post('/report', $scope.inserted).success(function(response) {
-        console.log("success (POST http://localhost:3000/report)");
-        $scope.inserted.id = response.id;
-        $scope.tableInformation.push($scope.inserted);
-    }).error(function() {
-        console.log("error (POST http://localhost:3000/report)");
-    });
-  };
+        return $http.post('/report', $scope.inserted).success(function(response) {
+            console.log("success (POST http://localhost:3000/report)");
+            $scope.inserted.id = response.id;
+            $scope.tableInformation.push($scope.inserted);
+        }).error(function() {
+            console.log("error (POST http://localhost:3000/report)");
+        });
+    };
 
 }]);
