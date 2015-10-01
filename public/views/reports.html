@@ -23,7 +23,7 @@
                 <td>{{report.text}}</td>
                 <td>{{report.created_at | date : 'yyyy-MMM-dd HH:mm'}}</td>
                 <td>
-                    <button ng-click="deleteReport(report.id)">Delete</button>
+                    <button ng-click="deleteReport(report.id)">Delete</button> <!-- deleteReport(report, tableInformation, $index) -->
                 </td>
             </tr>
 

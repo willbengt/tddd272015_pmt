@@ -8,11 +8,13 @@ class ReportController < ApplicationController
   end
 
   def create
+    puts '-----------create-----------'
     @report = Timereport.create(name: params[:name], project: params[:project], time: params[:time], text: params[:text])
     render nothing: true
   end
 
-  def get_all
+  def show
+    puts '-----------show-----------'
     data = Timereport.all
     render json: data
   end
@@ -23,7 +25,8 @@ class ReportController < ApplicationController
     render :json => @report
   end
 
-  def delete
+  def destroy
+    puts '-----------destroy-----------'
     puts params[:id]
     @report = Timereport.find(params[:id]).destroy
     render :json => {msg: 'ok'}

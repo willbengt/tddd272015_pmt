@@ -1,4 +1,15 @@
 
+    $scope.fetchData = function() {
+        console.log("fetching data again")
+        $http.get('/fetchdata').success(
+            function(response){
+                $scope.tableInformation = response;
+                console.log("data fetched");
+            }
+        ).error(
+            $scope.subheader = "Bad response"
+        );
+    };
 
 angular.module('TimeReportApp')
 
@@ -18,6 +29,16 @@ angular.module('TimeReportApp')
             ]
         };
 
+    $scope.addReport = function(report){
+        report.push($scope.form);
+        $http.post('/senddata', $scope.form).success(function(msg){
+            if(msg.msg != 'ok'){
+                $scope.msg = 'Something went wrong when trying to store in database';
+            }
+        });
+        $scope.fetchData(); // If I dont fetch data here I cannot delete it if there is no new fetch.
+        $scope.form = {};
+    };
 
         $scope.fetchData = function() {
             $scope.tableInformation = Report.query();

@@ -58,23 +58,30 @@ Rails.application.routes.draw do
 
 
 
+  # automatically creates routes for CRUD operations for ReportController
+  # resources :report
 
-  resources :report
+  get '/report', to: 'report#show'
+  post '/report', to: 'report#create'
+  delete '/report/:id', to: 'report#destroy'
 
-  post 'report/hejsan' => 'report#hejsan'
+  get '/people', to: 'people#show'
+  post '/people', to: 'people#create'
+  put '/people/:id', to: 'people#update'
+  delete '/people/:id', to: 'people#destroy'
 
+  get '/project', to: 'project#show'
+  post '/project', to: 'project#create'
+  put '/project/:id', to: 'project#update'
+  delete '/project/:id', to: 'project#destroy'
+  
+  #-- Redundant will be deleted when calls from front has been overhauled
   get '/reports' => 'report#get_all'
-
   get '/fetchdata' => 'report#get_all'
-
   post '/senddata' => 'report#create'
-
   post '/reports' => 'report#create'
-
   put '/deletedata' => 'report#delete'
-
   delete '/reports/:id' => 'report#delete'
-
   put '/authenticate' => 'session#authenticate'
 
 end

@@ -29,6 +29,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 
+    <!-- Include angular-xeditable -->
+    <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+
+
     <link rel="stylesheet" href="css/showReports.css" type="text/css">
 
     <!-- Modules -->
@@ -38,12 +43,15 @@
     <!-- controllers -->
     <script src="js/controllers/MainController.js"></script>
     <script src="js/controllers/ReportController.js"></script>
+    <script src="js/controllers/PeopleController.js"></script>
+    <script src="js/controllers/ProjectController.js"></script>
     <script src="js/controllers/SessionController.js"></script>
-    <script src="js/controllers/SecureController.js"></script>
+    <script src="js/controllers/CalendarController.js"></script>
 
     <!-- services -->
     <script src="js/services/users.js"></script>
     <script src="js/services/reports.js"></script>
+    <script src="js/services/Events.js"></script>
 
     <!--<script src="views/home.html" type="text/ng-template" id="/home.html"></script>-->
 
@@ -55,7 +63,8 @@
     <!-- Directives -->
     <script src="js/directive/d3js.js"></script>
 
-
+    <!-- Load JavaScript client Library -->
+    <script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script>
 
 </head>
 <body ng-app="TimeReportApp">
@@ -66,8 +75,10 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#/home">Home<span class="sr-only">(current)</span></a></li>
-                <li><a href="#/reports">Reports</a></li>
+                <li><a href="#/home">Home<span class="sr-only">(current)</span></a></li>
+                <li><a href="#/reports">Reports</a></li> 
+                <li><a href="#/people">People</a></li>
+                <li><a href="#/projects">Projects</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
