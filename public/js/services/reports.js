@@ -4,7 +4,7 @@
 angular.module('TimeReportApp')
 
     .factory('Report', function ReportFactory($resource){
-        return $resource('/reports/:id', {}, {
+        return $resource('/report/:id', {}, {
         //return $resource('/reports/:id', {params: {token: '@accessToken'}}, {
         //    validate: {method: 'GET'}
         });
