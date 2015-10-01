@@ -1,13 +1,15 @@
 <div ng-init="init()" >
   <h1>People</h1>
 
-  <table class="table table-striped table-hover table-condensed">
-    <tr style="font-weight: bold">
-      <td style="width:35%">Name</td>
-      <td style="width:20%">Email</td>
-      <td style="width:20%">Project</td>
-      <td style="width:25%">Edit</td>
-    </tr>
+  <table class="table table-striped table-condensed table-hover">
+    <thead>
+      <tr>
+        <th class="col-md-3">Name</th>
+        <th class="col-md-3">Email</th>
+        <th class="col-md-3">Project</th>
+        <th class="col-md-3">Edit</th>
+      </tr>
+    </thead>
     <tr ng-repeat="person in people">
       <td>
         <span editable-text="person.name" e-name="name" e-form="rowform" e-required>

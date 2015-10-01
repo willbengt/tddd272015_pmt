@@ -63,6 +63,7 @@ Rails.application.routes.draw do
 
   get '/report', to: 'report#show'
   post '/report', to: 'report#create'
+  put '/report/:id', to: 'report#update'
   delete '/report/:id', to: 'report#destroy'
 
   get '/people', to: 'people#show'
