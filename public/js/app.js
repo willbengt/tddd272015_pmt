@@ -1,6 +1,6 @@
-var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'ngResource'])
-
-    .config(['$stateProvider', '$urlRouterProvider',
+var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xeditable']).config([
+	'$stateProvider',
+	'$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
@@ -14,6 +14,18 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'ngRes
                 url: '/reports',
                 templateUrl: '/views/reports.html',
                 controller: 'ReportController'
+            })
+
+            .state('people', {
+                url: '/people',
+                templateUrl: '/views/people.html',
+                controller: 'PeopleController'
+            })
+
+            .state('projects', {
+                url: '/projects',
+                templateUrl: '/views/projects.html',
+                controller: 'ProjectController'
             })
 
             .state('oauth_callback', {
@@ -32,7 +44,18 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'ngRes
                 url: '/secure',
                 templateUrl: '/views/secure_test.html',
                 controller: 'SecureController'
+            })
+
+            .state('calendar', {
+                url: '/calendar',
+                templateUrl: '/views/calendar.html',
+                controller: 'CalendarController'
             });
 
         $urlRouterProvider.otherwise('/views/home.html');
     }]);
+
+app.controller("SecureController", function($scope){
+    $scope.accessToken = JSON.parse(window.localStorage.getItem("imgur")).oauth.access_token;
+    $scope.test_msg = "Nothing";
+});

@@ -2,7 +2,7 @@ app.controller('ReportController', ['$scope', '$http', function($scope, $http){
 
     $scope.fetchData = function() {
         console.log("fetching data again")
-        $http.get('/fetchdata').success(
+        $http.get('/report').success(
             function(response){
                 $scope.tableInformation = response;
                 console.log("data fetched");
@@ -12,12 +12,10 @@ app.controller('ReportController', ['$scope', '$http', function($scope, $http){
         );
     };
 
+    $scope.deleteReport = function(id){
+        console.log("deleting report with id = " + id);
 
-
-    $scope.deleteReport = function(reportEntry, report){
-        console.log("deleting report")
-        report.splice(report.indexOf(reportEntry), 1);
-        $http.put('/deletedata', reportEntry).success(function(msg) {
+        $http.delete('/report/' + id).success(function(msg) {
             if(msg.msg != 'ok'){
                 $scope.msg = 'Something went wrong when trying to delete from database';
             }
@@ -31,7 +29,7 @@ app.controller('ReportController', ['$scope', '$http', function($scope, $http){
 
     $scope.addReport = function(report){
         report.push($scope.form);
-        $http.post('/senddata', $scope.form).success(function(msg){
+        $http.post('/report', $scope.form).success(function(msg){
             if(msg.msg != 'ok'){
                 $scope.msg = 'Something went wrong when trying to store in database';
             }

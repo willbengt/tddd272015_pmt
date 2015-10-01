@@ -58,18 +58,22 @@ Rails.application.routes.draw do
 
 
 
+  # automatically creates routes for CRUD operations for ReportController
+  # resources :report
 
-  resources :report
+  get '/report', to: 'report#show'
+  post '/report', to: 'report#create'
+  delete '/report/:id', to: 'report#destroy'
 
-  post 'report/hejsan' => 'report#hejsan'
+  get '/people', to: 'people#show'
+  post '/people', to: 'people#create'
+  put '/people/:id', to: 'people#update'
+  delete '/people/:id', to: 'people#destroy'
 
-  get '/reports' => 'report#show'
-
-  get '/fetchdata' => 'report#show'
-
-  post '/senddata' => 'report#create'
-
-  put '/deletedata' => 'report#delete'
+  get '/project', to: 'project#show'
+  post '/project', to: 'project#create'
+  put '/project/:id', to: 'project#update'
+  delete '/project/:id', to: 'project#destroy'
 
   put '/authenticate' => 'session#authenticate'
 
