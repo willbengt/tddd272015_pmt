@@ -31,7 +31,7 @@ app.controller('PeopleController', ['$scope', '$http', '$filter', function($scop
       var selected = $filter('filter')($scope.projects, {id: person.project});
       return selected.length ? selected[0].name : 'Not set';
     } else {
-      return person.projectName || 'Not set';
+      return 'Not set';
     }
   };
 
