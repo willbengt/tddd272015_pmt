@@ -4,8 +4,9 @@
 
 angular.module('TimeReportApp')
 
-    .factory('Projects', function UserFactory($resource){
-        return $resource('/projects/:id', {params: {token: '@accessToken'}}, {
+    .factory('Project', function UserFactory($resource){
+        /*return $resource('/projects/:id', {params: {token: '@accessToken'}}, {
             validate: {method: 'GET'}
-        });
+        });*/
+        return $resource('/project/:id', {}, {});
     })

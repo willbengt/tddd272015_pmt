@@ -30,7 +30,7 @@ app.directive('barChart', function(){
             .attr("width", width)
             .attr("height", height)
             .append("g")
-            .attr("transform", "translate(20, 0)"); //flytta, rotera o sånt
+            .attr("transform", "translate(20, 0)"); //flytta, rotera o sï¿½nt
 
         var bars = canvas.selectAll("rect")
             .data(dataArray)
@@ -155,6 +155,7 @@ app.directive('burndownChart', function($window){
         var filtered = rawData.filter(function (item) {
             return item.project == 1;
         });
+
         for (var x in filtered) {
             testArray.push(filtered[x].time);
         }
@@ -162,6 +163,7 @@ app.directive('burndownChart', function($window){
         for (var x in rawData) {
             dataTime.push(rawData[x].time);
         }
+
         for (var x in rawData) {
             dataProject.push(rawData[x].project);
         }
