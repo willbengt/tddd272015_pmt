@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'ngResource'])
 
     .config(['$stateProvider', '$urlRouterProvider',
+=======
+var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xeditable', "ui.bootstrap"]).config([
+	'$stateProvider',
+	'$urlRouterProvider',
+>>>>>>> 6deae3a05a8954d544860fc132d5db56d3b2c381
 	function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
@@ -14,6 +20,18 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'ngRes
                 url: '/reports',
                 templateUrl: '/views/reports.html',
                 controller: 'ReportController'
+            })
+
+            .state('people', {
+                url: '/people',
+                templateUrl: '/views/people.html',
+                controller: 'PeopleController'
+            })
+
+            .state('projects', {
+                url: '/projects',
+                templateUrl: '/views/projects.html',
+                controller: 'ProjectController'
             })
 
             .state('oauth_callback', {
@@ -32,10 +50,20 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'ngRes
                 url: '/secure',
                 templateUrl: '/views/secure_test.html',
                 controller: 'SecureController'
+            })
+
+            .state('calendar', {
+                url: '/calendar',
+                templateUrl: '/views/calendar.html',
+                controller: 'CalendarController'
             });
 
      //   $urlRouterProvider.otherwise('/views/home.html');
     }]);
+
+app.run(function(editableOptions) {
+  editableOptions.theme = 'bs3'; // bootstrap3 theme. 
+});
 
 app.controller("SecureController", function($scope){
     $scope.accessToken = JSON.parse(window.localStorage.getItem("imgur")).oauth.access_token;

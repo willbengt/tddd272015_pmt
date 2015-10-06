@@ -10,5 +10,4 @@
 
 Timereport.create(name: 'Rasmus', project: 1, time: 1, text:" Trollar lite grann" )
 Timereport.create(name: 'Teddy', project: 1, time: 3, text:" Grejar po! " )
-User.create(userId: '123456789', userName: 'Teddy', email: 'test@gmail.com', userLevel: 1)
-Project.create(name: 'Test Project', totTime: 500, owner: '123456789')
+People.create(name: 'William', email: "mail@williambengtsson.com" )
