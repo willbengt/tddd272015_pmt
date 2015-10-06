@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'ngResource'])
-
-    .config(['$stateProvider', '$urlRouterProvider',
-=======
 var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xeditable', "ui.bootstrap"]).config([
 	'$stateProvider',
 	'$urlRouterProvider',
->>>>>>> 6deae3a05a8954d544860fc132d5db56d3b2c381
 	function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
