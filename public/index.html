@@ -36,7 +36,6 @@
     <!-- Include  angular-ui bootstrap -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
 
-
     <link rel="stylesheet" href="css/showReports.css" type="text/css">
     <link rel="stylesheet" href="css/timepicker.css" type="text/css">
 
@@ -56,20 +55,17 @@
     <script src="js/services/users.js"></script>
     <script src="js/services/reports.js"></script>
     <script src="js/services/projects.js"></script>
-    <script src="js/services/Events.js"></script>
-
-    <!--<script src="views/home.html" type="text/ng-template" id="/home.html"></script>-->
-
-    <!--<script src="views/reports.html" type="text/ng-template" id="/reports.html"></script>-->
-
-
-    <script src="views/reports.html" type="text/ng-template" id="/reports.html"></script>
+    <script src="js/services/events.js"></script>
 
     <!-- Directives -->
     <script src="js/directive/d3js.js"></script>
 
     <!-- Load JavaScript client Library -->
     <script src="https://apis.google.com/js/client.js?onload=OnLoadCallback"></script>
+
+    <!--<script src="views/home.html" type="text/ng-template" id="/home.html"></script>-->
+    <!--<script src="views/reports.html" type="text/ng-template" id="/reports.html"></script>-->
+    <script src="views/reports.html" type="text/ng-template" id="/reports.html"></script>
 
 </head>
 <body ng-app="TimeReportApp">
@@ -84,6 +80,7 @@
                 <li><a href="#/reports">Reports</a></li> 
                 <li><a href="#/people">People</a></li>
                 <li><a href="#/projects">Projects</a></li>
+                <li><a href="#/calendar">Calendars</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">

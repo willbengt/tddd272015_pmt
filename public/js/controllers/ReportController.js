@@ -24,14 +24,15 @@ angular.module('TimeReportApp')
         };
 
         $scope.fetchData = function() {
-            $scope.tableInformation = Report.query().$promise.then(
+            $scope.tableInformation = Report.query()
+                /*.$promise.then(
                 function(response) {
 
                     console.log("success loadReports (GET http://localhost:3000/project)");
                 }, function(error) {
                     console.log("error loadReports (GET http://localhost:3000/project)");
                 }
-            )
+            )*/
         };
 
         /*$scope.fetchData = function() {
