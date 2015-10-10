@@ -1,4 +1,4 @@
-app.controller('CalendarController', ['$scope', 'eventService', '$timeout', function($scope, eventService, $timeout){
+app.controller('CalendarController', ['$scope', '$timeout', function($scope, $timeout){
   var CLIENT_ID = '711755136597-5k4ijen3f7j0003088jjimt8knlre2cm.apps.googleusercontent.com';
   var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 
@@ -50,7 +50,6 @@ app.controller('CalendarController', ['$scope', 'eventService', '$timeout', func
           end : response.result.items[i].end.dateTime
         });
       }
-      //eventService.events = $scope.calendarsEvents;
     });
   };
 
