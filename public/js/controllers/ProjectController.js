@@ -2,11 +2,10 @@ app.controller('ProjectController', ['$scope', '$http', 'Project', function($sco
 	$scope.projects = [];
 
   $scope.loadProjects = function() {
-    return $http.get('/project').success(function(data) {
-      console.log("success (GET http://localhost:3000/project)");
-      $scope.projects = data;
-    }).error(function() {
-      console.log("error (GET http://localhost:3000/project)");
+    $scope.projects = Project.query(function() {
+      console.log("success (GET http://localhost:3000/api/projects)");
+    }, function(error) {
+      console.log("error (GET http://localhost:3000/api/projects)");
     });
   };
 

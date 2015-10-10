@@ -2,6 +2,12 @@ class ProjectController < ApplicationController
 
 	skip_before_filter :verify_authenticity_token
 
+  def index
+    puts '-----------project#index-----------'
+    @projects = Project.all
+    render json: @projects
+  end
+
   def show
     puts '-----------project#show-----------'
     data = Project.all

@@ -71,6 +71,7 @@ Rails.application.routes.draw do
   put '/people/:id', to: 'people#update'
   delete '/people/:id', to: 'people#destroy'
 
+  get 'api/projects', to: 'project#index'
   get '/project', to: 'project#show'
   post '/project', to: 'project#create'
   put '/project/:id', to: 'project#update'
