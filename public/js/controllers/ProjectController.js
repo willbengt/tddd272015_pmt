@@ -31,16 +31,14 @@ app.controller('ProjectController', ['$scope', '$http', 'Project', function($sco
   };
 
   $scope.addProject = function() {
-    $scope.inserted = {
-      name: ''
-    };
+    $scope.inserted = new Project();
 
-    return $http.post('/project', $scope.inserted).success(function(response) {
-      console.log("success (POST http://localhost:3000/project)");
+    $scope.inserted.$save(function(response) {
+      console.log("success (POST http://localhost:3000/api/projects)");
       $scope.inserted.id = response.id;
       $scope.projects.push($scope.inserted);
-    }).error(function() {
-      console.log("error (POST http://localhost:3000/project)");
+    }, function(error) {
+      console.log("error (POST http://localhost:3000/api/projects)");
     });
   };
 }]);

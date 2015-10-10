@@ -8,17 +8,16 @@ class ProjectController < ApplicationController
     render json: @projects
   end
 
-  def show
-    puts '-----------project#show-----------'
-    data = Project.all
-    render json: data
-  end
-
   def create
     puts '-----------project#create-----------'
-    Project.create(name: params[:name])
-    id = Project.last.id
-    render :json => {id: id}
+    @project = Project.create(name: params[:name])
+    render :json => {id: @project.id}
+  end
+
+  def show
+    puts '-----------project#show-----------'
+    @project = Project.find(params[:id])
+    render json: @project
   end
 
   def update
