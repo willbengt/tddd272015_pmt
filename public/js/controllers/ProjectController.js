@@ -17,12 +17,12 @@ app.controller('ProjectController', ['$scope', '$http', 'Project', function($sco
     });
   };
 
-  $scope.removeProject = function(id, rowIndex) {
+  $scope.removeProject = function(project, rowIndex) { 
     $scope.projects.splice(rowIndex, 1);
-    return $http.delete('/project/' + id).success(function(response) {
-      console.log("success (DELETE http://localhost:3000/project/" + id + ")");
-    }).error(function() {
-      console.log("error (DELETE http://localhost:3000/project/" + id + ")");
+    project.$delete(function() {
+      console.log("success (DELETE http://localhost:3000/api/projects/" + project.id + ")");
+    }, function(error) {
+      console.log("error (DELETE http://localhost:3000/api/projects/" + project.id + ")");
     });
   };
 

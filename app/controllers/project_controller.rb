@@ -29,7 +29,7 @@ class ProjectController < ApplicationController
 
   def destroy
     puts '-----------project#delete-----------'
-    Project.find(params[:id]).destroy
+    @project = Project.find(params[:id]).destroy
     render nothing: true
   end
 
