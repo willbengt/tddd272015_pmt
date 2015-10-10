@@ -1,15 +1,17 @@
 app.controller('ReportController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
 
     fetchData = function() {
-        console.log("fetching data again")
+    
+        console.log("fetching data again");
+        
         $http.get('/report').success(
             function(response){
                 $scope.tableInformation = response;
                 console.log("data fetched");
             }
-        ).error(
+        ).error(function() {
             $scope.subheader = "Bad response"
-        );
+        });
     };
 
     $scope.projects = [];
