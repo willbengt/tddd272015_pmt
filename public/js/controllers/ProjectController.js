@@ -1,4 +1,4 @@
-app.controller('ProjectController', ['$scope', '$http', function($scope, $http){
+app.controller('ProjectController', ['$scope', '$http', 'Project', function($scope, $http, Project){
 	$scope.projects = [];
 
   $scope.loadProjects = function() {
