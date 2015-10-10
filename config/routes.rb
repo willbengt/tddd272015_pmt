@@ -74,7 +74,7 @@ Rails.application.routes.draw do
   get 'api/projects', to: 'project#index'
   get '/project', to: 'project#show'
   post '/project', to: 'project#create'
-  put '/project/:id', to: 'project#update'
+  put 'api/projects/:id', to: 'project#update'
   delete 'api/projects/:id', to: 'project#destroy'
 
   put '/authenticate' => 'session#authenticate'

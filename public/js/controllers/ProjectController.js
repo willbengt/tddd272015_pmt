@@ -9,11 +9,15 @@ app.controller('ProjectController', ['$scope', '$http', 'Project', function($sco
     });
   };
 
-  $scope.saveProject = function(data, id) {
-    return $http.put('/project/' + id, data).success(function(response) {
-      console.log("success (PUT http://localhost:3000/project/" + id + ")");
-    }).error(function() {
-      console.log("error (PUT http://localhost:3000/project/" + id + ")");
+  $scope.saveProject = function(elementData, elementId) {
+    project = new Project();
+
+    angular.extend(project, {id: elementId}, elementData);
+      
+    project.$update(function() {  
+      console.log("success (PUT http://localhost:3000/api/projects/" + elementId + ")");
+    }, function(error) {
+      console.log("error (PUT http://localhost:3000/api/projects/" + elementId + ")");
     });
   };
 

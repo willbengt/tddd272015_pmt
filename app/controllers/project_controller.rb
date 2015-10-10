@@ -23,7 +23,7 @@ class ProjectController < ApplicationController
 
   def update
     puts '-----------project#update-----------'
-    Project.find(params[:id]).update(:name => params[:name])
+    @project = Project.find(params[:id]).update(:name => params[:name])
     render nothing: true
   end
 
