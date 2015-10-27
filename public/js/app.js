@@ -28,6 +28,13 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
                 controller: 'ProjectController'
             })
 
+            .state('project', {  
+                url: '/project/:projectId',   
+                controller: function(){
+                    console.log("project controller running");
+                }
+            })
+
             .state('oauth_callback', {
                 url: '/oauth_callback',
                 templateUrl: '/views/oauth_callback.html',
