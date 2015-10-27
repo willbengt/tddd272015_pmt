@@ -25,20 +25,22 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
             .state('projects', {
                 url: '/projects',
                 templateUrl: '/views/projects.html',
-                controller: 'ProjectController'
+                controller: 'ProjectsController'
             })
 
             .state('project', {  
-                url: '/project/:projectId',   
-                controller: function(){
-                    console.log("project controller running");
+                url: '/project/:projectId', 
+                templateUrl: '/views/project.html',  
+                controller: function($scope, $stateParams){
+                    console.log("projectController running");
+                    $scope.projectId = $stateParams.projectId;
                 }
             })
 
             .state('oauth_callback', {
                 url: '/oauth_callback',
                 templateUrl: '/views/oauth_callback.html',
-                controller: 'SessionController'
+                controller: 'SessionContr oller'
             })
 
             .state('login', {
