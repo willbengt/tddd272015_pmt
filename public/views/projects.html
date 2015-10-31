@@ -11,7 +11,7 @@
     <tr ng-repeat="project in projects">
       <td>
         <span editable-text="project.name" e-name="name" e-form="rowform" e-required>
-          {{project.name}}
+          <a href="#/project/{{project.id}}">{{project.name}}</a>
         </span>
       </td>
       <td>
