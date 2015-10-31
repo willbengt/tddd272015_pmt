@@ -1,3 +1,6 @@
-<div ng-init="loadProject()">
+<div ng-init="init()">
 	<h1>{{project.name}}</h1>
+
+	<burndown-chart ng-if="reports" val = "reports"></burndown-chart>
+	<!--<burndown-chart ng-if="reports" val = reports></burndown-chart>-->
 </div>
