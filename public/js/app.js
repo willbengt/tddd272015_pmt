@@ -52,7 +52,7 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
                 controller: 'CalendarController'
             });
 
-     //   $urlRouterProvider.otherwise('/views/home.html');
+        $urlRouterProvider.otherwise('/views/home.html');
     }]);
 
 app.run(function(editableOptions) {
