@@ -105,13 +105,23 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
 
   $scope.datePickerOpen = false;
 
-  $scope.data=[1,2,3,4,5,6,7,8,9];
+  $scope.trollData = [
+    {x: 1,y: 5},
+    {x: 2,y: 6},
+    {x: 3,y: 7},
+    {x: 4,y: 10},
+    {x: 5,y: 10},
+    {x: 6,y: 3},
+    {x: 7,y: 5},
+    {x: 8,y: 7},
+    {x: 9,y: 5},
+    {x: 10,y: 3}
+  ];
+
+
   //  $scope.fetchProject = [];
 
   console.log("Trollmessage:")
-  console.log($scope.project);
-  console.log(projectId)
-
-
+  console.log($scope.trollData);
 
 }]);

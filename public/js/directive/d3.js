@@ -1,227 +1,3 @@
-/**
- * Created by rasmus on 2015-08-27.
- */
-
-app.directive('fooChart', function(){
-    var directive = { };
-
-    directive.scope = {
-        data: '='
-    };
-    directive.restrict = 'AE';
-
-    directive.link = function(scope, elements, attr) {
-        scope.svg = null;
-        scope.container = null;
-
-        //Optional. If there is no option set this will be the standard:
-        scope.getOptions = function() {
-            return _.merge({
-                width: 1000,
-                height: 400,
-                margin: {
-                    top: 10,
-                    right: 10,
-                    bottom: 30,
-                    left: 50
-                }
-            }, scope.options || { });
-        };
-
-
-      //  var svg = d3.select(element[0])
-       //     .append("svg");
-
-        scope.initialize = function() {
-            scope.svg = d3.select(elements[0])
-                .append("svg")
-                .attr("class", "chart");
-
-            scope.container = scope.svg.append("g");
-            scope.container.append("g").attr("class", "x");
-            scope.container.append("g").attr("class", "y");
-            scope.setSvgSize();
-        };
-
-        scope.setSvgSize = function() {
-            var options = scope.getOptions();
-            scope.container.attr("transform", "translate(" + options.margin.left + ", " + options.margin.right + ")");
-            scope.svg.attr('viewBox','0 0 '+ (options.width + options.margin.left + options.margin.right) + ' ' +
-            (options.height + options.margin.top + options.margin.bottom))
-                .attr('preserveAspectRatio','xMinYMin');
-            scope.redraw();
-        };
-
-
-        scope.redraw = function() {
-
-
-
-            var lineGen = d3.svg.line()
-                .x(function (d, i) {
-                    return xScale(i);
-                })
-                .y(function (d) {
-
-                    startTime = startTime - d
-                    return yScale(startTime);
-                })
-                .interpolate("crispEdges");
-
-            for (var x in data) {
-
-                var startTime = 100;
-                //reportedTimeForProject = getTimeForProject(uniqueProjects[x]);
-                //reportedTimeForProject.unshift(0);
-
-//                var sumOfProjectTime = reportedTimeForProject.reduce(function(pv, cv) { return pv + cv; }, 0);
-
-                scope.svg
-                    .append('svg:path')
-                    .attr('d', lineGen(x))
-                    .attr('stroke-width', 2)
-                    .attr('fill', 'none');
-
-
-//                  .attr("fill", function(d) { return color(d) })
-                //     .attr('stroke', function() { return color(sumOfProjectTime) })
-                //.attr('stroke', "green")
-
-            }
-
-
-        };
-
-
-
-
-        scope.initialize();
-
-        //watch isolated scope for changes
-        scope.$watch('data', scope.redraw);
-        scope.$watch('options', scope.setSvgSize);
-    };
-    return directive;
-});
-
-
-
-
-app.directive('bollChart', function($window){
-   function link(scope, elem, attrs){
-       scope.padding = 40;
-       scope.pathClass = "path";
-       var d3 = $window.d3;
-       var rawSvg = elem.find("svg")[0];
-       var svg = d3.select(rawSvg);
-
-       var totalProjectTime = 100;
-       var numberOfInputs = -1;
-       var xValues = [1,2,3,4,5,6];
-
-   }
-
-
-});
-
-
-app.directive('testChart', function($window){
-    function link(scope, elem, attrs) {
-        scope.padding = 40;
-        scope.pathClass = "path";
-
-        var d3 = $window.d3;
-        var rawSvg = elem.find("svg")[0];
-        var svg = d3.select(rawSvg);
-
-        var totalProjectTime = 100;
-        var numberOfInputs = -1;
-        var xValues = getX(), yValues = scope.y;
-
-
-        console.log(scope.x);
-
-
-        function getX(){
-            var x = null;
-            if (scope.x) {
-                x = scope.x;
-            } else {
-                x = _.keys(scope.y);
-            }
-            return x;
-        }
-
-
-        function setChartParameters() {
-
-
-            xScale = d3.scale.linear()
-                .domain([0, scope.x - 1])
-                .range([scope.padding + 5, rawSvg.clientWidth - scope.padding]);
-
-            yScale = d3.scale.linear()
-                .domain([0, totalProjectTime])
-                .range([rawSvg.clientHeight - scope.padding, 0]);
-
-            xAxisGen = d3.svg.axis()
-                .scale(xScale)
-                .orient("bottom")
-                .ticks(xValues.length - 1);
-
-            yAxisGen = d3.svg.axis()
-                .scale(yScale)
-                .orient("left")
-                .ticks(5);
-
-            newProjectTime = totalProjectTime;
-            lineFun = d3.svg.line()
-                .x(function (d) {
-                    numberOfInputs = numberOfInputs + 1;
-                    return xScale(numberOfInputs);
-                })
-                .y(function (d) {
-                    newProjectTime = newProjectTime - d.time;
-                    return yScale(newProjectTime);
-                })
-                .interpolate("basis");
-        }
-
-
-        function drawLineChart() {
-
-            setChartParameters();
-
-            svg.append("svg:g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0,180)")
-                .call(xAxisGen);
-
-
-            svg.append("svg:g")
-                .attr("class", "y axis")
-                .attr("transform", "translate(40,0)")
-                .call(yAxisGen);
-
-            svg.append("svg:path")
-                .attr({
-                    d: lineFun(xValues),
-                    "stroke": "blue",
-                    "stroke-width": 2,
-                    "fill": "none",
-                    "class": scope.pathClass
-                });
-        }
-
-
-        drawLineChart();
-    }
-    return {
-        restrict: 'EA',
-        template: "<svg width='850' height='220'></svg>",
-        link: link
-    }
-});
 
 
 
@@ -254,12 +30,12 @@ app.directive('myChart', function(){
             return x;
         };
         /*
-        scope.getX = function() {
-            var x = null;
-                x = scope.x;
-            return x;
-        };
-*/
+         scope.getX = function() {
+         var x = null;
+         x = scope.x;
+         return x;
+         };
+         */
 
         //Optional. If there is no option set this will be the standard:
         scope.getOptions = function() {
@@ -328,18 +104,18 @@ app.directive('myChart', function(){
                 .attr("height", 200)
 
             /*dataset.enter().append("rect").attr("class", "bar");
-            dataset.transition().attr("x", function(d, i) {
-                return i * x.rangeBand();
-            }).attr("width", function() {
-                return x.rangeBand() - 5;
-            }).attr("height", function(d) {
-                return options.height - y(d);
-            }).attr("y", function(d) {
-                return y(d);
-            });
+             dataset.transition().attr("x", function(d, i) {
+             return i * x.rangeBand();
+             }).attr("width", function() {
+             return x.rangeBand() - 5;
+             }).attr("height", function(d) {
+             return options.height - y(d);
+             }).attr("y", function(d) {
+             return y(d);
+             });
 
-            dataset.exit().remove();
-*/
+             dataset.exit().remove();
+             */
 
 
 
@@ -365,7 +141,104 @@ app.directive('myChart', function(){
 
 
     };
-        return directive;
+    return directive;
+});
+/**
+ * Created by rasmus on 2015-08-27.
+ */
+
+app.directive('fooChart', function($window){
+    function link(scope, elem, attrs) {
+        scope.padding = 40;
+        scope.pathClass = "path";
+
+        var d3 = $window.d3;
+        var rawSvg = elem.find("svg")[0];
+        var svg = d3.select(rawSvg);
+
+        var totalProjectTime = 100;
+        var numberOfInputs = -1;
+        var xValues = getX(), yValues = scope.y;
+
+        function getData(){}
+
+        function getX(){
+            var x = null;
+            if (scope.x) {
+                x = scope.x;
+            } else {
+                x = _.keys(scope.y);
+            }
+            return x;
+        }
+
+
+        function setChartParameters() {
+            xScale = d3.scale.linear()
+                .domain([0, scope.x - 1])
+                .range([scope.padding + 5, rawSvg.clientWidth - scope.padding]);
+
+            yScale = d3.scale.linear()
+                .domain([0, totalProjectTime])
+                .range([rawSvg.clientHeight - scope.padding, 0]);
+
+            xAxisGen = d3.svg.axis()
+                .scale(xScale)
+                .orient("bottom")
+                .ticks(xValues.length - 1);
+
+            yAxisGen = d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .ticks(5);
+
+            newProjectTime = totalProjectTime;
+            lineFun = d3.svg.line()
+                .x(function (d) {
+                    numberOfInputs = numberOfInputs + 1;
+                    return xScale(numberOfInputs);
+                })
+                .y(function (d) {
+                    newProjectTime = newProjectTime - d.time;
+                    return yScale(newProjectTime);
+                })
+                .interpolate("basis");
+        }
+
+
+        function drawLineChart() {
+
+            setChartParameters();
+
+            svg.append("svg:g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0,180)")
+                .call(xAxisGen);
+
+
+            svg.append("svg:g")
+                .attr("class", "y axis")
+                .attr("transform", "translate(40,0)")
+                .call(yAxisGen);
+
+            svg.append("svg:path")
+                .attr({
+                    d: lineFun(xValues),
+                    "stroke": "blue",
+                    "stroke-width": 2,
+                    "fill": "none",
+                    "class": scope.pathClass
+                });
+        }
+
+
+        drawLineChart();
+    }
+    return {
+        restrict: 'EA',
+        template: "<svg width='850' height='220'></svg>",
+        link: link
+    }
 });
 
 
@@ -495,15 +368,13 @@ app.directive('barChart', function(){
 });
 
 
-app.directive('burndownChart', function($window){
+app.directive('burndownChart_backup', function($window){
     var canvas = d3.select("body")
         .append("svg")
         .attr("width", 500)
         .attr("height", 800);
 
     function link(scope, elem, attrs) {
-        console.log("running directive with myChart")
-        //making data into arrays. Seperated different tupples in database.
         var rawData = scope[attrs.val]; //data from our database
         var dataTime = [];
         var dataProject = [];
@@ -649,5 +520,28 @@ app.directive('burndownChart', function($window){
         //    template: "<svg width='850' height='220'></svg>",
         link: link
     }
+
+});
+
+
+app.directive('burndownChart', function($window){
+    var directive = { };
+
+    directive.restrict = 'AE';
+    directive.scope = {
+        data: '='
+    };
+
+    directive.link = function(scope, elements, attr) {
+        scope.svg = null;
+        scope.container = null;
+
+        scope.svg = d3.select("body")
+            .append("svg")
+            .attr("width", 500)
+            .attr("height", 800);
+    };
+
+    return directive;
 
 });
