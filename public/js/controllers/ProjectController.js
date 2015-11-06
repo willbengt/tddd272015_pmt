@@ -91,7 +91,7 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
       'client_id': CLIENT_ID, 
       'immediate': false,
       'response_type' : "token",
-      'scope': SCOPES, 
+      'scope': SCOPES
     }); 
   };
 
@@ -104,4 +104,14 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
   };
 
   $scope.datePickerOpen = false;
+
+  $scope.data=[1,2,3,4,5,6,7,8,9];
+  //  $scope.fetchProject = [];
+
+  console.log("Trollmessage:")
+  console.log($scope.project);
+  console.log(projectId)
+
+
+
 }]);
