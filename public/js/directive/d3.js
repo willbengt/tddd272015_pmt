@@ -524,24 +524,107 @@ app.directive('burndownChart_backup', function($window){
 });
 
 
+
+/*
+ directive.restrict = 'AE';
+ directive.scope = {
+ data: '='
+ };
+
+ directive.link =
+
+ */
+
+
 app.directive('burndownChart', function($window){
-    var directive = { };
 
-    directive.restrict = 'AE';
-    directive.scope = {
-        data: '='
-    };
 
-    directive.link = function(scope, elements, attr) {
-        scope.svg = null;
-        scope.container = null;
+   // var directive = { };
+    return {
+        restrict: 'AE',
+        scope: {
+            data: '=?'
+        },
+        link: function (scope, elements, attr) {
+            console.log("adaskdjhasdjkh");
+            console.log(scope);
+            console.log(scope.data);
 
-        scope.svg = d3.select("body")
-            .append("svg")
-            .attr("width", 500)
-            .attr("height", 800);
-    };
+            var margin = parseInt(attr.margin) || 20,
+                barHeight = parseInt(attr.barHeight) || 20,
+                barPadding = parseInt(attr.barPadding) || 5;
 
-    return directive;
+            scope.svg = null;
+            scope.container = null;
 
+            scope.svg = d3.select("body")
+                .append("svg")
+                .attr("width", 500)
+                .attr("height", 800);
+
+
+            window.onresize = function () {
+                scope.$apply();
+            };
+/*
+             scope.data = [
+             {name: "Greg", score: 98},
+             {name: "Ari", score: 96},
+             {name: 'Q', score: 75},
+             {name: "Loser", score: 48}
+             ];
+ */
+            scope.$watch(function () {
+                return angular.element($window)[0].innerWidth;
+            }, function () {
+                scope.render(scope.data);
+            });
+
+            scope.$watch('data', function(newVals, oldVals) {
+                return scope.render(newVals);
+            }, true);
+
+            scope.render = function (data) {
+                //remove all previous svgs before rendering
+                scope.svg.selectAll('*').remove();
+
+                if (!data) return;
+
+                // setup variables
+                var width = d3.select(elements[0]).node().offsetWidth - margin,
+                // calculate the height
+                    height = scope.data.length * (barHeight + barPadding),
+                // Use the category20() scale function for multicolor support
+                    color = d3.scale.category20(),
+                // our xScale
+                    xScale = d3.scale.linear()
+                        .domain([0, d3.max(data, function (d) {
+                            return d.score;
+                        })])
+                        .range([0, width]);
+
+                // set the height based on the calculations above
+                scope.svg.attr('height', height);
+
+                //create the rectangles for the bar chart
+                scope.svg.selectAll('rect')
+                    .data(data).enter()
+                    .append('rect')
+                    .attr('height', barHeight)
+                    .attr('width', 140)
+                    .attr('x', Math.round(margin / 2))
+                    .attr('y', function (d, i) {
+                        return i * (barHeight + barPadding);
+                    })
+                    .attr('fill', function (d) {
+                        return color(d.score);
+                    })
+                    .transition()
+                    .duration(1000)
+                    .attr('width', function (d) {
+                        return xScale(d.score);
+                    });
+            }
+        }
+    }
 });

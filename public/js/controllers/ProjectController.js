@@ -118,10 +118,16 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     {x: 10,y: 3}
   ];
 
+  $scope.data = [
+    {name: "Greg", score: 98},
+    {name: "Ari", score: 96},
+    {name: 'Q', score: 75},
+    {name: "Loser", score: 48}
+  ];
 
   //  $scope.fetchProject = [];
 
   console.log("Trollmessage:")
-  console.log($scope.trollData);
+  console.log($scope.data);
 
 }]);
