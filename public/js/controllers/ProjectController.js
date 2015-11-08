@@ -23,6 +23,9 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
   $scope.init = function() {
     loadProject();
     loadReports();
+    $scope.fetchData();
+    console.log("scope reports: ")
+    console.log($scope.reports)
   };
 
   var CLIENT_ID = '711755136597-5k4ijen3f7j0003088jjimt8knlre2cm.apps.googleusercontent.com';
@@ -119,8 +122,8 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
   ];
 
   $scope.set = {
-    time: [ ],
-    x: [ ]
+    time: [],
+    x: []
   };
 
   $scope.fetchData = function() {
@@ -144,7 +147,7 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     );
   };
 
-  $scope.fetchData();
+  //$scope.fetchData();
   $scope.data = [
     {name: "Greg", score: 98},
     {name: "Ari", score: 96},

@@ -546,14 +546,17 @@ app.directive('burndownChart', function($window){
             data: '=',
             test1: '=',
             test2: '=',
-            test3: '='
+            set: '=',
+            y: '=burndownChart'
+
         },
         link: function (scope, elements, attr) {
             console.log("what's stored in scope.data, scpope.test1-3");
             console.log(scope.data);
             console.log(scope.test1);
             console.log(scope.test2);
-            console.log(scope.test3);
+            console.log(scope.set);
+            console.log(scope.y);
 
 
 
@@ -581,17 +584,31 @@ app.directive('burndownChart', function($window){
              {name: "Loser", score: 48}
              ];
  */
+
+            scope.$watch('data', scope.render);
+            scope.$watch('test3', scope.render);
+
             scope.$watch(function () {
                 return angular.element($window)[0].innerWidth;
             }, function () {
                 scope.render(scope.data);
             });
-
+            /*
             scope.$watch('data', function(newVals, oldVals) {
                 return scope.render(newVals);
             }, true);
+            scope.$watch('scope.test3', function(newVals, oldVals) {
+                return scope.render(newVals);
+            }, true);
+
+            scope.$watch('test3', function(newVals, oldVals) {
+                return scope.render(newVals);
+            }, true);
+*/
 
             scope.render = function (data) {
+                console.log("IM IN DATA");
+                console.log(data);
                 //remove all previous svgs before rendering
                 scope.svg.selectAll('*').remove();
 
