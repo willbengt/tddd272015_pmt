@@ -118,14 +118,39 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     {x: 10,y: 3}
   ];
 
+  $scope.set = {
+    time: [ ],
+    x: [ ]
+  };
+
+  $scope.fetchData = function() {
+    console.log("fetching data_ project controller")
+    $http.get('/report').success(
+        function(response){
+          $scope.tableInformation = response;
+          $scope.set.time = [];
+          $scope.set.x = [];
+          _.times($scope.tableInformation.length, function(n) {
+            if ($scope.tableInformation[n].project == projectId) {
+              $scope.set.time.push($scope.tableInformation[n].time);
+              $scope.set.x.push(n);
+            }
+            console.log($scope.set)
+          });
+        }
+    ).error(
+        console.log("Bad Response")
+      //  $scope.subheader = "Bad response"
+    );
+  };
+
+  $scope.fetchData();
   $scope.data = [
     {name: "Greg", score: 98},
     {name: "Ari", score: 96},
     {name: 'Q', score: 75},
     {name: "Loser", score: 48}
   ];
-
-  //  $scope.fetchProject = [];
 
   console.log("Trollmessage:")
   console.log($scope.data);

@@ -8,7 +8,8 @@ app.controller('ReportController', ['$scope', '$http', '$filter', function($scop
                 console.log("data fetched");
             }
         ).error(
-            $scope.subheader = "Bad response"
+            console.log("Bad Response in reportController")
+//            $scope.subheader = "Bad response"
         );
     };
 

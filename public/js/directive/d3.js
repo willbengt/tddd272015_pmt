@@ -543,12 +543,19 @@ app.directive('burndownChart', function($window){
     return {
         restrict: 'AE',
         scope: {
-            data: '=?'
+            data: '=',
+            test1: '=',
+            test2: '=',
+            test3: '='
         },
         link: function (scope, elements, attr) {
-            console.log("adaskdjhasdjkh");
-            console.log(scope);
+            console.log("what's stored in scope.data, scpope.test1-3");
             console.log(scope.data);
+            console.log(scope.test1);
+            console.log(scope.test2);
+            console.log(scope.test3);
+
+
 
             var margin = parseInt(attr.margin) || 20,
                 barHeight = parseInt(attr.barHeight) || 20,
