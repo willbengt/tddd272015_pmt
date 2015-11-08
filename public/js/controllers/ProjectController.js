@@ -51,13 +51,8 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     });
   };
     
-  $scope.numberOfEvents = 2;
-  $scope.startDate = new Date();
-  $scope.calendarSelected = "primary";
   listCalendarEvents = function() {
     $scope.calendarEvents = []; 
-    //var timeZoneOffset = (new Date()).getTimezoneOffset() * 60000;
-    //var timeMin = (new Date($scope.startDate - timeZoneOffset)).toISOString();
     var timeMin = $scope.startDate.toISOString();
 
     //API: https://developers.google.com/google-apps/calendar/v3/reference/events/list
