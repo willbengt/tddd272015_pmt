@@ -5,25 +5,33 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
 
   loadProject = function() {
     $scope.project = Project.get({id:projectId}, function() {
+      console.log("success (GET http://127.0.0.1:3000/api/projects/" + projectId + ")");
+    }, function(error) {
+      console.log("error (GET http://127.0.0.1:3000/api/projects/" + projectId + ")");
+    });
+  };
+  /*
+  loadProject = function() {
+    $scope.project = Project.get({id:projectId}, function() {
       console.log("success (GET http://localhost:3000/api/projects/" + projectId + ")");
     }, function(error) {
       console.log("error (GET http://localhost:3000/api/projects/" + projectId + ")");
     });
   };
-
+*/
   loadReports = function() {
   	$http.get('/report').success(function(response) {
-      console.log("success (GET http://localhost:3000/report)");
+      console.log("success (GET http://127.0.0.1:3000/report)");
       $scope.reports = $filter('filter')(response, {project: $scope.project.id}); 
     }).error(function() {
-      console.log("error (GET http://localhost:3000/report)");
+      console.log("error (GET http://127.0.0.1:3000/report)");
     });
   };
 
   $scope.init = function() {
+    fetchData();
     loadProject();
     loadReports();
-    $scope.fetchData();
   };
 
   var CLIENT_ID = '711755136597-5k4ijen3f7j0003088jjimt8knlre2cm.apps.googleusercontent.com';
@@ -111,7 +119,7 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     x: []
   };
 
-  $scope.fetchData = function() {
+  fetchData = function() {
     console.log("fetching data_ project controller")
     $http.get('/report').success(
         function(response){
@@ -123,7 +131,6 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
               $scope.set.time.push($scope.tableInformation[n].time);
               $scope.set.x.push(n);
             }
-            console.log($scope.set)
           });
         }
     ).error(

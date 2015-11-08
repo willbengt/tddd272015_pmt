@@ -1,7 +1,6 @@
 app.controller('ReportController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
 
     fetchData = function() {
-        console.log("fetching data again")
         $http.get('/report').success(
             function(response){
                 $scope.tableInformation = response;
@@ -17,10 +16,10 @@ app.controller('ReportController', ['$scope', '$http', '$filter', function($scop
     loadProjects = function() {
         console.log("loadProjects");
         return $http.get('/api/projects').success(function(data) {
-            console.log("success (GET http://localhost:3000/api/projects)");
+            console.log("success (GET http://127.0.0.1:3000/api/projects)");
             $scope.projects = data;
         }).error(function() {
-            console.log("error (GET http://localhost:3000/api/projects)");
+            console.log("error (GET http://127.0.0.1:3000/api/projects)");
         });
     };
 
@@ -41,17 +40,17 @@ app.controller('ReportController', ['$scope', '$http', '$filter', function($scop
     $scope.removeReport = function(id, rowIndex) {
         $scope.tableInformation.splice(rowIndex, 1);
         return $http.delete('/report/' + id).success(function(response) {
-            console.log("success (DELETE http://localhost:3000/report/" + id + ")");
+            console.log("success (DELETE http://127.0.0.1:3000/report/" + id + ")");
         }).error(function() {
-            console.log("error (DELETE http://localhost:3000/report/" + id + ")");
+            console.log("error (DELETE http://127.0.0.1:3000/report/" + id + ")");
         });
     };
 
     $scope.saveReport = function(data, id) {
         return $http.put('/report/' + id, data).success(function(response) {
-            console.log("success (PUT http://localhost:3000/report/" + id + ")");
+            console.log("success (PUT http://127.0.0.1:3000/report/" + id + ")");
         }).error(function() {
-            console.log("error (PUT http://localhost:3000/report/" + id + ")");
+            console.log("error (PUT http://127.0.0.1:3000/report/" + id + ")");
         });
     };
 

@@ -701,10 +701,6 @@ app.directive('bdChart', function($window){
             scope.svg.selectAll('*').remove();
             var x, y, xAxis, yAxis, dataset, options = scope.getOptions(), yValues = scope.y, xScale, yScale, startTime = 100, temp;
 
-           if (yValues[0] != 0) {
-               yValues.unshift(0)
-           }
-            console.log(yValues)
 
             var amountData = yValues.length
             console.log(yValues)
@@ -712,11 +708,15 @@ app.directive('bdChart', function($window){
 
 
             if (yValues) {
+                if (yValues[0] != 0) {
+                    yValues.unshift(0)
+                }
+
 //                x = d3.scale.ordinal().domain(xValues).rangeRoundBands([ 0, options.width ], 0);
 //                y = d3.scale.linear().domain([0, d3.max(yValues)]).range([ options.height, 0]);
 
                 //hårdkodat då det inte finns "project time i databasen
-                xScale = d3.scale.linear().range([options.margins.left, options.width - options.margins.right]).domain([0,amountData]),
+                xScale = d3.scale.linear().range([options.margins.left, options.width - options.margins.right]).domain([0,amountData-1]),
                 yScale = d3.scale.linear().range([options.height - options.margins.top, options.margins.bottom]).domain([0, 100]),
 
 
