@@ -24,8 +24,6 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     loadProject();
     loadReports();
     $scope.fetchData();
-    console.log("scope reports: ")
-    console.log($scope.reports)
   };
 
   var CLIENT_ID = '711755136597-5k4ijen3f7j0003088jjimt8knlre2cm.apps.googleusercontent.com';
@@ -108,19 +106,6 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
 
   $scope.datePickerOpen = false;
 
-  $scope.trollData = [
-    {x: 1,y: 5},
-    {x: 2,y: 6},
-    {x: 3,y: 7},
-    {x: 4,y: 10},
-    {x: 5,y: 10},
-    {x: 6,y: 3},
-    {x: 7,y: 5},
-    {x: 8,y: 7},
-    {x: 9,y: 5},
-    {x: 10,y: 3}
-  ];
-
   $scope.set = {
     time: [],
     x: []
@@ -143,19 +128,6 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
         }
     ).error(
         console.log("Bad Response")
-      //  $scope.subheader = "Bad response"
     );
   };
-
-  //$scope.fetchData();
-  $scope.data = [
-    {name: "Greg", score: 98},
-    {name: "Ari", score: 96},
-    {name: 'Q', score: 75},
-    {name: "Loser", score: 48}
-  ];
-
-  console.log("Trollmessage:")
-  console.log($scope.data);
-
 }]);
