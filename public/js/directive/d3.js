@@ -557,7 +557,8 @@ app.directive('burndownChart', function($window){
             console.log(scope.test2);
             console.log(scope.set);
             console.log(scope.y);
-
+var hej = scope.set;
+            console.log(hej);
 
 
             var margin = parseInt(attr.margin) || 20,
