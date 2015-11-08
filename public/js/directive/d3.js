@@ -1,6 +1,3 @@
-
-
-
 app.directive('myChart', function(){
     var directive = { };
 
@@ -655,16 +652,15 @@ var hej = scope.set;
         }
     }
 });
-app.directive('bdChart', function(){
+app.directive('bdChart', function($window){
     // angular.module("d3.directives", []).directive("barChart", function() {
     var directive = { };
 
     directive.restrict = 'AE';
     directive.scope = {
-       // x: '=?',
+        x: '=?',
         y: '=bdChart',
-        options: '=?',
-       // project: '=?'
+        options: '=?'
     };
 
     directive.link = function(scope, elements, attr) {
@@ -710,7 +706,7 @@ app.directive('bdChart', function(){
            }
             console.log(yValues)
 
-            var lol = yValues.length
+            var amountData = yValues.length
             console.log(yValues)
 
 
@@ -720,11 +716,11 @@ app.directive('bdChart', function(){
 //                y = d3.scale.linear().domain([0, d3.max(yValues)]).range([ options.height, 0]);
 
                 //hårdkodat då det inte finns "project time i databasen
-                xScale = d3.scale.linear().range([options.margins.left, options.width - options.margins.right]).domain([0,lol]),
+                xScale = d3.scale.linear().range([options.margins.left, options.width - options.margins.right]).domain([0,amountData]),
                 yScale = d3.scale.linear().range([options.height - options.margins.top, options.margins.bottom]).domain([0, 100]),
 
 
-                xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(lol);
+                xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(amountData);
                 yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(10);
 
                 scope.svg.append("svg:g")
@@ -734,7 +730,7 @@ app.directive('bdChart', function(){
                     .attr("transform", "translate(" + (options.margins.left) + ",0)")
                     .call(yAxis);
 
-                temp = startTime
+                temp = startTime;
                 var lineGen = d3.svg.line()
                     .x(function (d, i) {
                         return xScale(i);
@@ -756,6 +752,12 @@ app.directive('bdChart', function(){
         scope.$watch('x', scope.redraw);
         scope.$watch('y', scope.redraw);
         scope.$watch('options', scope.setSvgSize);
+
+        scope.$watch(function () {
+            return angular.element($window)[0].innerWidth;
+        }, function () {
+            scope.redraw();
+        });
 
         scope.initialize();
     };
