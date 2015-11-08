@@ -77,8 +77,9 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
         startTime = new Date(response.result.items[i].start.dateTime);
         endTime = new Date(response.result.items[i].end.dateTime);
         timeDiff = endTime.getTime() - startTime.getTime();
-        
+
         $scope.calendarEvents.push({
+          selected : false,
           title : response.result.items[i].summary, 
           start : startTime.toDateString(), 
           duration : timeDiff/(1000*3600)
@@ -105,6 +106,10 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
       'scope': SCOPES, 
     }); 
   };
+
+  $scope.addEvent = function(calendarEvent) {
+    calendarEvent.selected = true;
+  }
 
   $scope.datePickerOpen = false;
 

@@ -62,12 +62,16 @@
 					</form>
 					<table class="table" ng-show="calEventsFetched">
 					  <thead>
+				      <th>Add</th>
 				      <th>Title</th>
 				      <th>Start</th>
 				      <th>Duration [hrs]</th>
 					  </thead>
 				    <tbody>
 					    <tr ng-repeat="calendarEvent in calendarEvents">
+					      <td><button style="font-size:10px;" class="btn btn-success" ng-hide="calendarEvent.selected" ng-click="addEvent(calendarEvent)">
+    							<span class="glyphicon glyphicon-plus"></span> 
+  							</button></td>
 					      <td>{{calendarEvent.title}}</td>
 					      <td>{{calendarEvent.start}}</td>
 					      <td>{{calendarEvent.duration}}</td>
