@@ -25,9 +25,10 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     loadReports();
   };
 
-  var CLIENT_ID = '711755136597-5k4ijen3f7j0003088jjimt8knlre2cm.apps.googleusercontent.com';
+  var CLIENT_ID = '711755136597-022n0vgnc4bhgot40ct6ghim4ge594vc.apps.googleusercontent.com';
   var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
   $scope.calendarsFetched = false;
+  $scope.calEventsFetched = false;
 
   $scope.calendars = [];
   listCalendars = function() {
@@ -49,31 +50,32 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     });
   };
     
-  $scope.calendarEvents = [];         
+  $scope.numberOfEvents = 10;
   listCalendarEvents = function() {
-    
-    var timeZoneOffset = (new Date()).getTimezoneOffset() * 60000;
-    var timeMin = (new Date($scope.startDate - timeZoneOffset)).toISOString();
+    $scope.calendarEvents = []; 
+    //var timeZoneOffset = (new Date()).getTimezoneOffset() * 60000;
+    //var timeMin = (new Date($scope.startDate - timeZoneOffset)).toISOString();
+    var timeMin = $scope.startDate.toISOString();
 
     //API: https://developers.google.com/google-apps/calendar/v3/reference/events/list
     var request = gapi.client.calendar.events.list({ 
       'calendarId': $scope.calendarSelected,
-      'timeMin' : timeMin,
+      'timeMin': timeMin,
+      'singleEvents': true,
+      'maxResults': $scope.numberOfEvents,
       'orderBy': 'startTime'
     });
 
-    $scope.calendarEvents = []; 
-
     //API: https://developers.google.com/google-apps/calendar/v3/reference/events#resource
     request.then(function(response) { 
-      
-      for (i = 0; i < $scope.numberOfEvents; i++) {
+      for (i = 0; i < response.result.items.length; i++) {
         $scope.calendarEvents.push({
           title : response.result.items[i].summary, 
           start : response.result.items[i].start.dateTime, 
           end : response.result.items[i].end.dateTime
         });
       }
+      $scope.calEventsFetched = true;
     });
   };
 
@@ -95,6 +97,8 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     }); 
   };
 
+  $scope.datePickerOpen = false;
+
   $scope.openDatePicker = function($event) {
     $scope.datePickerOpen = true;
   };
@@ -102,6 +106,4 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
   $scope.dateOptions = {
     startingDay: 1
   };
-
-  $scope.datePickerOpen = false;
 }]);
