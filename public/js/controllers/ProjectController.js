@@ -2,6 +2,7 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
   var projectId = $stateParams.projectId;
 
  	$scope.project = [];
+  $scope.reports = [];
 
   loadProject = function() {
     $scope.project = Project.get({id:projectId}, function() {
@@ -107,8 +108,23 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     }); 
   };
 
-  $scope.addEvent = function(calendarEvent) {
-    calendarEvent.selected = true;
+  $scope.addEvent = function(event) {
+    event.selected = true;
+
+    var data = {
+      name: event.title,
+      project: projectId,
+      time: event.duration,
+      text: 'Imported from Google Calendar'
+    };
+
+    $http.post('/report', data).success(function(response) {
+      console.log("success (POST http://localhost:3000/report)");
+    }).error(function() {
+      console.log("error (POST http://localhost:3000/report)");
+    });
+
+    loadReports();
   }
 
   $scope.datePickerOpen = false;
