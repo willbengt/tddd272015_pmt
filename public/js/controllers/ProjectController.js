@@ -50,7 +50,9 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     });
   };
     
-  $scope.numberOfEvents = 10;
+  $scope.numberOfEvents = 2;
+  $scope.startDate = new Date();
+  $scope.calendarSelected = "primary";
   listCalendarEvents = function() {
     $scope.calendarEvents = []; 
     //var timeZoneOffset = (new Date()).getTimezoneOffset() * 60000;
@@ -66,13 +68,20 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
       'orderBy': 'startTime'
     });
 
+    var timeDiff;
+    var startTime;
+    var endTime;
     //API: https://developers.google.com/google-apps/calendar/v3/reference/events#resource
     request.then(function(response) { 
       for (i = 0; i < response.result.items.length; i++) {
+        startTime = new Date(response.result.items[i].start.dateTime);
+        endTime = new Date(response.result.items[i].end.dateTime);
+        timeDiff = endTime.getTime() - startTime.getTime();
+        
         $scope.calendarEvents.push({
           title : response.result.items[i].summary, 
-          start : response.result.items[i].start.dateTime, 
-          end : response.result.items[i].end.dateTime
+          start : startTime.toDateString(), 
+          duration : timeDiff/(1000*3600)
         });
       }
       $scope.calEventsFetched = true;
