@@ -1,42 +1,39 @@
 app.controller('ReportController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
 
-<<<<<<< HEAD
     $scope.set = {
         time: [ ],
         project: [ ]
     };
 
-    $scope.fetchData = function() {
-        console.log("fetching data")
-        $http.get('/fetchdata').success(
-=======
-    fetchData = function() {
-    
+    fetchData = function(){
         console.log("fetching data again");
-        
+
         $http.get('/report').success(
->>>>>>> 6deae3a05a8954d544860fc132d5db56d3b2c381
             function(response){
                 $scope.tableInformation = response;
                 $scope.set.time = [];
                 $scope.set.project = [];
-                _.times($scope.tableInformation.length, function(n) {
-                //    $scope.set.x.push(n + 1);
-                    $scope.set.time.push($scope.tableInformation[n].time);
-                    $scope.set.project.push($scope.tableInformation[n].project);
-                });
+
+                // Is this related to d3? Can't find the times function anywhere.
+
+                //_.times($scope.tableInformation.length, function(n) {
+                //    //    $scope.set.x.push(n + 1);
+                //    $scope.set.time.push($scope.tableInformation[n].time);
+                //    $scope.set.project.push($scope.tableInformation[n].project);
+                //});
+
                 console.log($scope.set.time);
                 console.log($scope.set.project);
 
+                console.log("data fetched");
             }
         ).error(function() {
-            $scope.subheader = "Bad response"
-        });
-    };
-
-<<<<<<< HEAD
+                $scope.subheader = "Bad response"
+            });
+    }
+    
 // above here is for the chartController
-=======
+
     $scope.projects = [];
     loadProjects = function() {
         console.log("loadProjects");
@@ -52,11 +49,10 @@ app.controller('ReportController', ['$scope', '$http', '$filter', function($scop
         fetchData();
         loadProjects();
     };
->>>>>>> 6deae3a05a8954d544860fc132d5db56d3b2c381
 
     $scope.showProject = function(report) {
         if(report.project && $scope.projects.length) {
-            var selected = $filter('filter')($scope.projects, {id: report.project}); 
+            var selected = $filter('filter')($scope.projects, {id: report.project});
             return selected.length ? selected[0].name : 'Not set';
         } else {
             return 'Not set';
