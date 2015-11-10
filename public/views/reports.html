@@ -56,6 +56,15 @@
 
     <button class="btn btn-default" ng-click="addReport()">Add row</button>
 
-    <burndown-chart ng-if="tableInformation" val = tableInformation></burndown-chart>
+  <!--  <burndown-chart ng-if="tableInformation" val = tableInformation></burndown-chart>
+    <myawesome-chart nf-if="tableInformation" val = tableInformation></myawesome-chart>
+    -->
 
-    </div>
+
+    <!-- <div bar-chart="tableInformation.time" x = "tableInformation.project" class = content></div>
+    -->
+  <div bar-chart="set.time" x="set.project" class="content"></div>
+
+  <!--  <div my-chart time="set.time" project="set.project" class="content"></div>
+-->
+</div>

@@ -1,19 +1,42 @@
 app.controller('ReportController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
 
+<<<<<<< HEAD
+    $scope.set = {
+        time: [ ],
+        project: [ ]
+    };
+
+    $scope.fetchData = function() {
+        console.log("fetching data")
+        $http.get('/fetchdata').success(
+=======
     fetchData = function() {
     
         console.log("fetching data again");
         
         $http.get('/report').success(
+>>>>>>> 6deae3a05a8954d544860fc132d5db56d3b2c381
             function(response){
                 $scope.tableInformation = response;
-                console.log("data fetched");
+                $scope.set.time = [];
+                $scope.set.project = [];
+                _.times($scope.tableInformation.length, function(n) {
+                //    $scope.set.x.push(n + 1);
+                    $scope.set.time.push($scope.tableInformation[n].time);
+                    $scope.set.project.push($scope.tableInformation[n].project);
+                });
+                console.log($scope.set.time);
+                console.log($scope.set.project);
+
             }
         ).error(function() {
             $scope.subheader = "Bad response"
         });
     };
 
+<<<<<<< HEAD
+// above here is for the chartController
+=======
     $scope.projects = [];
     loadProjects = function() {
         console.log("loadProjects");
@@ -29,6 +52,7 @@ app.controller('ReportController', ['$scope', '$http', '$filter', function($scop
         fetchData();
         loadProjects();
     };
+>>>>>>> 6deae3a05a8954d544860fc132d5db56d3b2c381
 
     $scope.showProject = function(report) {
         if(report.project && $scope.projects.length) {
