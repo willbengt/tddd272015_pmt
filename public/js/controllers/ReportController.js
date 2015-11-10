@@ -1,18 +1,36 @@
 app.controller('ReportController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
 
-    fetchData = function() {
-    
+    $scope.set = {
+        time: [ ],
+        project: [ ]
+    };
+
+    fetchData = function(){
         console.log("fetching data again");
-        
+
         $http.get('/report').success(
             function(response){
                 $scope.tableInformation = response;
+                $scope.set.time = [];
+                $scope.set.project = [];
+
+                // Is this related to d3? Can't find the times function anywhere.
+
+                //_.times($scope.tableInformation.length, function(n) {
+                //    //    $scope.set.x.push(n + 1);
+                //    $scope.set.time.push($scope.tableInformation[n].time);
+                //    $scope.set.project.push($scope.tableInformation[n].project);
+                //});
+
+                console.log($scope.set.time);
+                console.log($scope.set.project);
+
                 console.log("data fetched");
             }
         ).error(function() {
-            $scope.subheader = "Bad response"
-        });
-    };
+                $scope.subheader = "Bad response"
+            });
+    }
 
     $scope.projects = [];
     loadProjects = function() {
@@ -32,7 +50,7 @@ app.controller('ReportController', ['$scope', '$http', '$filter', function($scop
 
     $scope.showProject = function(report) {
         if(report.project && $scope.projects.length) {
-            var selected = $filter('filter')($scope.projects, {id: report.project}); 
+            var selected = $filter('filter')($scope.projects, {id: report.project});
             return selected.length ? selected[0].name : 'Not set';
         } else {
             return 'Not set';
