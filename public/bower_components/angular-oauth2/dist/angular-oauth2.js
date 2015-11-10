@@ -1,12 +1,12 @@
 /**
  * angular-oauth2 - Angular OAuth2
- * @version v2.1.0
+ * @version v2.1.1
  * @link https://github.com/seegno/angular-oauth2
  * @license MIT
  */
 (function(root, factory) {
     if (typeof define === "function" && define.amd) {
-        define([ "angular/angular", "query-string" ], factory);
+        define([ "angular", "query-string" ], factory);
     } else if (typeof exports === "object") {
         module.exports = factory(require("angular"), require("query-string"));
     } else {
@@ -243,7 +243,7 @@
                     },
                     removeToken: {
                         value: function removeToken() {
-                            return ipCookie.remove(config.name, config.options);
+                            return ipCookie.remove(config.name, angular.copy(config.options));
                         },
                         writable: true,
                         enumerable: true,
