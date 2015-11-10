@@ -34,7 +34,7 @@
     <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 
     <!-- Include  angular-ui bootstrap -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
 
     <link rel="stylesheet" href="css/showReports.css" type="text/css">
     <link rel="stylesheet" href="css/timepicker.css" type="text/css">
@@ -44,18 +44,19 @@
     <script src="http://d3js.org/d3.v3.min.js" ></script>
 
     <!-- controllers -->
-    <script src="js/controllers/MainController.js"></script>
+    <script src="js/controllers/MainCtrl.js"></script>
     <script src="js/controllers/ReportController.js"></script>
     <script src="js/controllers/PeopleController.js"></script>
     <script src="js/controllers/ProjectController.js"></script>
     <script src="js/controllers/SessionController.js"></script>
     <script src="js/controllers/CalendarController.js"></script>
+    <script src="js/controllers/LoginController.js"></script>
 
     <!-- services -->
     <script src="js/services/users.js"></script>
     <script src="js/services/reports.js"></script>
     <script src="js/services/projects.js"></script>
-    <script src="js/services/events.js"></script>
+    <script src="js/services/sessions.js"></script>
 
     <!-- Directives -->
     <script src="js/directive/d3js.js"></script>
@@ -69,44 +70,46 @@
 
 </head>
 <body ng-app="TimeReportApp">
+<div ng-controller="MainCtrl">
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="#/home">Home<span class="sr-only">(current)</span></a></li>
-                <li><a href="#/reports">Reports</a></li> 
-                <li><a href="#/people">People</a></li>
-                <li><a href="#/projects">Projects</a></li>
-                <li><a href="#/calendar">Calendars</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#/secure">Secure</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div ng-controller="SessionController">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" ng-click="login()">Login</a></li>
-                    <li><a href="#" ng-click="logout()">Logout</a></li>
-                    <li><a href="#">Register</a></li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/home">Home<span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/reports">Reports</a></li>
+                    <li><a href="#/people">People</a></li>
+                    <li><a href="#/projects">Projects</a></li>
+                    <li><a href="#/calendar">Calendars</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#/secure">Secure</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
                 </ul>
-            </div>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-<div class="col-xs-12">
-    <div ui-view></div>
+                <!--<div ng-controller="SessionController">-->
+                <div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" ng-click="login()">Login</a></li>
+                        <li><a href="#" ng-click="logout()">Logout</a></li>
+                        <li><a href="#">Register</a></li>
+                    </ul>
+                </div>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="col-xs-12">
+        <div ui-view></div>
+    </div>
 </div>
-
 </body>
 </html>

@@ -1,13 +1,12 @@
-var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xeditable', 'ui.bootstrap', 'ngResource']).config([
-	'$stateProvider',
-	'$urlRouterProvider',
-	function($stateProvider, $urlRouterProvider) {
+var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xeditable', 'ui.bootstrap', 'ngResource'])
+
+    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
             .state('home', {
                 url: '/home',
                 templateUrl: '/views/home.html',
-                controller: 'MainController'
+                controller: 'LoginController'
             })
 
             .state('reports', {
@@ -53,9 +52,19 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
             });
 
         $urlRouterProvider.otherwise('/views/home.html');
-    }]);
+    }])
 
-app.controller("SecureController", function($scope){
-    $scope.accessToken = JSON.parse(window.localStorage.getItem("imgur")).oauth.access_token;
-    $scope.test_msg = "Nothing";
-});
+    .run(['$rootScope', '$location', 'Session', function ($rootScope, $location, Session) {
+        $rootScope.$on('$routeChangeStart', function (event) {
+
+            if (!Session.isLoggedIn()) {
+                console.log('DENY');
+                event.preventDefault();
+                $location.path('/login');
+            }
+            else {
+                console.log('ALLOW');
+                $location.path('/home');
+            }
+        });
+    }]);

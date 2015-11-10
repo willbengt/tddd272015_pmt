@@ -3,7 +3,17 @@
  */
 angular.module('TimeReportApp')
 
-    .controller('SessionController', ['$scope','$http', function($scope, $http){
+    .controller('SessionController', function($scope, $http, Session){
+
+        var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
+        $scope.oauth_token = 'Not authorized yet.';
+        $scope.fetchToken = function(){
+            $scope.oauth_token = gapi.auth.getToken();
+        };
+
+        $scope.init = function(){
+            gapi.auth.init($scope.redirect(gapi.auth.getToken()));
+        };
 
         $scope.login=function() {
             var client_id="462878784674-q643pcp1acsrh17m9ms2s84tkpupgbnn.apps.googleusercontent.com";
@@ -50,6 +60,7 @@ angular.module('TimeReportApp')
             }
         };
 
+
         //$scope.userValidation = function(access_token){
         //    $http.put('/authenticate', access_token).success(
         //        function (response) {
@@ -61,4 +72,4 @@ angular.module('TimeReportApp')
         //    return $scope.validationResponse;
         //};
 
-    }]);
+    });
