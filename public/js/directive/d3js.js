@@ -1,4 +1,64 @@
 // var app = angular.module('TimeReportApp', [])
+
+app.directive('barChart', function(){
+    function link(scope, el){
+
+        var dataArray = [];
+        dataArray[0]= scope.val;
+      //  var dataArray=[1,2,3];
+        var width = 500;
+        var height = 800;
+
+        var widthScale = d3.scale.linear()
+            .domain([0, 60])
+            .range([0, width]);
+
+        var heighScale = d3.scale.linear()
+            .domain([0,60])
+            .range([0, height]);
+
+        var color = d3.scale.linear()
+            .domain([0, 60])
+            .range(["red", "blue"]);
+
+        var axis = d3.svg.axis()
+            .ticks(5)
+            .scale(widthScale);
+
+        var canvas = d3.select("body")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(20, 0)"); //flytta, rotera o sånt
+
+        var bars = canvas.selectAll("rect")
+            .data(dataArray)
+            .enter()
+            .append("rect")
+            .attr("width", function(d) { return widthScale(d); })
+            .attr("height", 50)
+            .attr("fill", function(d) { return color(d) })
+            .attr("y", function(d, i) { return i * 100 });
+
+        canvas.append("g")
+            .attr("transform", "translate(0, 700)")
+            .call(axis);
+
+    }
+    return {
+        restrict: 'E',
+        scope: {
+            val: '=',
+            grouped: '='
+        },
+        link: link
+
+    }
+});
+
+
+
 app.directive('testChart', function($window){
     function link(scope, elem, attrs) {
         var dataToPlot=scope[attrs.val];
@@ -78,8 +138,6 @@ app.directive('testChart', function($window){
 
         }
 });
-
-
 
 app.directive('burndownChart', function($window){
     var canvas = d3.select("body")
@@ -236,64 +294,6 @@ app.directive('burndownChart', function($window){
             link: link
         }
 
-});
-
-
-app.directive('barChart', function(){
-    function link(scope, el){
-
-        var dataArray = [];
-        dataArray[0]= scope.val;
-        //  var dataArray=[1,2,3];
-        var width = 500;
-        var height = 800;
-
-        var widthScale = d3.scale.linear()
-            .domain([0, 60])
-            .range([0, width]);
-
-        var heighScale = d3.scale.linear()
-            .domain([0,60])
-            .range([0, height]);
-
-        var color = d3.scale.linear()
-            .domain([0, 60])
-            .range(["red", "blue"]);
-
-        var axis = d3.svg.axis()
-            .ticks(5)
-            .scale(widthScale);
-
-        var canvas = d3.select("body")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .append("g")
-            .attr("transform", "translate(20, 0)"); //flytta, rotera o sånt
-
-        var bars = canvas.selectAll("rect")
-            .data(dataArray)
-            .enter()
-            .append("rect")
-            .attr("width", function(d) { return widthScale(d); })
-            .attr("height", 50)
-            .attr("fill", function(d) { return color(d) })
-            .attr("y", function(d, i) { return i * 100 });
-
-        canvas.append("g")
-            .attr("transform", "translate(0, 700)")
-            .call(axis);
-
-    }
-    return {
-        restrict: 'E',
-        scope: {
-            val: '=',
-            grouped: '='
-        },
-        link: link
-
-    }
 });
 
 

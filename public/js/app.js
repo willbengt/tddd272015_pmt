@@ -37,7 +37,7 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
             .state('oauth_callback', {
                 url: '/oauth_callback',
                 templateUrl: '/views/oauth_callback.html',
-                controller: 'SessionContr oller'
+                controller: 'SessionController'
             })
 
             .state('login', {

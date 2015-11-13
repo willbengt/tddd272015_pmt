@@ -26,6 +26,12 @@ class ReportController < ApplicationController
     render json: data
   end
 
+  def get
+    puts params[:id]
+    @report = Timereport.find(params[:id])
+    render :json => @report
+  end
+
   def destroy
     puts '-----------destroy-----------'
     puts params[:id]

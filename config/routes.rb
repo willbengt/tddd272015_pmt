@@ -79,4 +79,17 @@ Rails.application.routes.draw do
 
   put '/authenticate' => 'session#authenticate'
 
+  
+  #get '/project', to: 'project#show'
+  #post '/project', to: 'project#create'
+  #put '/project/:id', to: 'project#update'
+  #delete '/project/:id', to: 'project#destroy'
+
+  #-- Redundant will be deleted when calls from front has been overhauled
+  #get '/reports' => 'report#get_all'
+  #get '/fetchdata' => 'report#get_all'
+  #post '/senddata' => 'report#create'
+  #post '/reports' => 'report#create'
+  #put '/deletedata' => 'report#delete'
+  #delete '/reports/:id' => 'report#delete'
 end
