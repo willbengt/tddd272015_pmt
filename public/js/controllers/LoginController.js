@@ -14,8 +14,9 @@ angular.module('TimeReportApp')
             // Ask to the server, do your job and THEN set the user
             Session.Authorize(false, SCOPES);
             console.log('Loading Google+ API');
+           // Session.setUser(temp); //Update the state of the user in the app
             return gapi.client.load('plus', 'v1', CallPlusApi);
-            Session.setUser(temp); //Update the state of the user in the app
+
         };
 
         CallPlusApi = function() {
@@ -28,7 +29,7 @@ angular.module('TimeReportApp')
 
             var request = gapi.client.plus.people.get({'userId' : 'me'});
 
-            Session.setUser([]);
+            Session.setUser([107337831363100578935, "Rasmus"]); //id name time?
 
             return request.execute(function(response) {
                 console.log(response);
@@ -42,5 +43,9 @@ angular.module('TimeReportApp')
                 //$scope.calendarsFetched = true;
             });
         };
+        isLogedIn = function() {
+            console.log("Session is logged in? ")
+            console.log(Session.isLoggedIn())
+        }
     });
     //}])

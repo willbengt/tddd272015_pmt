@@ -1,4 +1,4 @@
-app.controller('PeopleController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
+app.controller('PeopleController', ['$scope', '$http', '$filter', 'Session', function($scope, $http, $filter, Session){
 
   $scope.people = [];
   loadPeople = function() {
@@ -65,5 +65,10 @@ app.controller('PeopleController', ['$scope', '$http', '$filter', function($scop
     }).error(function() {
       console.log("error (POST http://localhost:3000/people)");
     });
+  };
+
+  $scope.isLogedIn = function() {
+    console.log("Session is logged in? ")
+    console.log(Session.isLoggedIn()[0])
   };
 }]);

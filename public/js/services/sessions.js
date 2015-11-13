@@ -7,7 +7,7 @@ angular.module('TimeReportApp')
     .factory('Session', function SessionFactory() {
         //var CLIENT_ID = '711755136597-5k4ijen3f7j0003088jjimt8knlre2cm.apps.googleusercontent.com';
         var CLIENT_ID = '462878784674-q643pcp1acsrh17m9ms2s84tkpupgbnn.apps.googleusercontent.com';
-        var user;
+        var user = null;
 
         return {
 
@@ -27,7 +27,7 @@ angular.module('TimeReportApp')
                     'client_id': CLIENT_ID,
                     'immediate': immediateVal,
                     'response_type': "token",
-                    'scope': SCOPES,
+                    'scope': SCOPES
                     }, SessionFactory.HandleAuthResult
                 );
             },
@@ -38,6 +38,7 @@ angular.module('TimeReportApp')
 
             setUser : function(aUser){
                 user = aUser;
+                console.log("User set = aUser")
             }
         };
 
