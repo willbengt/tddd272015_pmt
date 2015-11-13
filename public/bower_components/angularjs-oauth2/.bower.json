@@ -23,12 +23,15 @@
     "test",
     "tests"
   ],
+  "dependencies": {
+    "angular-md5": ">=0.1.7"
+  },
   "main": "dist/angularJsOAuth2.js",
-  "_release": "16f75aabf9",
+  "_release": "27335adde4",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "16f75aabf9c4ef60901a3e845bcae97e7391e42e"
+    "commit": "27335adde4b0a17b553a1fc219795cbf3116288b"
   },
   "_source": "git://github.com/JamesRandall/AngularJS-OAuth2.git",
   "_target": "*",

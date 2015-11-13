@@ -146,6 +146,7 @@ app.directive('burndownChart', function($window){
         .attr("height", 800);
 
     function link(scope, elem, attrs) {
+
         console.log("running directive with myChart")
         //making data into arrays. Seperated different tupples in database.
         var rawData = scope[attrs.val]; //data from our database
@@ -237,60 +238,15 @@ app.directive('burndownChart', function($window){
              var sumOfProjectTime = reportedTimeForProject.reduce(function(pv, cv) { return pv + cv; }, 0);
              canvas.append('svg:path')
                  .attr('d', lineGen(reportedTimeForProject))
-//                 .attr("fill", function(d) { return color(d) })
                  .attr('stroke', function() { return color(sumOfProjectTime) })
-                //.attr('stroke', "green")
                  .attr('stroke-width', 2)
                  .attr('fill', 'none');
-
          }
 
-
-        /*
-
-
-        var bars = canvas.selectAll("rect")
-        .data(timeInEachProject)
-        .enter()
-        .append("rect")
-        .attr("width", function(d) {return d * 10})
-        .attr("height", 50)
-        .attr("y", function(d, i){return i * 100});
-        */
-
-        /*
-
-         var linefunction = d3.svg.line()
-         .x(function (d) {
-         return Math.random() * 400;
-         })
-         .y(function (d) {
-         return Math.random() * 400;
-         });
-         //            .interpolate("linear");
-
-         for(var x in uniqueProjects) {
-         // alert(uniqueProjects[x]);
-         tomte = getTimeForProject(uniqueProjects[x]);
-         alert(tomte);
-
-         //these are the things I would like to do for each different project!
-         canvas.append("path")
-         .data(tomte)
-         .enter()
-         .append("path")
-         .attr("d", function() {return linefunction(tomte)})
-         .attr("class", "line")
-         .style("stroke", "blue" )
-         .attr('fill', 'none');
-         }
-
-         }
-         */
     }
         return {
             restrict: 'EA',
-            //    template: "<svg width='850' height='220'></svg>",
+            replace: true,
             link: link
         }
 
@@ -393,4 +349,95 @@ app.directive('oldChart', function($window){
         template: "<svg width='850' height='220'></svg>",
         link: link
     }
+});
+
+
+// My newest test-chart
+app.directive('rasmusChart', function($window){
+    var directive = { };
+    directive.restrict = 'AE';
+
+    directive.scope = {
+        x: '=?',
+        y: '=barChart',
+        options: '=?'
+    };
+
+    directive.link = function(scope, elements, attr) {
+        scope.svg = null;
+        scope.container = null;
+
+        scope.getX = function() {
+            var x = null;
+            if (scope.x) {
+                x = scope.x;
+            } else {
+                x = _.keys(scope.y);
+            }
+            return x;
+        };
+
+        scope.getOptions = function() {
+            return _.merge({
+                width: 1000,
+                height: 400,
+                margin: {
+                    top: 10,
+                    right: 10,
+                    bottom: 30,
+                    left: 50
+                }
+            }, scope.options || { });
+        };
+
+        scope.initialize = function() {
+            scope.svg = d3.select(elements[0]).append("svg").attr("class", "chart");
+            scope.container = scope.svg.append("g");
+            scope.container.append("g").attr("class", "x");
+            scope.container.append("g").attr("class", "y");
+            scope.setSvgSize();
+        };
+
+        scope.setSvgSize = function() {
+            var options = scope.getOptions();
+            scope.container.attr("transform", "translate(" + options.margin.left + ", " + options.margin.right + ")");
+            scope.svg.attr('viewBox','0 0 '+ (options.width + options.margin.left + options.margin.right) + ' ' +
+            (options.height + options.margin.top + options.margin.bottom))
+                .attr('preserveAspectRatio','xMinYMin');
+            scope.redraw();
+        };
+
+        scope.redraw = function() {
+            var x, y, xAxis, yAxis, dataset, options = scope.getOptions(), xValues = scope.getX(), yValues = scope.y;
+            if (xValues && yValues) {
+                x = d3.scale.ordinal().domain(xValues).rangeRoundBands([ 0, options.width ], 0);
+                y = d3.scale.linear().domain([0, d3.max(yValues)]).range([ options.height, 0]);
+                xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(5);
+                yAxis = d3.svg.axis().scale(y).orient("left").ticks(2);
+
+                scope.container.selectAll("g.x").attr("transform", "translate(0, " + options.height + ")").call(xAxis);
+                scope.container.selectAll("g.y").call(yAxis);
+                dataset = scope.container.selectAll(".bar").data(yValues);
+                dataset.enter().append("rect").attr("class", "bar");
+                dataset.transition().attr("x", function(d, i) {
+                    return i * x.rangeBand();
+                }).attr("width", function() {
+                    return x.rangeBand() - 5;
+                }).attr("height", function(d) {
+                    return options.height - y(d);
+                }).attr("y", function(d) {
+                    return y(d);
+                });
+                dataset.exit().remove();
+            }
+        };
+
+        scope.$watch('x', scope.redraw);
+        scope.$watch('y', scope.redraw);
+        scope.$watch('options', scope.setSvgSize);
+
+        scope.initialize();
+    };
+
+    return directive;
 });
