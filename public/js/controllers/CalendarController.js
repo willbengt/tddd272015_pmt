@@ -1,7 +1,8 @@
 angular.module('TimeReportApp')
 
-    .controller('CalendarController', ['$scope', 'eventService', '$timeout', function($scope, eventService, $timeout){
-        var CLIENT_ID = '462878784674-q643pcp1acsrh17m9ms2s84tkpupgbnn.apps.googleusercontent.com';
+    .controller('CalendarController', function($scope, $timeout, Session){
+        var CLIENT_ID = '711755136597-5k4ijen3f7j0003088jjimt8knlre2cm.apps.googleusercontent.com';
+        //var CLIENT_ID = '462878784674-q643pcp1acsrh17m9ms2s84tkpupgbnn.apps.googleusercontent.com';
         var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 
         $scope.calendarsFetched = false;
@@ -15,7 +16,7 @@ angular.module('TimeReportApp')
             $scope.calendars = [];
 
             return request.execute(function(response) {
-
+                console.log(response);
                 for (var i = 0; i < response.items.length; i++) {
                     $scope.calendars.push({
                         title : response.items[i].summary,
@@ -76,13 +77,5 @@ angular.module('TimeReportApp')
             $timeout(callCalendarEventsApi, 1000);
         };
 
-        $scope.authorize = function() {
-            //Initiates the OAuth 2.0 authorization process
-            gapi.auth.authorize({
-                'client_id': CLIENT_ID,
-                'immediate': false,
-                'response_type' : "token",
-                'scope': SCOPES,
-            });
-        };
-    }]);
+        $scope.authorize = Session.Authorize(true, SCOPES);
+    });
