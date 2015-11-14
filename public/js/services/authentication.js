@@ -1,6 +1,6 @@
 angular.module('TimeReportApp')
 
     .factory('Authenticate', function AuthenticateFactory($resource) {
-        return $resource('/api/authentication', {}, {
+        return $resource('/api/authenticate/:id', {}, {
         });
     });
