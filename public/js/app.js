@@ -59,7 +59,7 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
         Session.setUser(null);
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
 
-            console.log("isLoggedIn(): ")
+            console.log("isLoggedIn(): ");
             console.log(Session.isLoggedIn());
 
             if (!Session.isLoggedIn()) {
