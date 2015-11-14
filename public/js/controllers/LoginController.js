@@ -53,6 +53,5 @@ angular.module('TimeReportApp')
         $scope.isLogedIn = function() {
             return Session.isLoggedIn();
         }
-
     });
     //}])
