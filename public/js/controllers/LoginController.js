@@ -5,7 +5,7 @@
 angular.module('TimeReportApp')
 
     //.controller('LoginController', [ '$scope', 'Session', function ($scope, Session) {
-    .controller('LoginController', function ($scope, Session, $timeout) {
+    .controller('LoginController', function ($scope, Session, Authenticate, $timeout) {
         //submit
         var SCOPES = ["https://www.googleapis.com/auth/plus.me"];
         $scope.oauth_token = 'Not authorized yet.';
@@ -27,11 +27,25 @@ angular.module('TimeReportApp')
             //$timeout(fetchPlusProfile, 1000);
         };
 
+        isNewUser = function(userId) {
+            $scope.user = Authenticate.get({id:userId}, function(response) {
+                console.log("success (GET http://127.0.0.1:3000/api/user/" + userId + ")");
+                return response;
+            }, function(error) {
+                console.log("error (GET http://127.0.0.1:3000/api/user/" + userId + ")");
+            });
+        };
+
+
         fetchPlusProfile = function() {
 
             var request = gapi.client.plus.people.get({'userId' : 'me'});
 
             Session.setUser([107337831363100578935, "Rasmus"]); //id name time?
+
+            if (isNewUser("107337831363100578935")){
+                console.log("IT IS A NEW USER =D")
+            }
 
             return request.execute(function(response) {
                 console.log(response);
@@ -53,5 +67,7 @@ angular.module('TimeReportApp')
         $scope.isLogedIn = function() {
             return Session.isLoggedIn();
         }
+
+
     });
     //}])
