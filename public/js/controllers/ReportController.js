@@ -1,6 +1,6 @@
 angular.module('TimeReportApp')
 
-    .controller('ReportController', function($scope, $filter, Report, Project){
+    .controller('ReportController', function($scope, $filter, $http, Report, Project){
 
         $scope.tempReport = new Report();
         $scope.tableInformation = {};
