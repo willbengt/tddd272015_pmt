@@ -49,9 +49,10 @@ angular.module('TimeReportApp')
                 //$scope.calendarsFetched = true;
             });
         };
-        isLogedIn = function() {
-            console.log("Session is logged in? ")
-            console.log(Session.isLoggedIn())
+
+        $scope.isLogedIn = function() {
+            return Session.isLoggedIn();
         }
+
     });
     //}])

@@ -54,7 +54,7 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
         $urlRouterProvider.otherwise('/views/home.html');
     }])
 
-    .run(function(editableOptions, $rootScope, Session, $location) {
+    .run(function(editableOptions, $rootScope, Session, $location, $state) {
         console.log("RRRUNNNNN");
         Session.setUser(null);
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -62,16 +62,15 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
             console.log("isLoggedIn(): ")
             console.log(Session.isLoggedIn());
 
-            if (!Session.isLoggedIn()) {
-                console.log('DENY');
-                event.preventDefault();
-                $location.path('/views/home');
-//                Session.setUser("testUSER")
-            }
-            else {
-                console.log('ALLOW');
-                console.log(Session.isLoggedIn());
-                // $location.path('/home');
+             if(!$state.is('home')) {
+                if (!Session.isLoggedIn()) {
+                    console.log('DENY');
+                    event.preventDefault();
+                    $location.path('/views/home');
+                }
+                else {
+                    console.log('Allow' + Session.isLoggedIn());
+                }
             }
 
             // transitionTo() promise will be rejected with
