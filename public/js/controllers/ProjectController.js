@@ -19,6 +19,27 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     });
   };
 */
+
+  fetchData = function() {
+    console.log("fetching data_ project controller")
+    
+    $http.get('/report').success(
+        function(response){
+          $scope.tableInformation = response;
+          $scope.set.time = [];
+          $scope.set.x = [];
+          _.times($scope.tableInformation.length, function(n) {
+            if ($scope.tableInformation[n].project == projectId) {
+              $scope.set.time.push($scope.tableInformation[n].time);
+              $scope.set.x.push(n);
+            }
+          });
+        }
+    ).error(function() {
+        console.log("Bad Response");
+    });
+  };
+
   loadReports = function() {
   	$http.get('/report').success(function(response) {
       console.log("success (GET http://127.0.0.1:3000/report)");
@@ -117,24 +138,5 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
   $scope.set = {
     time: [],
     x: []
-  };
-
-  fetchData = function() {
-    console.log("fetching data_ project controller")
-    $http.get('/report').success(
-        function(response){
-          $scope.tableInformation = response;
-          $scope.set.time = [];
-          $scope.set.x = [];
-          _.times($scope.tableInformation.length, function(n) {
-            if ($scope.tableInformation[n].project == projectId) {
-              $scope.set.time.push($scope.tableInformation[n].time);
-              $scope.set.x.push(n);
-            }
-          });
-        }
-    ).error(
-        console.log("Bad Response")
-    );
   };
 }]);

@@ -13,11 +13,11 @@ app.controller('PeopleController', ['$scope', '$http', '$filter', 'Session', fun
   $scope.projects = [];
   loadProjects = function() {
     console.log("loadProjects");
-    return $http.get('/project').success(function(data) {
-      console.log("success (GET http://localhost:3000/project)");
+    return $http.get('/api/projects').success(function(data) {
+      console.log("success (GET http://localhost:3000/api/projects)");
       $scope.projects = data;
     }).error(function() {
-      console.log("error (GET http://localhost:3000/project)");
+      console.log("error (GET http://localhost:3000/api/projects)");
     });
   };
 
