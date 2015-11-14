@@ -45,12 +45,6 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
                 controller: 'SessionController'
             })
 
-            .state('secure', {
-                url: '/secure',
-                templateUrl: '/views/secure_test.html',
-                controller: 'SecureController'
-            })
-
             .state('calendar', {
                 url: '/calendar',
                 templateUrl: '/views/calendar.html',
@@ -60,22 +54,32 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
         $urlRouterProvider.otherwise('/views/home.html');
     }])
 
-    .run(['$rootScope', '$location', 'Session', function ($rootScope, $location, Session) {
-        $rootScope.$on('$routeChangeStart', function (event) {
+    .run(function(editableOptions, $rootScope, Session, $location) {
+        console.log("RRRUNNNNN");
+        Session.setUser(null);
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+
+            console.log("isLoggedIn(): ")
+            console.log(Session.isLoggedIn());
 
             if (!Session.isLoggedIn()) {
                 console.log('DENY');
                 event.preventDefault();
-                $location.path('/login');
+                $location.path('/views/home');
+//                Session.setUser("testUSER")
             }
             else {
                 console.log('ALLOW');
-                $location.path('/home');
+                console.log(Session.isLoggedIn());
+                // $location.path('/home');
             }
+
+            // transitionTo() promise will be rejected with
+            // a 'transition prevented' error
         });
         editableOptions.theme = 'bs3'; // bootstrap3 theme.
 
-    }]);
+    });
 /*
 app.run(function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. 

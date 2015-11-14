@@ -38,7 +38,14 @@ angular.module('TimeReportApp')
 
             setUser : function(aUser){
                 user = aUser;
-                console.log("User set = aUser")
+                console.log("Logged in as: ")
+                console.log(user);
+
+            },
+
+            logOutUser : function(){
+                user = null;
+                console.log("You are now logged out!")
             }
         };
 

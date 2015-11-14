@@ -18,7 +18,9 @@ angular.module('TimeReportApp')
             return gapi.client.load('plus', 'v1', CallPlusApi);
 
         };
-
+        $scope.logout = function (){
+            Session.logOutUser();
+        }
         CallPlusApi = function() {
             fetchPlusProfile();
             //1000 milliseconds delay and then callCalendarEventsApi second time.
@@ -34,6 +36,10 @@ angular.module('TimeReportApp')
             return request.execute(function(response) {
                 console.log(response);
                 $scope.oauth_token = response;
+
+                console.log("TOKEN:");
+                console.log($scope.oauth_token);
+
                 //for (var i = 0; i < response.items.length; i++) {
                 //    $scope.calendars.push({
                 //        title : response.items[i].summary,
