@@ -73,12 +73,11 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
                 $location.path('/home');
             }
         });
+        editableOptions.theme = 'bs3'; // bootstrap3 theme.
+
     }]);
+/*
 app.run(function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. 
 });
-
-app.controller("SecureController", function($scope){
-    $scope.accessToken = JSON.parse(window.localStorage.getItem("imgur")).oauth.access_token;
-    $scope.test_msg = "Nothing";
-});
+*/
