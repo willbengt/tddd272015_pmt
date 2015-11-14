@@ -2,6 +2,7 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
   var projectId = $stateParams.projectId;
 
  	$scope.project = [];
+  $scope.reports = [];
 
   loadProject = function() {
     $scope.project = Project.get({id:projectId}, function() {
@@ -55,9 +56,10 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     loadReports();
   };
 
-  var CLIENT_ID = '711755136597-5k4ijen3f7j0003088jjimt8knlre2cm.apps.googleusercontent.com';
+  var CLIENT_ID = '711755136597-022n0vgnc4bhgot40ct6ghim4ge594vc.apps.googleusercontent.com';
   var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
   $scope.calendarsFetched = false;
+  $scope.calEventsFetched = false;
 
   $scope.calendars = [];
   listCalendars = function() {
@@ -79,31 +81,37 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
     });
   };
     
-  $scope.calendarEvents = [];         
   listCalendarEvents = function() {
-    
-    var timeZoneOffset = (new Date()).getTimezoneOffset() * 60000;
-    var timeMin = (new Date($scope.startDate - timeZoneOffset)).toISOString();
+    $scope.calendarEvents = []; 
+    var timeMin = $scope.startDate.toISOString();
 
     //API: https://developers.google.com/google-apps/calendar/v3/reference/events/list
     var request = gapi.client.calendar.events.list({ 
       'calendarId': $scope.calendarSelected,
-      'timeMin' : timeMin,
+      'timeMin': timeMin,
+      'singleEvents': true,
+      'maxResults': $scope.numberOfEvents,
       'orderBy': 'startTime'
     });
 
-    $scope.calendarEvents = []; 
-
+    var timeDiff;
+    var startTime;
+    var endTime;
     //API: https://developers.google.com/google-apps/calendar/v3/reference/events#resource
     request.then(function(response) { 
-      
-      for (i = 0; i < $scope.numberOfEvents; i++) {
+      for (i = 0; i < response.result.items.length; i++) {
+        startTime = new Date(response.result.items[i].start.dateTime);
+        endTime = new Date(response.result.items[i].end.dateTime);
+        timeDiff = endTime.getTime() - startTime.getTime();
+
         $scope.calendarEvents.push({
+          selected : false,
           title : response.result.items[i].summary, 
-          start : response.result.items[i].start.dateTime, 
-          end : response.result.items[i].end.dateTime
+          start : startTime.toDateString(), 
+          duration : timeDiff/(1000*3600)
         });
       }
+      $scope.calEventsFetched = true;
     });
   };
 
@@ -124,6 +132,27 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
       'scope': SCOPES
     }); 
   };
+
+  $scope.addEvent = function(event) {
+    event.selected = true;
+
+    var data = {
+      name: event.title,
+      project: projectId,
+      time: event.duration,
+      text: 'Imported from Google Calendar'
+    };
+
+    $http.post('/report', data).success(function(response) {
+      console.log("success (POST http://localhost:3000/report)");
+    }).error(function() {
+      console.log("error (POST http://localhost:3000/report)");
+    });
+
+    loadReports();
+  }
+
+  $scope.datePickerOpen = false;
 
   $scope.openDatePicker = function($event) {
     $scope.datePickerOpen = true;
