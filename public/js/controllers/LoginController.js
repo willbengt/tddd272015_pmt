@@ -28,7 +28,10 @@ angular.module('TimeReportApp')
         };
 
         isNewUser = function(userId) {
-            $scope.user = Authenticate.get({id:userId}, function(response) {
+            console.log("GETTING TOKEN")
+            LOL = gapi.auth.getToken();
+            console.log(LOL);
+            $scope.user = Authenticate.get({id:LOL.access_token}, function(response) {
                 console.log("success (GET http://127.0.0.1:3000/api/user/" + userId + ")");
                 return response;
             }, function(error) {

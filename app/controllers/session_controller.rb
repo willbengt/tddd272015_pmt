@@ -4,8 +4,17 @@ class SessionController < ApplicationController
 
 
   def authenticate
-    token = params[:access_token]
+    token = params[:id]
 
+    require 'google/apis/drive_v2'
+    drive = Google::Apis::DriveV2::DriveService.new
+
+    drive.authorization = auth_client
+    files = drive.list_files
+
+  end
+
+=begin
     require 'net/http'
     callbackParameters = (Net::HTTP.get(URI.parse('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token='+ token))).split(',')
     userData = {}
@@ -20,7 +29,7 @@ class SessionController < ApplicationController
 =begin
         create(userData['user_id'], userData['email'])
         render :json => {'msg' => 'New user created'}
-=end
+
         render :json => (create(userData['user_id'], userData['email']))
       else
         render json:  (User.find(userData['user_id']))
@@ -38,5 +47,5 @@ class SessionController < ApplicationController
       return {:errors => @user.errors.full_message}, :status => 422
     end
   end
-
+=end
 end
