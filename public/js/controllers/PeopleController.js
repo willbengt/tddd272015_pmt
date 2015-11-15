@@ -1,10 +1,10 @@
 app.controller('PeopleController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
 
-  $scope.people = [];
-  loadPeople = function() {
+  $scope.users = [];
+  loadUsers = function() {
     return $http.get('/people').success(function(data) {
       console.log("success (GET http://localhost:3000/people)");
-      $scope.people = data;
+      $scope.users = data;
     }).error(function() {
       console.log("error (GET http://localhost:3000/people)");
     });
@@ -22,20 +22,20 @@ app.controller('PeopleController', ['$scope', '$http', '$filter', function($scop
   };
 
   $scope.init = function() {
-    loadPeople();
+    loadUsers();
     loadProjects();
   };
 
-  $scope.showProject = function(person) {
-    if(person.project && $scope.projects.length) {
-      var selected = $filter('filter')($scope.projects, {id: person.project});
+  $scope.showProject = function(user) {
+    if(user.project && $scope.projects.length) {
+      var selected = $filter('filter')($scope.projects, {id: user.project});
       return selected.length ? selected[0].name : 'Not set';
     } else {
       return 'Not set';
     }
   };
 
-  $scope.savePerson = function(data, id) {
+  $scope.saveUser = function(data, id) {
     return $http.put('/people/' + id, data).success(function(response) {
       console.log("success (PUT http://localhost:3000/people/" + id + ")");
     }).error(function() {
@@ -43,8 +43,8 @@ app.controller('PeopleController', ['$scope', '$http', '$filter', function($scop
     });
   };
 
-  $scope.removePerson = function(id, rowIndex) {
-    $scope.people.splice(rowIndex, 1);
+  $scope.removeUser = function(id, rowIndex) {
+    $scope.users.splice(rowIndex, 1);
     return $http.delete('/people/' + id).success(function(response) {
       console.log("success (DELETE http://localhost:3000/people/" + id + ")");
     }).error(function() {
@@ -52,7 +52,7 @@ app.controller('PeopleController', ['$scope', '$http', '$filter', function($scop
     });
   };
   
-  $scope.addPerson = function() {
+  $scope.addUser = function() {
     $scope.inserted = {
       name: '',
       email: ''
@@ -61,7 +61,7 @@ app.controller('PeopleController', ['$scope', '$http', '$filter', function($scop
     return $http.post('/people', $scope.inserted).success(function(response) {
       console.log("success (POST http://localhost:3000/people)");
       $scope.inserted.id = response.id;
-      $scope.people.push($scope.inserted);
+      $scope.users.push($scope.inserted);
     }).error(function() {
       console.log("error (POST http://localhost:3000/people)");
     });
