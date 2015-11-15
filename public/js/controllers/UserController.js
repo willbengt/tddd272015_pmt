@@ -1,23 +1,31 @@
-app.controller('UserController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
+app.controller('UserController', [
+  '$scope', 
+  '$filter', 
+  'User', 
+  'Project', function(
+    $scope,  
+    $filter, 
+    User, 
+    Project){
+
+  //var rootUrl = "http://127.0.0.1:3000/"
+  var rootUrl = "http://localhost:3000/"
 
   $scope.users = [];
   loadUsers = function() {
-    return $http.get('/people').success(function(data) {
-      console.log("success (GET http://localhost:3000/people)");
-      $scope.users = data;
-    }).error(function() {
-      console.log("error (GET http://localhost:3000/people)");
+    $scope.users = User.query(function() {
+      console.log("success (GET " + rootUrl + "api/users)");
+    }, function(error) {
+      console.log("error (GET " + rootUrl + "api/users)");
     });
   };
 
   $scope.projects = [];
   loadProjects = function() {
-    console.log("loadProjects");
-    return $http.get('/api/projects').success(function(data) {
-      console.log("success (GET http://localhost:3000/api/projects)");
-      $scope.projects = data;
-    }).error(function() {
-      console.log("error (GET http://localhost:3000/api/projects)");
+    $scope.projects = Project.query(function() {
+      console.log("success (GET " + rootUrl + "api/projects)");
+    }, function(error) {
+      console.log("error (GET " + rootUrl + "api/projects)");
     });
   };
 
@@ -35,35 +43,39 @@ app.controller('UserController', ['$scope', '$http', '$filter', function($scope,
     }
   };
 
-  $scope.saveUser = function(data, id) {
-    return $http.put('/people/' + id, data).success(function(response) {
-      console.log("success (PUT http://localhost:3000/people/" + id + ")");
-    }).error(function() {
-      console.log("error (PUT http://localhost:3000/people/" + id + ")");
+  $scope.saveUser = function(elementData, elementId) {
+    var user = new User();
+
+    angular.extend(user, {id: elementId}, elementData);
+
+    user.$update(function() {  
+      console.log("success (PUT " + rootUrl + "api/users/" + elementId + ")");
+    }, function(error) {
+      console.log("error (PUT " + rootUrl + "api/users/" + elementId + ")");
     });
   };
 
-  $scope.removeUser = function(id, rowIndex) {
+  $scope.removeUser = function(user, rowIndex) {
     $scope.users.splice(rowIndex, 1);
-    return $http.delete('/people/' + id).success(function(response) {
-      console.log("success (DELETE http://localhost:3000/people/" + id + ")");
-    }).error(function() {
-      console.log("error (DELETE http://localhost:3000/people/" + id + ")");
+    user.$delete(function() {
+      console.log("success (DELETE " + rootUrl + "api/projects/" + user.id + ")");
+    }, function(error) {
+      console.log("error (DELETE " + rootUrl + "api/projects/" + user.id + ")");
     });
   };
-  
-  $scope.addUser = function() {
-    $scope.inserted = {
-      name: '',
-      email: ''
-    };
 
-    return $http.post('/people', $scope.inserted).success(function(response) {
-      console.log("success (POST http://localhost:3000/people)");
+  $scope.addUser = function() {
+    $scope.inserted = new User();
+
+    $scope.inserted.name = '';
+    $scope.inserted.name = '';
+
+    $scope.inserted.$save(function(response) {
+      console.log("success (POST " + rootUrl + "api/users)");
       $scope.inserted.id = response.id;
       $scope.users.push($scope.inserted);
-    }).error(function() {
-      console.log("error (POST http://localhost:3000/people)");
+    }, function(error) {
+      console.log("error (POST " + rootUrl + "api/users)");
     });
   };
 }]);
