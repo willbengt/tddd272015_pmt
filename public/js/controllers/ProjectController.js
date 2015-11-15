@@ -29,9 +29,8 @@ app.controller('ProjectController', [
 
   loadReports = function() {
     Report.query(function(response) {
-      console.log("1success (GET " + rootUrl + "report)");
+      console.log("success (GET " + rootUrl + "api/reports)");
       $scope.reports = $filter('filter')(response, {project: projectId}); 
-
       $scope.tableInformation = response;
       $scope.set.time = [];
       $scope.set.x = [];
@@ -42,13 +41,22 @@ app.controller('ProjectController', [
         }
       });
     }), function(error) {
-      console.log("error (GET " + rootUrl + "report)");
+      console.log("error (GET " + rootUrl + "api/reports)");
     };
   };
 
   $scope.init = function() {
     loadProject();
     loadReports();
+  };
+
+  $scope.removeReport = function(report, rowIndex){
+    $scope.reports.splice(rowIndex, 1);
+    report.$delete(function() {
+      console.log("success (DELETE " + rootUrl + "api/projects/" + report.name + ")");
+    }, function(error) {
+      console.log("error (DELETE " + rootUrl + "api/projects/" + report.id + ")");
+    });
   };
 
   var CLIENT_ID = '711755136597-022n0vgnc4bhgot40ct6ghim4ge594vc.apps.googleusercontent.com';

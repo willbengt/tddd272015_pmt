@@ -4,7 +4,7 @@ class ReportController < ApplicationController
 
   def index
     puts 'index has been initiated'
-    render json: Report.all
+    render json: Timereport.all
   end
 
   def create
@@ -14,16 +14,16 @@ class ReportController < ApplicationController
     render :json => {id: id}
   end
 
+  def show
+    puts '-----------show-----------'
+    @report = Timereport.find(params[:id])
+    render json: @report
+  end
+
   def update
     puts '-----------report#update-----------'
     Timereport.find(params[:id]).update(name: params[:name], project: params[:project], time: params[:time], text: params[:text])
     render nothing: true
-  end
-
-  def show
-    puts '-----------show-----------'
-    data = Timereport.all
-    render json: data
   end
 
   def get
@@ -34,8 +34,7 @@ class ReportController < ApplicationController
 
   def destroy
     puts '-----------destroy-----------'
-    puts params[:id]
     @report = Timereport.find(params[:id]).destroy
-    render :json => {msg: 'ok'}
+    render nothing: true
   end
 end

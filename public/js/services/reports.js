@@ -4,7 +4,7 @@
 angular.module('TimeReportApp')
 
     .factory('Report', function($resource) {
-        return $resource('/report/:id', {id: '@id'}, {
+        return $resource('/api/reports/:id', {id: '@id'}, {
         	'update': {method: 'PUT'}
         });
     });
