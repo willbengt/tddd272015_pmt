@@ -14,58 +14,41 @@ app.controller('ProjectController', [
     Project
   ){
   var projectId = $stateParams.projectId;
+  
+  //var rootUrl = "http://127.0.0.1:3000/"
+  var rootUrl = "http://localhost:3000/"
 
  	$scope.project = [];
   $scope.reports = [];
 
   loadProject = function() {
     $scope.project = Project.get({id:projectId}, function() {
-      console.log("success (GET http://127.0.0.1:3000/api/projects/" + projectId + ")");
+      console.log("success (GET " + rootUrl + "api/projects/" + projectId + ")");
     }, function(error) {
-      console.log("error (GET http://127.0.0.1:3000/api/projects/" + projectId + ")");
-    });
-  };
-  /*
-  loadProject = function() {
-    $scope.project = Project.get({id:projectId}, function() {
-      console.log("success (GET http://localhost:3000/api/projects/" + projectId + ")");
-    }, function(error) {
-      console.log("error (GET http://localhost:3000/api/projects/" + projectId + ")");
-    });
-  };
-*/
-
-  fetchData = function() {
-    console.log("fetching data_ project controller")
-    
-    $http.get('/report').success(
-        function(response){
-          $scope.tableInformation = response;
-          $scope.set.time = [];
-          $scope.set.x = [];
-          _.times($scope.tableInformation.length, function(n) {
-            if ($scope.tableInformation[n].project == projectId) {
-              $scope.set.time.push($scope.tableInformation[n].time);
-              $scope.set.x.push(n);
-            }
-          });
-        }
-    ).error(function() {
-        console.log("Bad Response");
+      console.log("error (GET " + rootUrl + "api/projects/" + projectId + ")");
     });
   };
 
   loadReports = function() {
   	$http.get('/report').success(function(response) {
-      console.log("success (GET http://127.0.0.1:3000/report)");
+      console.log("success (GET " + rootUrl + "report)");
       $scope.reports = $filter('filter')(response, {project: $scope.project.id}); 
+
+      $scope.tableInformation = response;
+      $scope.set.time = [];
+      $scope.set.x = [];
+      _.times($scope.tableInformation.length, function(n) {
+        if ($scope.tableInformation[n].project == projectId) {
+          $scope.set.time.push($scope.tableInformation[n].time);
+          $scope.set.x.push(n);
+        }
+      });
     }).error(function() {
-      console.log("error (GET http://127.0.0.1:3000/report)");
+      console.log("error (GET " + rootUrl + "report)");
     });
   };
 
   $scope.init = function() {
-    fetchData();
     loadProject();
     loadReports();
   };
