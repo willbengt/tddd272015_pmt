@@ -60,19 +60,20 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
         $urlRouterProvider.otherwise('/views/home');
     }])
 
-    .run(['$rootScope', '$location', 'Session', function ($rootScope, $location, Session) {
+    .run(['$rootScope', '$location', 'Session', '$state', function ($rootScope, $location, Session, $state) {
         $rootScope.$on('$routeChangeStart', function (event) {
+                if (!Session.isLoggedIn()) {
+                    console.log('DENY');
+                    event.preventDefault();
+                    $location.path('/login');
+                }
+                else {
+                    console.log('ALLOW');
+                    $location.path('/home');
+                }
+            })
 
-            if (!Session.isLoggedIn()) {
-                console.log('DENY');
-                event.preventDefault();
-                $location.path('/login');
-            }
-            else {
-                console.log('ALLOW');
-                $location.path('/home');
-            }
-        });
+        $rootScope.$state = $state;
     }]);
 app.run(function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. 
