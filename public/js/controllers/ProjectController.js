@@ -50,6 +50,20 @@ app.controller('ProjectController', [
     loadReports();
   };
 
+  $scope.saveReport = function(elementData, elementId) {
+    var report = new Report();
+
+    angular.extend(report, {id: elementId, project: projectId}, elementData);
+    
+    console.log(JSON.stringify(report));
+
+    report.$update(function() {  
+      console.log("success (PUT " + rootUrl + "api/reports/" + elementId + ")");
+    }, function(error) {
+      console.log("error (PUT " + rootUrl + "api/reports/" + elementId + ")");
+    });
+  };
+
   $scope.removeReport = function(report, rowIndex){
     $scope.reports.splice(rowIndex, 1);
     report.$delete(function() {

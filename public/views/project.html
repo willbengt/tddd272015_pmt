@@ -1,20 +1,32 @@
 <div ng-init="init()">
-	<div class="col-xs-7">
+	<div class="col-xs-8">
     <h1>{{project.name}}</h1>
     <table class="table table-striped table-condensed table-hover">
 	    <thead>
 	      <tr>
 	        <th class="col-md-2">Name</th>
 	        <th class="col-md-1">Time</th>
-	        <th class="col-md-3">Text</th>
+	        <th class="col-md-3">Comment</th>
 	        <th class="col-md-2">Edit</th>
 	      </tr>
 	    </thead>
 	    <tbody>
         <tr data-ng-repeat="report in reports">
-          <td>{{report.name}}</td>
-          <td>{{report.time}}</td>
-          <td>{{report.text}}</td>
+          <td>
+		        <span editable-text="report.name" e-name="name" e-form="rowform" e-required>
+		        	{{report.name}}
+		        </span>
+		      </td>
+          <td>
+		        <span editable-text="report.time" e-name="time" e-form="rowform" e-required>
+		        	{{report.time}}
+		        </span>
+		      </td>          
+          <td>
+		        <span editable-text="report.text" e-name="text" e-form="rowform" e-required>
+		        	{{report.text}}
+		        </span>
+		      </td> 
           <td>
             <form editable-form name="rowform" onbeforesave="saveReport($data, report.id)" ng-show="rowform.$visible" shown="inserted == report" class="form-buttons form-inline">
 			        <button type="submit" class="btn btn-success">
@@ -44,7 +56,10 @@
 	  	</button>
   	</div>
 	</div>
-	<div bd-chart="set.time" x="set.x" class="content"></div>
+	<div class="col-xs-4">
+		<h1>Burn Down Chart"</h1>
+		<div bd-chart="set.time" x="set.x" class="content"></div>
+	</div>
 	<div class="modal fade" id="importModal">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
