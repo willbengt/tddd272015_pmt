@@ -1,4 +1,4 @@
-app.controller('PeopleController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
+app.controller('UserController', ['$scope', '$http', '$filter', function($scope, $http, $filter){
 
   $scope.users = [];
   loadUsers = function() {
