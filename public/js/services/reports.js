@@ -3,9 +3,8 @@
  */
 angular.module('TimeReportApp')
 
-    .factory('Report', function ReportFactory($resource){
-        return $resource('/report/:id', {}, {
-        //return $resource('/reports/:id', {params: {token: '@accessToken'}}, {
-        //    validate: {method: 'GET'}
+    .factory('Report', function($resource) {
+        return $resource('/report/:id', {id: '@id'}, {
+        	'update': {method: 'PUT'}
         });
     });

@@ -1,4 +1,18 @@
-app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter', '$timeout', 'Project', function($scope, $stateParams, $http, $filter, $timeout, Project){
+app.controller('ProjectController', [
+  '$scope', 
+  '$stateParams', 
+  '$http', 
+  '$filter', 
+  'Report', 
+  'Project', 
+  function(
+    $scope, 
+    $stateParams, 
+    $http, 
+    $filter,
+    Report, 
+    Project
+  ){
   var projectId = $stateParams.projectId;
 
  	$scope.project = [];
