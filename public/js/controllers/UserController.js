@@ -68,7 +68,8 @@ app.controller('UserController', [
     $scope.inserted = new User();
 
     $scope.inserted.name = '';
-    $scope.inserted.name = '';
+    $scope.inserted.email = '';
+    $scope.inserted.project = '';
 
     $scope.inserted.$save(function(response) {
       console.log("success (POST " + rootUrl + "api/users)");
