@@ -73,6 +73,18 @@ app.controller('ProjectController', [
     });
   };
 
+  $scope.addReport = function() {
+    $scope.inserted = new Report();
+
+    $scope.inserted.$save(function(response) {
+      console.log("success (POST " + rootUrl + "api/reports)");
+      $scope.inserted.id = response.id;
+      $scope.reports.push($scope.inserted);
+    }, function(error) {
+      console.log("error (POST " + rootUrl + "api/reports)");
+    });
+  };
+
   var CLIENT_ID = '711755136597-022n0vgnc4bhgot40ct6ghim4ge594vc.apps.googleusercontent.com';
   var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
   $scope.calendarsFetched = false;
@@ -151,6 +163,7 @@ app.controller('ProjectController', [
   };
 
   $scope.addEvent = function(event) {
+
     event.selected = true;
 
     $scope.inserted = new Report();
