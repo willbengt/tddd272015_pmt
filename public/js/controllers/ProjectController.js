@@ -1,14 +1,12 @@
 app.controller('ProjectController', [
   '$scope', 
-  '$stateParams', 
-  '$http', 
+  '$stateParams',  
   '$filter', 
   'Report', 
   'Project', 
   function(
     $scope, 
-    $stateParams, 
-    $http, 
+    $stateParams,  
     $filter,
     Report, 
     Project
@@ -30,9 +28,9 @@ app.controller('ProjectController', [
   };
 
   loadReports = function() {
-  	$http.get('/report').success(function(response) {
-      console.log("success (GET " + rootUrl + "report)");
-      $scope.reports = $filter('filter')(response, {project: $scope.project.id}); 
+    Report.query(function(response) {
+      console.log("1success (GET " + rootUrl + "report)");
+      $scope.reports = $filter('filter')(response, {project: projectId}); 
 
       $scope.tableInformation = response;
       $scope.set.time = [];
@@ -43,9 +41,9 @@ app.controller('ProjectController', [
           $scope.set.x.push(n);
         }
       });
-    }).error(function() {
+    }), function(error) {
       console.log("error (GET " + rootUrl + "report)");
-    });
+    };
   };
 
   $scope.init = function() {
@@ -133,18 +131,19 @@ app.controller('ProjectController', [
   $scope.addEvent = function(event) {
     event.selected = true;
 
-    var data = {
-      name: event.title,
-      project: projectId,
-      time: event.duration,
-      text: 'Imported from Google Calendar'
-    };
+    $scope.inserted = new Report();
 
-    $http.post('/report', data).success(function(response) {
-      console.log("success (POST http://localhost:3000/report)");
-    }).error(function() {
-      console.log("error (POST http://localhost:3000/report)");
-    });
+    $scope.inserted.name = event.title;
+    $scope.inserted.project = projectId;
+    $scope.inserted.time = event.duration;
+    $scope.inserted.text = 'Imported from Google Calendar';
+
+    $scope.inserted.$save(function() {
+      console.log("success (POST " + rootUrl + "report)");
+      $scope.reports.push($scope.inserted);
+    }), function(error) {
+      console.log("error (POST " + rootUrl + "report)");
+    };
 
     loadReports();
   }
