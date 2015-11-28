@@ -19,9 +19,11 @@ class SessionController < ApplicationController
           refresh_token: @auth['refresh_token'],
           expires_at: Time.at(@auth['expires_at']).to_datetime,
           email: @user['email'])
-      end
   else
       puts 'User exists in DB'
+    end
+
+    # redirect_to('https://localhost:3000/home?' + @auth['token'])
   end
 
   def authenticate
