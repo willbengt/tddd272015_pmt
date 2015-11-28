@@ -5,12 +5,23 @@ class SessionController < ApplicationController
   layout false
 
   def create
+    @user = request.env['omniauth.auth']['info']
     @auth = request.env['omniauth.auth']['credentials']
-    Token.create(
-        access_token: @auth['token'],
-        refresh_token: @auth['refresh_token'],
-        expires_at: Time.at(@auth['expires_at']).to_datetime,
-        email: @auth['email'])
+
+    puts 'Auth: \n'
+    puts @auth
+    puts 'User: \n'
+    puts @user
+
+    if Token.where(:email => @user['email']).blank?
+      Token.create(
+          access_token: @auth['token'],
+          refresh_token: @auth['refresh_token'],
+          expires_at: Time.at(@auth['expires_at']).to_datetime,
+          email: @user['email'])
+      end
+  else
+      puts 'User exists in DB'
   end
 
   def authenticate
