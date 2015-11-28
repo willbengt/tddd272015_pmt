@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'report/index'
+  #  get 'report/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -61,6 +61,11 @@ Rails.application.routes.draw do
   # automatically creates routes for CRUD operations for ReportController
   # resources :report
 
+  get '/new', to: 'session#new'
+  get '/auth/:provider/callback', to: 'session#create'
+
+
+
   get '/report', to: 'report#show'
   post '/report', to: 'report#create'
   put '/report/:id', to: 'report#update'
@@ -78,6 +83,8 @@ Rails.application.routes.draw do
   delete 'api/projects/:id', to: 'project#destroy'
 
   get 'api/authenticate/:id', to: 'session#authenticate'
+
+
 
   
   #get '/project', to: 'project#show'

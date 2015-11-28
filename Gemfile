@@ -15,7 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem 'google-api-client'
+gem 'google-api-client', '~> 0.9.pre1'
 gem 'signet'
 
 # Use jquery as the JavaScript library
@@ -30,6 +30,8 @@ group :doc do
   gem 'sdoc', '~> 0.4.0'
 end
 
+gem 'omniauth', '~> 1.2.2'
+gem 'omniauth-google-oauth2'
 #gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password

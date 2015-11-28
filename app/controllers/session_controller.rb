@@ -2,16 +2,17 @@ class SessionController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
+  layout false
+
+  def create
+    @auth = request.env['omniauth.auth']['credentials']
+  end
 
   def authenticate
-    token = params[:id]
+   # token = params[:id]
 
-    require 'google/apis/drive_v2'
-    drive = Google::Apis::DriveV2::DriveService.new
-
-    drive.authorization = auth_client
-    files = drive.list_files
-
+   # require 'google/apis/drive_v2'
+   # drive = Google::Apis::DriveV2::DriveService.new
   end
 
 =begin
