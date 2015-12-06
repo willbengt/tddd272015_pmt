@@ -9,7 +9,7 @@ angular.module('TimeReportApp')
         //submit
         var SCOPES = ["https://www.googleapis.com/auth/plus.me"];
         $scope.oauth_token = 'Not authorized yet.';
-        console.log('Token: ' + $state.params(token));
+        //console.log('Token: ' + $state.params(token));
 
         $scope.login = function () {
             // Ask to the server, do your job and THEN set the user

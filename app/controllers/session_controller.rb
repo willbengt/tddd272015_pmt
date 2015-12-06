@@ -17,8 +17,9 @@ class SessionController < ApplicationController
       People.create(name: @user['first_name'], email: @user['email'], project: 1)
     else
       puts 'User exists in DB'
-      # redirect_to('https://localhost:3000/home?' + @auth['token'])
     end
+
+    t = Token.last
 
     if Token.where(:email => @user['email']).blank?
       Token.create(
@@ -27,11 +28,10 @@ class SessionController < ApplicationController
           expires_at: Time.at(@auth['expires_at']).to_datetime,
           email: @user['email'])
     else
-      Token.fresh_token
-      #Token.where(:email => @user['mail']).fresh_token
-        puts 'User token expired'
+      t.fresh_token
     end
 
+      redirect_to('http://localhost:3000')
   end
 
   def authenticate
