@@ -10,7 +10,7 @@ class ProjectController < ApplicationController
 
   def create
     puts '-----------project#create-----------'
-    @project = Project.create(name: params[:name])
+    @project = Project.create(name: params[:name], time: params[:time])
     render :json => {id: @project.id}
   end
 
@@ -22,7 +22,7 @@ class ProjectController < ApplicationController
 
   def update
     puts '-----------project#update-----------'
-    @project = Project.find(params[:id]).update(:name => params[:name])
+    @project = Project.find(params[:id]).update(name: params[:name], time: params[:time])
     render nothing: true
   end
 
