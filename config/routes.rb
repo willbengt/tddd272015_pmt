@@ -64,17 +64,16 @@ Rails.application.routes.draw do
   get '/new', to: 'session#new'
   get '/auth/:provider/callback', to: 'session#create'
 
+  get 'api/reports', to: 'report#index'
+  post 'api/reports', to: 'report#create'
+  get 'api/reports/:id', to: 'report#show'
+  put 'api/reports/:id', to: 'report#update'
+  delete 'api/reports/:id', to: 'report#destroy'
 
-
-  get '/report', to: 'report#show'
-  post '/report', to: 'report#create'
-  put '/report/:id', to: 'report#update'
-  delete '/report/:id', to: 'report#destroy'
-
-  get '/people', to: 'people#show'
-  post '/people', to: 'people#create'
-  put '/people/:id', to: 'people#update'
-  delete '/people/:id', to: 'people#destroy'
+  get 'api/users', to: 'people#show'
+  post 'api/users', to: 'people#create'
+  put 'api/users/:id', to: 'people#update'
+  delete 'api/users/:id', to: 'people#destroy'
 
   get 'api/projects', to: 'project#index'
   post 'api/projects', to: 'project#create'

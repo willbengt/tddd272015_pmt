@@ -1,59 +1,88 @@
-app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter', '$timeout', 'Project', function($scope, $stateParams, $http, $filter, $timeout, Project){
+app.controller('ProjectController', [
+  '$scope', 
+  '$stateParams',  
+  '$filter', 
+  'Report', 
+  'Project', 
+  function(
+    $scope, 
+    $stateParams,  
+    $filter,
+    Report, 
+    Project
+  ){
   var projectId = $stateParams.projectId;
+  
+  //var rootUrl = "http://127.0.0.1:3000/"
+  var rootUrl = "http://localhost:3000/"
 
  	$scope.project = [];
   $scope.reports = [];
 
   loadProject = function() {
     $scope.project = Project.get({id:projectId}, function() {
-      console.log("success (GET http://127.0.0.1:3000/api/projects/" + projectId + ")");
+      console.log("success (GET " + rootUrl + "api/projects/" + projectId + ")");
     }, function(error) {
-      console.log("error (GET http://127.0.0.1:3000/api/projects/" + projectId + ")");
-    });
-  };
-  /*
-  loadProject = function() {
-    $scope.project = Project.get({id:projectId}, function() {
-      console.log("success (GET http://localhost:3000/api/projects/" + projectId + ")");
-    }, function(error) {
-      console.log("error (GET http://localhost:3000/api/projects/" + projectId + ")");
-    });
-  };
-*/
-
-  fetchData = function() {
-    console.log("fetching data_ project controller")
-    
-    $http.get('/report').success(
-        function(response){
-          $scope.tableInformation = response;
-          $scope.set.time = [];
-          $scope.set.x = [];
-          _.times($scope.tableInformation.length, function(n) {
-            if ($scope.tableInformation[n].project == projectId) {
-              $scope.set.time.push($scope.tableInformation[n].time);
-              $scope.set.x.push(n);
-            }
-          });
-        }
-    ).error(function() {
-        console.log("Bad Response");
+      console.log("error (GET " + rootUrl + "api/projects/" + projectId + ")");
     });
   };
 
   loadReports = function() {
-  	$http.get('/report').success(function(response) {
-      console.log("success (GET http://127.0.0.1:3000/report)");
-      $scope.reports = $filter('filter')(response, {project: $scope.project.id}); 
-    }).error(function() {
-      console.log("error (GET http://127.0.0.1:3000/report)");
-    });
+    Report.query(function(response) {
+      console.log("success (GET " + rootUrl + "api/reports)");
+      $scope.reports = $filter('filter')(response, {project: projectId}); 
+      $scope.tableInformation = response;
+      $scope.set.time = [];
+      $scope.set.x = [];
+      _.times($scope.tableInformation.length, function(n) {
+        if ($scope.tableInformation[n].project == projectId) {
+          $scope.set.time.push($scope.tableInformation[n].time);
+          $scope.set.x.push(n);
+        }
+      });
+    }), function(error) {
+      console.log("error (GET " + rootUrl + "api/reports)");
+    };
   };
 
   $scope.init = function() {
-    fetchData();
     loadProject();
     loadReports();
+  };
+
+  $scope.saveReport = function(elementData, elementId) {
+    var report = new Report();
+
+    angular.extend(report, {id: elementId, project: projectId}, elementData);
+    
+    console.log(JSON.stringify(report));
+
+    report.$update(function() {  
+      console.log("success (PUT " + rootUrl + "api/reports/" + elementId + ")");
+    }, function(error) {
+      console.log("error (PUT " + rootUrl + "api/reports/" + elementId + ")");
+    });
+  };
+
+  $scope.removeReport = function(report, rowIndex){
+    $scope.reports.splice(rowIndex, 1);
+    report.$delete(function() {
+      console.log("success (DELETE " + rootUrl + "api/projects/" + report.name + ")");
+    }, function(error) {
+      console.log("error (DELETE " + rootUrl + "api/projects/" + report.id + ")");
+    });
+  };
+
+  $scope.addReport = function() {
+    $scope.inserted = new Report();
+
+    $scope.inserted.$save(function(response) {
+      console.log("success (POST " + rootUrl + "api/reports)");
+      $scope.inserted.id = response.id;
+      $scope.reports.push($scope.inserted);
+    }, function(error) {
+      console.log("error (POST " + rootUrl + "api/reports)");
+    });
   };
 
   var CLIENT_ID = '711755136597-022n0vgnc4bhgot40ct6ghim4ge594vc.apps.googleusercontent.com';
@@ -134,20 +163,22 @@ app.controller('ProjectController', ['$scope', '$stateParams', '$http', '$filter
   };
 
   $scope.addEvent = function(event) {
+
     event.selected = true;
 
-    var data = {
-      name: event.title,
-      project: projectId,
-      time: event.duration,
-      text: 'Imported from Google Calendar'
-    };
+    $scope.inserted = new Report();
 
-    $http.post('/report', data).success(function(response) {
-      console.log("success (POST http://localhost:3000/report)");
-    }).error(function() {
-      console.log("error (POST http://localhost:3000/report)");
-    });
+    $scope.inserted.name = event.title;
+    $scope.inserted.project = projectId;
+    $scope.inserted.time = event.duration;
+    $scope.inserted.text = 'Imported from Google Calendar';
+
+    $scope.inserted.$save(function() {
+      console.log("success (POST " + rootUrl + "report)");
+      $scope.reports.push($scope.inserted);
+    }), function(error) {
+      console.log("error (POST " + rootUrl + "report)");
+    };
 
     loadReports();
   }

@@ -15,10 +15,10 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
                 controller: 'ReportController'
             })
 
-            .state('people', {
-                url: '/people',
-                templateUrl: '/views/people.html',
-                controller: 'PeopleController'
+            .state('users', {
+                url: '/users',
+                templateUrl: '/views/users.html',
+                controller: 'UserController'
             })
 
             .state('projects', {
@@ -54,6 +54,7 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
         $urlRouterProvider.otherwise('/views/home');
     }])
 
+//<<<<<<< HEAD
     .run(function(editableOptions, $rootScope, Session, $location, $state) {
         console.log("RRRUNNNNN");
         Session.setUser(null);
@@ -80,6 +81,23 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
 
     });
 /*
+=======
+    .run(['$rootScope', '$location', 'Session', '$state', function ($rootScope, $location, Session, $state) {
+        $rootScope.$on('$routeChangeStart', function (event) {
+                if (!Session.isLoggedIn()) {
+                    console.log('DENY');
+                    event.preventDefault();
+                    $location.path('/login');
+                }
+                else {
+                    console.log('ALLOW');
+                    $location.path('/home');
+                }
+            })
+
+        $rootScope.$state = $state;
+    }]);
+>>>>>>> issue30
 app.run(function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. 
 });
