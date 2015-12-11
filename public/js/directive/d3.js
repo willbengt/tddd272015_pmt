@@ -6,6 +6,7 @@ app.directive('bdChart', function($window){
     directive.scope = {
         x: '=?',
         y: '=bdChart',
+        startTime: '=projecttime',
         options: '=?'
     };
 
@@ -45,8 +46,8 @@ app.directive('bdChart', function($window){
 
         scope.redraw = function() {
             scope.svg.selectAll('*').remove();
-            var x, y, xAxis, yAxis, dataset, options = scope.getOptions(), yValues = scope.y, xScale, yScale, startTime = 100, temp;
-
+            
+            var x, y, xAxis, yAxis, dataset, options = scope.getOptions(), yValues = scope.y, xScale, yScale, startTime = scope.startTime, temp;
 
             var amountData = yValues.length
             console.log(yValues)
@@ -58,9 +59,8 @@ app.directive('bdChart', function($window){
                     yValues.unshift(0)
                 }
 
-                //hårdkodat då det inte finns "project time i databasen
                 xScale = d3.scale.linear().range([options.margins.left, options.width - options.margins.right]).domain([0,amountData-1]),
-                yScale = d3.scale.linear().range([options.height - options.margins.top, options.margins.bottom]).domain([0, 100]),
+                yScale = d3.scale.linear().range([options.height - options.margins.top, options.margins.bottom]).domain([0, startTime]),
 
 
                 xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(amountData);

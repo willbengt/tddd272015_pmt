@@ -20,7 +20,8 @@ app.controller('ProjectController', [
   $scope.reports = [];
 
   loadProject = function() {
-    $scope.project = Project.get({id:projectId}, function() {
+    $scope.project = Project.get({id:projectId}, function(resource) {
+      $scope.prjtime = resource.time;
       console.log("success (GET " + rootUrl + "api/projects/" + projectId + ")");
     }, function(error) {
       console.log("error (GET " + rootUrl + "api/projects/" + projectId + ")");
