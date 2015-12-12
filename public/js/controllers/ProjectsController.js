@@ -1,12 +1,31 @@
-app.controller('ProjectsController', ['$scope', 'Project', function($scope, Project){
-	$scope.projects = [];
+app.controller('ProjectsController', ['$scope', 'Project', 'Membership', function($scope, Project, Membership){
+  //var rootUrl = "http://127.0.0.1:3000/";
+  var rootUrl = "http://localhost:3000/";
 
-  $scope.loadProjects = function() {
+  $scope.projects = [];
+  $scope.memberships = [];
+
+
+  loadProjects = function() {
+    console.log("-----------------------");
     $scope.projects = Project.query(function() {
       console.log("success (GET http://127.0.0.1:3000/api/projects)");
     }, function(error) {
       console.log("error (GET http://127.0.0.1:3000/api/projects)");
     });
+  };
+
+  loadMemberships = function() {
+    $scope.memberships = Membership.query(function() {
+      console.log("success (GET " + rootUrl + "api/memberships)");
+    }, function(error) {
+      console.log("error (GET " + rootUrl + "api/memberships)");
+    });
+  };
+
+  $scope.init = function() {
+    loadProjects();
+    loadMemberships();
   };
 
   $scope.saveProject = function(elementData, elementId) {
