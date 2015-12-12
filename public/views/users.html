@@ -6,8 +6,8 @@
       <tr>
         <th class="col-md-3">Name</th>
         <th class="col-md-3">Email</th>
-        <th class="col-md-3">Project</th>
-        <th class="col-md-3">Edit</th>
+        <th class="col-md-5">Projects</th>
+        <th class="col-md-1">Edit</th>
       </tr>
     </thead>
     <tr ng-repeat="user in users">
@@ -28,16 +28,20 @@
       </td>
       <td>
         <form editable-form name="rowform" onbeforesave="saveUser($data, user.id)" ng-show="rowform.$visible" shown="inserted == user" class="form-buttons form-inline">
-          <button type="submit" class="btn btn-primary">
-            save
+          <button type="submit" class="btn btn-success">
+            <span class="glyphicon glyphicon-ok"></span> 
           </button>
           <button type="button" ng-click="rowform.$cancel()" class="btn btn-default">
-            cancel
+            <span class="glyphicon glyphicon-share-alt"></span> 
           </button>
         </form>
         <div class="buttons" ng-show="!rowform.$visible">
-          <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-          <button class="btn btn-danger" ng-click="removeUser(user, $index)">del</button>
+          <button class="btn btn-primary" ng-click="rowform.$show()">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+          <button class="btn btn-danger" ng-click="removeUser(user, $index)">
+            <span class="glyphicon glyphicon-remove"></span> 
+          </button>
         </div>  
 
       </td>
@@ -45,5 +49,7 @@
   </table>
 
   <button class="btn btn-default" ng-click="isLogedIn()">TROLL</button>
-  <button class="btn btn-default" ng-click="addUser()">Add row</button>
+  <button class="btn btn-success" ng-click="addUser()">
+    <span class="glyphicon glyphicon-plus"></span>
+  </button>
 </div>
