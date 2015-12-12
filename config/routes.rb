@@ -70,10 +70,10 @@ Rails.application.routes.draw do
   put 'api/reports/:id', to: 'report#update'
   delete 'api/reports/:id', to: 'report#destroy'
 
-  get 'api/users', to: 'people#show'
-  post 'api/users', to: 'people#create'
-  put 'api/users/:id', to: 'people#update'
-  delete 'api/users/:id', to: 'people#destroy'
+  get 'api/users', to: 'user#show'
+  post 'api/users', to: 'user#create'
+  put 'api/users/:id', to: 'user#update'
+  delete 'api/users/:id', to: 'user#destroy'
 
   get 'api/projects', to: 'project#index'
   post 'api/projects', to: 'project#create'
