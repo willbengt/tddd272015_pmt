@@ -54,7 +54,6 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
         $urlRouterProvider.otherwise('/views/home');
     }])
 
-//<<<<<<< HEAD
     .run(function(editableOptions, $rootScope, Session, $location, $state) {
         console.log("RRRUNNNNN");
         Session.setUser(null);
@@ -73,32 +72,10 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
                     console.log('Allow' + Session.isLoggedIn());
                 }
             }
-
+            $rootScope.$state = $state;
             // transitionTo() promise will be rejected with
             // a 'transition prevented' error
         });
         editableOptions.theme = 'bs3'; // bootstrap3 theme.
 
     });
-/*
-=======
-    .run(['$rootScope', '$location', 'Session', '$state', function ($rootScope, $location, Session, $state) {
-        $rootScope.$on('$routeChangeStart', function (event) {
-                if (!Session.isLoggedIn()) {
-                    console.log('DENY');
-                    event.preventDefault();
-                    $location.path('/login');
-                }
-                else {
-                    console.log('ALLOW');
-                    $location.path('/home');
-                }
-            })
-
-        $rootScope.$state = $state;
-    }]);
->>>>>>> issue30
-app.run(function(editableOptions) {
-  editableOptions.theme = 'bs3'; // bootstrap3 theme. 
-});
-*/
