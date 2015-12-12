@@ -81,6 +81,8 @@ Rails.application.routes.draw do
   put 'api/projects/:id', to: 'project#update'
   delete 'api/projects/:id', to: 'project#destroy'
 
+  get 'api/memberships', to: 'membership#index'
+
   get 'api/authenticate/:id', to: 'session#authenticate'
 
 
