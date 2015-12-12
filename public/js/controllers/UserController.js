@@ -2,11 +2,13 @@ app.controller('UserController', [
   '$scope', 
   '$filter', 
   'User', 
-  'Project', function(
+  'Project',
+  'Membership', function(
     $scope,  
     $filter, 
     User, 
-    Project){
+    Project,
+    Membership){
 
   //var rootUrl = "http://127.0.0.1:3000/"
   var rootUrl = "http://localhost:3000/"
@@ -29,9 +31,19 @@ app.controller('UserController', [
     });
   };
 
+  $scope.memberships = [];
+  loadMemberships = function() {
+    $scope.memberships = Membership.query(function() {
+      console.log("success (GET " + rootUrl + "api/memberships)");
+    }, function(error) {
+      console.log("error (GET " + rootUrl + "api/memberships)");
+    });
+  };
+
   $scope.init = function() {
     loadUsers();
     loadProjects();
+    loadMemberships();
   };
 
   $scope.showProject = function(user) {
