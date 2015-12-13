@@ -13,6 +13,21 @@ app.controller('UserController', [
   //var rootUrl = "http://127.0.0.1:3000/"
   var rootUrl = "http://localhost:3000/"
 
+  $scope.memberships = [];
+
+  $scope.showProjects = function(user) {
+    var memberships = $filter('filter')($scope.memberships, {user_id: user.id});
+    var project;
+    var selected = [];
+    if($scope.projects.length) {
+      for (var i = 0; i < memberships.length; i++) {
+        project = $filter('filter')($scope.projects, {id: memberships[i].project_id});
+        selected.push(project[0].name);
+      }
+      return selected.length ? selected.join(', ') : 'Not set';
+    }
+  }; 
+
   $scope.users = [];
   loadUsers = function() {
     $scope.users = User.query(function() {
@@ -30,10 +45,12 @@ app.controller('UserController', [
       console.log("error (GET " + rootUrl + "api/projects)");
     });
   };
-
-  $scope.memberships = [];
+  
   loadMemberships = function() {
-    $scope.memberships = Membership.query(function() {
+    Membership.query(function(response) {
+      for (var i = 0; i < response.length; i++) {
+        $scope.memberships.push(response[i]);
+      }
       console.log("success (GET " + rootUrl + "api/memberships)");
     }, function(error) {
       console.log("error (GET " + rootUrl + "api/memberships)");
@@ -44,15 +61,6 @@ app.controller('UserController', [
     loadUsers();
     loadProjects();
     loadMemberships();
-  };
-
-  $scope.showProject = function(user) {
-    if(user.project && $scope.projects.length) {
-      var selected = $filter('filter')($scope.projects, {id: user.project});
-      return selected.length ? selected[0].name : 'Not set';
-    } else {
-      return 'Not set';
-    }
   };
 
   $scope.saveUser = function(elementData, elementId) {
