@@ -22,8 +22,15 @@ class UserController < ApplicationController
   end
 
   def destroy
-    puts '-----------user#delete-----------'
+    puts '-----------user#delete-----------' 
+    
+    @memberships = Membership.where(user_id: params[:id])
+    @memberships.each do |membership|
+      membership.destroy
+    end
+
     User.find(params[:id]).destroy
+
     render nothing: true
   end
 
