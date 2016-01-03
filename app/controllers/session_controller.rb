@@ -31,7 +31,7 @@ class SessionController < ApplicationController
       t.fresh_token
     end
 
-      redirect_to('http://localhost:3000')
+      redirect_to('http://localhost:3000?token=' + @auth['token'])
   end
 
   def authenticate
