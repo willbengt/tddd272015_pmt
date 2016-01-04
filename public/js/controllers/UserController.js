@@ -1,11 +1,13 @@
 app.controller('UserController', [
   '$scope', 
-  '$filter', 
+  '$filter',
+  '$timeout', 
   'User', 
   'Project',
   'Membership', function(
     $scope,  
-    $filter, 
+    $filter,
+    $timeout, 
     User, 
     Project,
     Membership){
@@ -13,24 +15,61 @@ app.controller('UserController', [
   //var rootUrl = "http://127.0.0.1:3000/"
   var rootUrl = "http://localhost:3000/"
 
-  $scope.memberships = [];
+  function findById(array, id, attr) {
+    for(var i = 0; i < array.length; i += 1) {
+      if(array[i].id == id) {
+        return (array[i])[attr];
+      }
+    }
+  }
+
+  function filterArray(array, keyAttr, key, valueAttr) {
+    var values = [];
+    console.log(array);
+    console.log("array.length = " + array.length);
+    for(var i = 0; i < array.length; i += 1) {
+      if((array[i])[keyAttr] == key) {
+        values.push((array[i])[valueAttr]);
+      }
+    }
+    return values;
+  }
 
   $scope.showProjects = function(user) {
-    var memberships = $filter('filter')($scope.memberships, {user_id: user.id});
-    var project;
+
     var selected = [];
-    if($scope.projects.length) {
-      for (var i = 0; i < memberships.length; i++) {
-        project = $filter('filter')($scope.projects, {id: memberships[i].project_id});
-        selected.push(project[0].name);
-      }
-      return selected.length ? selected.join(', ') : 'Not set';
+    var project;
+
+    for (var i = 0; i < user.projects.length; i++) {
+      project = findById($scope.projects, user.projects[i], "name"); 
+      selected.push(project);
     }
+
+    return selected.length ? $filter('orderBy')(selected).join(', ') : 'Not set';
   }; 
+
+  var memberships = [];
+  loadMemberships = function() {
+    memberships = Membership.query(function() {
+      console.log("success (GET " + rootUrl + "api/memberships)");
+    }, function(error) {
+      console.log("error (GET " + rootUrl + "api/memberships)");
+    });
+  }
 
   $scope.users = [];
   loadUsers = function() {
-    $scope.users = User.query(function() {
+    var user = [];
+
+    User.query(function(response) {
+      for (var i = 0; i < response.length; i++) {
+        user = response[i];
+
+        projects = filterArray(memberships, "user_id", user.id, "project_id");
+        angular.extend(user, {projects: projects});
+
+        $scope.users.push(user); 
+      }
       console.log("success (GET " + rootUrl + "api/users)");
     }, function(error) {
       console.log("error (GET " + rootUrl + "api/users)");
@@ -45,33 +84,33 @@ app.controller('UserController', [
       console.log("error (GET " + rootUrl + "api/projects)");
     });
   };
-  
-  loadMemberships = function() {
-    Membership.query(function(response) {
-      for (var i = 0; i < response.length; i++) {
-        $scope.memberships.push(response[i]);
-      }
-      console.log("success (GET " + rootUrl + "api/memberships)");
-    }, function(error) {
-      console.log("error (GET " + rootUrl + "api/memberships)");
-    });
-  };
 
   $scope.init = function() {
-    loadUsers();
-    loadProjects();
     loadMemberships();
+    loadProjects();
+    $timeout(function() {
+      console.log('timeout');
+      loadUsers();
+    }, 100);
   };
 
   $scope.saveUser = function(elementData, elementId) {
     var user = new User();
+    var membership = new Membership();
 
-    angular.extend(user, {id: elementId}, elementData);
+    angular.extend(user, {id: elementId, name: elementData.name, email: elementData.email});
+    angular.extend(membership, {userId: elementId, userProjects: elementData.userProjects});
 
     user.$update(function() {  
       console.log("success (PUT " + rootUrl + "api/users/" + elementId + ")");
     }, function(error) {
       console.log("error (PUT " + rootUrl + "api/users/" + elementId + ")");
+    });
+
+    membership.$update(function() {  
+      console.log("success (PUT " + rootUrl + "api/memberships/" + elementId + ")");
+    }, function(error) {
+      console.log("error (PUT " + rootUrl + "api/memberships/" + elementId + ")");
     });
   };
 
