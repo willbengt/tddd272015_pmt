@@ -1,14 +1,14 @@
 <div ng-init="init()">
 	<h1>{{project.name}}</h1>
-	<div class="col-xs-8">
-    <h3>{{project.name}}</h3>
+	<div class="col-xs-7">
+    <h3>Reports</h3>
     <table class="table table-striped table-condensed table-hover">
 	    <thead>
 	      <tr>
 	        <th class="col-md-2">Title</th>
 	        <th class="col-md-1">Time</th>
 	        <th class="col-md-3">Comment</th>
-	        <th class="col-md-2">Edit</th>
+	        <th class="col-md-1">Edit</th>
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -57,7 +57,7 @@
 	  	</button>
   	</div>
 	</div>
-	<div class="col-xs-4">
+	<div class="col-xs-5">
 		<h3>Burn Down Chart</h3>
 		<div bd-chart="set.time" x="set.x" projecttime="prjtime" class="content"></div>
 	</div>

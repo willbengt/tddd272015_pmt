@@ -40,9 +40,11 @@ app.controller('UserController', [
     var selected = [];
     var project;
 
-    for (var i = 0; i < user.projects.length; i++) {
-      project = findById($scope.projects, user.projects[i], "name"); 
-      selected.push(project);
+    if(user.projects) {
+      for (var i = 0; i < user.projects.length; i++) {
+        project = findById($scope.projects, user.projects[i], "name"); 
+        selected.push(project);
+      }
     }
 
     return selected.length ? $filter('orderBy')(selected).join(', ') : 'Not set';
