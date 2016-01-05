@@ -12,8 +12,10 @@ app.controller('UserController', [
     Project,
     Membership){
 
-  //var rootUrl = "http://127.0.0.1:3000/"
-  var rootUrl = "http://localhost:3000/"
+  //var rootUrl = "http://127.0.0.1:3000/";
+  var rootUrl = "http://localhost:3000/";
+  var memberships = [];
+  $scope.projects = [];
 
   function findById(array, id, attr) {
     for(var i = 0; i < array.length; i += 1) {
@@ -25,8 +27,7 @@ app.controller('UserController', [
 
   function filterArray(array, keyAttr, key, valueAttr) {
     var values = [];
-    console.log(array);
-    console.log("array.length = " + array.length);
+    
     for(var i = 0; i < array.length; i += 1) {
       if((array[i])[keyAttr] == key) {
         values.push((array[i])[valueAttr]);
@@ -36,7 +37,6 @@ app.controller('UserController', [
   }
 
   $scope.showProjects = function(user) {
-
     var selected = [];
     var project;
 
@@ -49,15 +49,6 @@ app.controller('UserController', [
 
     return selected.length ? $filter('orderBy')(selected).join(', ') : 'Not set';
   }; 
-
-  var memberships = [];
-  loadMemberships = function() {
-    memberships = Membership.query(function() {
-      console.log("success (GET " + rootUrl + "api/memberships)");
-    }, function(error) {
-      console.log("error (GET " + rootUrl + "api/memberships)");
-    });
-  }
 
   $scope.users = [];
   loadUsers = function() {
@@ -78,22 +69,12 @@ app.controller('UserController', [
     });
   };
 
-  $scope.projects = [];
-  loadProjects = function() {
-    $scope.projects = Project.query(function() {
-      console.log("success (GET " + rootUrl + "api/projects)");
-    }, function(error) {
-      console.log("error (GET " + rootUrl + "api/projects)");
-    });
-  };
-
   $scope.init = function() {
-    loadMemberships();
-    loadProjects();
-    $timeout(function() {
-      console.log('timeout');
-      loadUsers();
-    }, 100);
+    memberships = Membership.query(function() {
+      $scope.projects = Project.query(function() {
+        loadUsers();
+      });
+    });
   };
 
   $scope.saveUser = function(elementData, elementId) {
