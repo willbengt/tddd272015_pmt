@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-#gem 'rack', '1.6.0'
-gem 'rack', '1.5.2'
+gem 'rack', '1.6.0'
+#gem 'rack', '1.5.2'
 gem 'tzinfo-data'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
