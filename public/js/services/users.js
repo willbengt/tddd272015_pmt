@@ -2,11 +2,23 @@
  * Created by teddy on 28/08/15.
  */
 angular.module('TimeReportApp')
-    .factory('User', function($resource) {
+    .factory('User', ['$resource', function($resource) {
+      var rootUrl = "http://localhost:3000";
         return $resource('/api/users/:id', {id: '@id'}, {
-            'update': {method: 'PUT'}
+          'update': {
+            method: 'PUT',
+            interceptor: {
+              response: function (data) {
+                console.log("success (" + data.config.method + ' ' + rootUrl + data.config.url + ")", data);
+              },
+              responseError: function (data) {
+                alert("error (" + data.config.method + ' ' + rootUrl + data.config.url + ")");
+                console.log("error (" + data.config.method + ' ' + rootUrl + data.config.url + ")", data);
+              }
+            },
+          }
         });
-    });
+    }]);
 
 
 /*

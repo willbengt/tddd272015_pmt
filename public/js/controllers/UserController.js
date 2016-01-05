@@ -102,12 +102,11 @@ app.controller('UserController', [
 
     angular.extend(user, {id: elementId, name: elementData.name, email: elementData.email});
     angular.extend(membership, {userId: elementId, userProjects: elementData.userProjects});
-
-    user.$update(function() {  
+    user.$update(/*function() {  
       console.log("success (PUT " + rootUrl + "api/users/" + elementId + ")");
     }, function(error) {
       console.log("error (PUT " + rootUrl + "api/users/" + elementId + ")");
-    });
+    }*/);
 
     membership.$update(function() {  
       console.log("success (PUT " + rootUrl + "api/memberships/" + elementId + ")");
