@@ -55,8 +55,6 @@ app.controller('ProjectController', [
     var report = new Report();
 
     angular.extend(report, {id: elementId, project: projectId}, elementData);
-    
-    console.log(JSON.stringify(report));
 
     report.$update(function() {  
       console.log("success (PUT " + rootUrl + "api/reports/" + elementId + ")");
@@ -169,10 +167,7 @@ app.controller('ProjectController', [
 
     $scope.inserted = new Report();
 
-    $scope.inserted.name = event.title;
-    $scope.inserted.project = projectId;
-    $scope.inserted.time = event.duration;
-    $scope.inserted.text = 'Imported from Google Calendar';
+    angular.extend($scope.inserted, {name: event.title, project: projectId, time: event.duration, text: 'Imported from Google Calendar'});
 
     $scope.inserted.$save(function() {
       console.log("success (POST " + rootUrl + "report)");

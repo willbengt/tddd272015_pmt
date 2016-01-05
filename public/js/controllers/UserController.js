@@ -108,10 +108,6 @@ app.controller('UserController', [
   $scope.addUser = function() {
     $scope.inserted = new User();
 
-    $scope.inserted.name = '';
-    $scope.inserted.email = '';
-    $scope.inserted.project = '';
-
     $scope.inserted.$save(function(response) {
       console.log("success (POST " + rootUrl + "api/users)");
       $scope.inserted.id = response.id;
