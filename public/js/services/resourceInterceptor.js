@@ -9,7 +9,8 @@ app.factory('ResourceInterceptor', function() {
       return data;
     },
     responseError: function (data) {
-      console.log("success (" + data.config.method + ' ' + rootUrl + data.config.url + ")", data);
+      alert("error (" + data.config.method + ' ' + rootUrl + data.config.url + ")")
+      console.log("error (" + data.config.method + ' ' + rootUrl + data.config.url + ")", data);
       return data;
     }
   };

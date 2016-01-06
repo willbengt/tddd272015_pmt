@@ -12,10 +12,7 @@ app.controller('UserController', [
     Project,
     Membership){
 
-  //var rootUrl = "http://127.0.0.1:3000/";
-  var rootUrl = "http://localhost:3000/";
   var memberships = [];
-  $scope.projects = [];
 
   function findById(array, id, attr) {
     for(var i = 0; i < array.length; i += 1) {
@@ -63,9 +60,6 @@ app.controller('UserController', [
 
         $scope.users.push(user); 
       }
-      console.log("success (GET " + rootUrl + "api/users)");
-    }, function(error) {
-      console.log("error (GET " + rootUrl + "api/users)");
     });
   };
 
@@ -83,37 +77,22 @@ app.controller('UserController', [
 
     angular.extend(user, {id: elementId, name: elementData.name, email: elementData.email});
     angular.extend(membership, {user: elementId, userProjects: elementData.userProjects});
-    user.$update(/*function() {  
-      console.log("success (PUT " + rootUrl + "api/users/" + elementId + ")");
-    }, function(error) {
-      console.log("error (PUT " + rootUrl + "api/users/" + elementId + ")");
-    }*/);
+    user.$update();
 
-    membership.$update(function() {  
-      console.log("success (PUT " + rootUrl + "api/memberships/" + elementId + ")");
-    }, function(error) {
-      console.log("error (PUT " + rootUrl + "api/memberships/" + elementId + ")");
-    });
+    membership.$update();
   };
 
   $scope.removeUser = function(user, rowIndex) {
     $scope.users.splice(rowIndex, 1);
-    user.$delete(function() {
-      console.log("success (DELETE " + rootUrl + "api/projects/" + user.id + ")");
-    }, function(error) {
-      console.log("error (DELETE " + rootUrl + "api/projects/" + user.id + ")");
-    });
+    user.$delete();
   };
 
   $scope.addUser = function() {
     $scope.inserted = new User();
 
     $scope.inserted.$save(function(response) {
-      console.log("success (POST " + rootUrl + "api/users)");
       $scope.inserted.id = response.id;
       $scope.users.push($scope.inserted);
-    }, function(error) {
-      console.log("error (POST " + rootUrl + "api/users)");
     });
   };
 }]);

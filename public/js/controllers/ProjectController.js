@@ -11,26 +11,11 @@ app.controller('ProjectController', [
     Report, 
     Project
   ){
-  var projectId = $stateParams.projectId;
   
-  //var rootUrl = "http://127.0.0.1:3000/"
-  var rootUrl = "http://localhost:3000/"
-
- 	$scope.project = [];
-  $scope.reports = [];
-
-  loadProject = function() {
-    $scope.project = Project.get({id:projectId}, function(resource) {
-      $scope.prjtime = resource.time;
-      console.log("success (GET " + rootUrl + "api/projects/" + projectId + ")");
-    }, function(error) {
-      console.log("error (GET " + rootUrl + "api/projects/" + projectId + ")");
-    });
-  };
+  var projectId = $stateParams.projectId;
 
   loadReports = function() {
     Report.query(function(response) {
-      console.log("success (GET " + rootUrl + "api/reports)");
       $scope.reports = $filter('filter')(response, {project: projectId}); 
       $scope.tableInformation = response;
       $scope.set.time = [];
@@ -41,46 +26,33 @@ app.controller('ProjectController', [
           $scope.set.x.push(n);
         }
       });
-    }), function(error) {
-      console.log("error (GET " + rootUrl + "api/reports)");
-    };
+    });
   };
 
   $scope.init = function() {
-    loadProject();
+    $scope.project = Project.get({id:projectId}, function(resource) {
+      $scope.prjtime = resource.time;
+    });
     loadReports();
   };
 
   $scope.saveReport = function(elementData, elementId) {
     var report = new Report();
-
     angular.extend(report, {id: elementId, project: projectId}, elementData);
-
-    report.$update(function() {  
-      console.log("success (PUT " + rootUrl + "api/reports/" + elementId + ")");
-    }, function(error) {
-      console.log("error (PUT " + rootUrl + "api/reports/" + elementId + ")");
-    });
+    report.$update();
   };
 
   $scope.removeReport = function(report, rowIndex){
     $scope.reports.splice(rowIndex, 1);
-    report.$delete(function() {
-      console.log("success (DELETE " + rootUrl + "api/projects/" + report.id + ")");
-    }, function(error) {
-      console.log("error (DELETE " + rootUrl + "api/projects/" + report.id + ")");
-    });
+    report.$delete();
   };
 
   $scope.addReport = function() {
     $scope.inserted = new Report();
 
-    return $scope.inserted.$save(function(response) {
-      console.log("success (POST " + rootUrl + "api/reports)");
+    $scope.inserted.$save(function(response) {
       $scope.inserted.id = response.id;
       $scope.reports.push($scope.inserted);
-    }, function(error) {
-      console.log("error (POST " + rootUrl + "api/reports)");
     });
   };
 
@@ -89,7 +61,6 @@ app.controller('ProjectController', [
   $scope.calendarsFetched = false;
   $scope.calEventsFetched = false;
 
-  $scope.calendars = [];
   listCalendars = function() {
 
     var request = gapi.client.calendar.calendarList.list({});
