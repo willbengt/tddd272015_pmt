@@ -66,7 +66,7 @@ app.controller('ProjectController', [
   $scope.removeReport = function(report, rowIndex){
     $scope.reports.splice(rowIndex, 1);
     report.$delete(function() {
-      console.log("success (DELETE " + rootUrl + "api/projects/" + report.name + ")");
+      console.log("success (DELETE " + rootUrl + "api/projects/" + report.id + ")");
     }, function(error) {
       console.log("error (DELETE " + rootUrl + "api/projects/" + report.id + ")");
     });
@@ -75,7 +75,7 @@ app.controller('ProjectController', [
   $scope.addReport = function() {
     $scope.inserted = new Report();
 
-    $scope.inserted.$save(function(response) {
+    return $scope.inserted.$save(function(response) {
       console.log("success (POST " + rootUrl + "api/reports)");
       $scope.inserted.id = response.id;
       $scope.reports.push($scope.inserted);
@@ -112,13 +112,14 @@ app.controller('ProjectController', [
   listCalendarEvents = function() {
     $scope.calendarEvents = []; 
     var timeMin = $scope.startDate.toISOString();
+    var timeMax = $scope.endDate.toISOString();
 
     //API: https://developers.google.com/google-apps/calendar/v3/reference/events/list
     var request = gapi.client.calendar.events.list({ 
       'calendarId': $scope.calendarSelected,
       'timeMin': timeMin,
+      'timeMax': timeMax,
       'singleEvents': true,
-      'maxResults': $scope.numberOfEvents,
       'orderBy': 'startTime'
     });
 
@@ -165,31 +166,26 @@ app.controller('ProjectController', [
 
     event.selected = true;
 
-    $scope.inserted = new Report();
+    var newReport = new Report();
 
-    angular.extend($scope.inserted, {name: event.title, project: projectId, time: event.duration, text: 'Imported from Google Calendar'});
-
-    $scope.inserted.$save(function() {
-      console.log("success (POST " + rootUrl + "report)");
-      $scope.reports.push($scope.inserted);
-    }), function(error) {
-      console.log("error (POST " + rootUrl + "report)");
-    };
-
-    loadReports();
+    newReport.$save(function(response) {
+      angular.extend(newReport, {id: response.id, name: event.title, project: projectId, time: event.duration, text: 'Imported from Google Calendar'});
+      newReport.$update(function() {
+        $scope.reports.push(newReport);
+      });
+    });
   }
 
-  $scope.datePickerOpen = false;
+  $scope.openDatePicker = function($event, opened) {
+    $event.preventDefault();
+    $event.stopPropagation();
 
-  $scope.openDatePicker = function($event) {
-    $scope.datePickerOpen = true;
+    $scope[opened] = true;
   };
 
   $scope.dateOptions = {
     startingDay: 1
   };
-
-  $scope.datePickerOpen = false;
 
   $scope.set = {
     time: [],
