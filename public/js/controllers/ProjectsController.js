@@ -94,12 +94,15 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
 
   $scope.addProject = function() {
     $scope.inserted = new Project();
+    var newMembership = new Membership();
 
     $scope.inserted.$save(function(response) {
       console.log("success (POST http://127.0.0.1:3000/api/projects)");
       $scope.inserted.id = response.id;
       selectedProjects.push(response.id);
       $scope.projects.push($scope.inserted);
+      angular.extend(newMembership, {userId: $scope.selectedUser.id, projectId: response.id});
+      newMembership.$save();
     }, function(error) {
       console.log("error (POST http://127.0.0.1:3000/api/projects)");
     });

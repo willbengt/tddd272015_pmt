@@ -82,7 +82,7 @@ app.controller('UserController', [
     var membership = new Membership();
 
     angular.extend(user, {id: elementId, name: elementData.name, email: elementData.email});
-    angular.extend(membership, {userId: elementId, userProjects: elementData.userProjects});
+    angular.extend(membership, {user: elementId, userProjects: elementData.userProjects});
     user.$update(/*function() {  
       console.log("success (PUT " + rootUrl + "api/users/" + elementId + ")");
     }, function(error) {

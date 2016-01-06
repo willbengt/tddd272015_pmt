@@ -7,6 +7,12 @@ class MembershipController < ApplicationController
     render json: @memberships
   end
 
+  def create
+    puts '-----------membership#create-----------'
+    @membership = Membership.create(user_id: params[:userId], project_id: params[:projectId])
+    render nothing: true
+  end
+
   def update
     puts '-----------membership#update-----------'
 
