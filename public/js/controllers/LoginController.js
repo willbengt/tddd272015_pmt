@@ -5,11 +5,13 @@
 angular.module('TimeReportApp')
 
     //.controller('LoginController', [ '$scope', 'Session', function ($scope, Session) {
-    .controller('LoginController', function ($stateParams, $scope, Session, Authenticate, $timeout) {
-        //submit
+    .controller('LoginController', function ($stateParams, $scope, Session, Authenticate, $timeout, $location) {
         var SCOPES = ["https://www.googleapis.com/auth/plus.me"];
         $scope.oauth_token = 'Not authorized yet.';
-        console.log('Token: ' + $stateParams.token);
+        $scope.tokenParam = $location.absUrl().split('?').pop();
+        console.log('Token: ' + $scope.tokenParam.split('&')[0]);
+        console.log('Username: ' + $scope.tokenParam.split('&')[1]);
+        Session.setUser($scope.tokenParam.split('&')[1], $scope.tokenParam.split('&')[0]);
 
         $scope.login = function () {
             // Ask to the server, do your job and THEN set the user
@@ -17,11 +19,12 @@ angular.module('TimeReportApp')
             console.log('Loading Google+ API');
            // Session.setUser(temp); //Update the state of the user in the app
             return gapi.client.load('plus', 'v1', CallPlusApi);
-
         };
+
         $scope.logout = function (){
             Session.logOutUser();
-        }
+        };
+
         CallPlusApi = function() {
             fetchPlusProfile();
             //1000 milliseconds delay and then callCalendarEventsApi second time.
@@ -30,9 +33,9 @@ angular.module('TimeReportApp')
 
         isNewUser = function(userId) {
             console.log("GETTING TOKEN")
-            LOL = gapi.auth.getToken();
-            console.log(LOL);
-            $scope.user = Authenticate.get({id:LOL.access_token}, function(response) {
+            //LOL = gapi.auth.getToken();
+            ////console.log(LOL);
+            $scope.user = Authenticate.get({id:window.localStorage.access_token}, function(response) {
                 console.log("success (GET http://127.0.0.1:3000/api/user/" + userId + ")");
                 return response;
             }, function(error) {
@@ -47,7 +50,7 @@ angular.module('TimeReportApp')
 
             Session.setUser([107337831363100578935, "Rasmus"]); //id name time?
 
-            if (isNewUser("107337831363100578935")){
+            if (isNewUser(window.localStorage.access_token)){
                 console.log("IT IS A NEW USER =D")
             }
 
