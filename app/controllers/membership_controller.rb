@@ -11,17 +11,22 @@ class MembershipController < ApplicationController
     puts '-----------membership#update-----------'
 
     @memberships = Membership.where(user_id: params[:userId])
-    
-    @memberships.each do |membership|
-      membership.destroy
-    end 
+
+    if @memberships
+      puts @memberships.count
+      @memberships.each do |membership|
+        membership.destroy
+      end 
+    end
 
     @projects = params[:userProjects]
 
-    @projects.each do |project|
-      Membership.create(user_id: params[:userId], project_id: project)
-    end 
-    
+    if @projects
+      @projects.each do |project|
+        Membership.create(user_id: params[:userId], project_id: project)
+      end 
+    end
+  
     render nothing: true
   end
 end
