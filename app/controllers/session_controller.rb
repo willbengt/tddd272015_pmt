@@ -13,15 +13,25 @@ class SessionController < ApplicationController
     puts 'User: \n'
     puts @user
 
+    if People.where(:email => @user['email']).blank?
+      People.create(name: @user['first_name'], email: @user['email'], project: 1)
+    else
+      puts 'User exists in DB'
+    end
+
+    t = Token.last
+
     if Token.where(:email => @user['email']).blank?
       Token.create(
           access_token: @auth['token'],
           refresh_token: @auth['refresh_token'],
           expires_at: Time.at(@auth['expires_at']).to_datetime,
           email: @user['email'])
-      end
-  else
-      puts 'User exists in DB'
+    else
+      t.fresh_token
+    end
+
+      redirect_to('http://localhost:3000?' + @auth['token'] + '&' + @user['first_name'])
   end
 
   def authenticate
