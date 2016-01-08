@@ -9,7 +9,7 @@ gem 'rails', '4.2.1'
 gem 'sqlite3'
 
 # maybe this will install GEM for mysql??? We'll see
-gem 'mysql', '~> 2.9', '>= 2.9.1'
+gem 'mysql2', '~> 0.4.2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
