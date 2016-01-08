@@ -36,11 +36,11 @@ angular.module('TimeReportApp')
                 return(user)? user : false;
             },
 
-            setUser : function(userName, access_token){
+            setUser : function(userName, accessToken){
                 user = userName;
-                window.localStorage.setItem('access_token', JSON.stringify(access_token));
+                window.localStorage.setItem('access_token', JSON.stringify(accessToken));
+                window.localStorage.setItem('user_name', JSON.stringify(userName));
                 console.log("Logged in as: " + userName)
-                //console.log(user);
 
             },
 

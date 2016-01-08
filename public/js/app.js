@@ -55,7 +55,6 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
     }])
 
     .run(function(editableOptions, $rootScope, Session, $location, $state) {
-        console.log("RRRUNNNNN");
         Session.setUser(null);
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
 
