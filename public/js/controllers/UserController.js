@@ -38,6 +38,7 @@ function($scope, $filter, $timeout, User, Project, Membership) {
 
   loadUsers = function() {
     var user = [];
+    $scope.users = [];
 
     User.query(function(response) {
       for (var i = 0; i < response.length; i++) {
