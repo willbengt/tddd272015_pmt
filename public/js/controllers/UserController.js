@@ -3,7 +3,7 @@ function($scope, $filter, $timeout, User, Project, Membership) {
 
   var memberships = [];
 
-  function findById(array, id, attr) {
+  findById = function(array, id, attr) {
     for(var i = 0; i < array.length; i += 1) {
       if(array[i].id == id) {
         return (array[i])[attr];
@@ -11,7 +11,7 @@ function($scope, $filter, $timeout, User, Project, Membership) {
     }
   }
 
-  function filterArray(array, keyAttr, key, valueAttr) {
+  filterArray = function(array, keyAttr, key, valueAttr) {
     var values = [];
     
     for(var i = 0; i < array.length; i += 1) {
