@@ -22,5 +22,14 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  database: "<%=ENV['OPENSHIFT_APP_NAME']%>"
+  encoding: utf8
+  username: "<%=ENV['OPENSHIFT_MYSQL_DB_USERNAME']%>"
+  password: "<%=ENV['OPENSHIFT_MYSQL_DB_PASSWORD']%>"
+  host: "<%=ENV['OPENSHIFT_MYSQL_DB_HOST']%>"
+  port: "<%=ENV['OPENSHIFT_MYSQL_DB_PORT']%>"
+  timeout: 5000
+
+#  <<: *default
+#  database: db/production.sqlite3
