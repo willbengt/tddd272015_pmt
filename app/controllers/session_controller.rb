@@ -31,7 +31,7 @@ class SessionController < ApplicationController
       t.fresh_token
     end
 
-      redirect_to('http://localhost:3000?' + @auth['token'] + '&' + @user['first_name'])
+      redirect_to('http://http://tddd27-timereportapp.rhcloud.com?' + @auth['token'] + '&' + @user['first_name'])
   end
 
   def authenticate
