@@ -20,7 +20,7 @@
 		      </td>
           <td>
 		        <span editable-text="report.time" e-name="time" e-form="rowform" e-required>
-		        	{{report.time}}
+		        	{{report.time | number : 2}}
 		        </span>
 		      </td>          
           <td>
@@ -63,61 +63,74 @@
 	</div>
 	<div class="modal fade" id="importModal">
 	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h4 class="modal-title">Import Calendar Events</h4>
-	      </div>
-	      <div class="modal-body">
-	        <button type="button" class="btn btn-default" ng-click = "authorize()" ng-hide="calendarsFetched">Authorize</button>
-					<button type="button" class="btn btn-default" ng-click = "fetchCalendars()" ng-hide="calendarsFetched">Fetch Calendars</button>
-
-					<form name="selectCalendarForm" ng-submit="fetchCalendarEvents()" ng-show="calendarsFetched">
-					  <div class="form-group">
-					    <label for="title">Title</label>
-					    <select class="form-control" ng-model="calendarSelected" ng-options="c.id as c.title for c in calendars">
-					    	<option value="">-- choose calendar --</option>
-							</select>
-					  </div>
-					  <div class="form-group">
-					    <p class="input-group">
-	              <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="startDate" is-open="datePickerOpen" datepicker-options="dateOptions"></input>
-	              <span class="input-group-btn">
-	                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)">
-	                	<i class="glyphicon glyphicon-calendar"></i>
-	                </button>
-	              </span>
-		          </p>
-		        </div>
-		        <div class="form-group">
-	    				<label for="title">Number of events</label>
-	    				<input type="text" class="form-control" ng-model="numberOfEvents" placeholder="Number of events">
-	  				</div>
-					  <div class="form-group">
-					    <button type="submit" class="btn btn-default">Fetch Calendar Events</button>
-					  </div>
-					</form>
-					<table class="table" ng-show="calEventsFetched">
-					  <thead>
-				      <th>Add</th>
-				      <th>Title</th>
-				      <th>Start</th>
-				      <th>Duration [hrs]</th>
-					  </thead>
-				    <tbody>
-					    <tr ng-repeat="calendarEvent in calendarEvents">
-					      <td><button class="btn btn-success btn-xs" ng-hide="calendarEvent.selected" ng-click="addEvent(calendarEvent)">
-    							<span class="glyphicon glyphicon-plus"></span> 
-  							</button></td>
-					      <td>{{calendarEvent.title}}</td>
-					      <td>{{calendarEvent.start}}</td>
-					      <td>{{calendarEvent.duration}}</td>
-					    </tr>
-						</tbody>
-					</table>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
+	    <div class="col-md-12">
+        <div class="modal-content">
+  	      <div class="modal-header">
+  	        <h4 class="modal-title">Import Calendar Events</h4>
+  	      </div>
+  	      <div class="modal-body">
+  	        <button type="button" class="btn btn-default" ng-click = "authorize()" ng-hide="calendarsFetched">Authorize</button>
+  					<button type="button" class="btn btn-default" ng-click = "fetchCalendars()" ng-hide="calendarsFetched">Fetch Calendars</button>
+  					<form name="selectCalendarForm" ng-submit="fetchCalendarEvents()" ng-show="calendarsFetched">
+      			  <div class="form-group">
+  					    <label for="title">Title</label>
+  					    <select class="form-control" ng-model="calendarSelected" ng-options="c.id as c.title for c in calendars">
+  					    	<option value="">-- choose calendar --</option>
+  							</select>
+  					  </div>
+              <div class="form-group">
+                <div class="form-group row">
+                    <div class="col-md-6">
+                      <label for="title">Start</label>
+                      <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="startDate" is-open="openedStart" datepicker-options="dateOptions"></input>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'openedStart')">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                          </button>
+                        </span>
+                      </p>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="title">End</label>
+                      <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="endDate" is-open="openedEnd" datepicker-options="dateOptions"></input>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="openDatePicker($event, 'openedEnd')">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                          </button>
+                        </span>
+                      </p>
+                    </div>
+                </div>
+              </div>
+  					  <div class="form-group">
+  					    <button type="submit" class="btn btn-default">Fetch Calendar Events</button>
+  					  </div>          
+  					</form>
+  					<table class="table" ng-show="calEventsFetched">
+  					  <thead>
+  				      <th>Add</th>
+  				      <th>Title</th>
+  				      <th>Start</th>
+  				      <th>Duration [hrs]</th>
+  					  </thead>
+  				    <tbody>
+  					    <tr ng-repeat="calendarEvent in calendarEvents">
+  					      <td><button class="btn btn-success btn-xs" ng-hide="calendarEvent.selected" ng-click="addEvent(calendarEvent)">
+      							<span class="glyphicon glyphicon-plus"></span> 
+    							</button></td>
+  					      <td>{{calendarEvent.title}}</td>
+  					      <td>{{calendarEvent.start}}</td>
+  					      <td>{{calendarEvent.duration | number : 2}}</td>
+  					    </tr>
+  						</tbody>
+  					</table>
+  	      </div>
+  	      <div class="modal-footer">
+  	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  	      </div>
+        </div>
 	    </div>
 	  </div>
 	</div>
