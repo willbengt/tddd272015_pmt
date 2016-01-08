@@ -10,11 +10,12 @@ angular.module('TimeReportApp')
         $scope.fetchToken = function(){
             $scope.oauth_token = gapi.auth.getToken();
         };
-
+/*
         $scope.init = function(){
             gapi.auth.init($scope.redirect(gapi.auth.getToken()));
         };
-
+*/
+        /*
         $scope.login=function() {
             var client_id="462878784674-q643pcp1acsrh17m9ms2s84tkpupgbnn.apps.googleusercontent.com";
             var scope="email%20profile";
@@ -24,7 +25,7 @@ angular.module('TimeReportApp')
                 "&response_type="+response_type;
             window.location.replace(url);
         };
-
+*/
         /*$scope.login = function() {
          window.location.href = "https://api.imgur.com/oauth2/authorize?client_id=" + "772e4e0d393959b" + "&response_type=token";
          }*/
@@ -32,7 +33,7 @@ angular.module('TimeReportApp')
         $scope.logout = function() {
             window.localStorage.removeItem("google");
         }
-
+/*
         $scope.callbackHandler = function() {
             var originSite = 'google';
             var callbackResponse = (document.URL).split("#")[1];
@@ -59,7 +60,7 @@ angular.module('TimeReportApp')
                 $scope.callback_msg = "Problem authenticating";
             }
         };
-
+*/
 
         //$scope.userValidation = function(access_token){
         //    $http.put('/authenticate', access_token).success(
