@@ -13,8 +13,8 @@ class SessionController < ApplicationController
     puts 'User: \n'
     puts @user
 
-    if People.where(:email => @user['email']).blank?
-      People.create(name: @user['first_name'], email: @user['email'], project: 1)
+    if User.where(:email => @user['email']).blank?
+      User.create(name: @user['first_name'], email: @user['email'], project: 1)
     else
       puts 'User exists in DB'
     end
