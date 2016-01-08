@@ -1,0 +1,11 @@
+development:
+  client_id: 462878784674-q643pcp1acsrh17m9ms2s84tkpupgbnn.apps.googleusercontent.com
+  client_secret: rgRALxKeUXw9-pKCKffdSRhA
+
+test:
+  client_id: 462878784674-q643pcp1acsrh17m9ms2s84tkpupgbnn.apps.googleusercontent.com
+  client_secret: rgRALxKeUXw9-pKCKffdSRhA
+
+production:
+  client_id: 462878784674-q643pcp1acsrh17m9ms2s84tkpupgbnn.apps.googleusercontent.com
+  client_secret: rgRALxKeUXw9-pKCKffdSRhA

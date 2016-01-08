@@ -7,8 +7,8 @@ class Token < ActiveRecord::Base
 
   def to_params
     {'refresh_token' => refresh_token,
-     'client_id' => ENV['CLIENT_ID'],
-     'client_secret' => ENV['CLIENT_SECRET'],
+     'client_id' => GOOGLE_CONFIG['client_id'],
+     'client_secret' => GOOGLE_CONFIG['client_secret'],
      'grant_type' => 'refresh_token'}
   end
 
