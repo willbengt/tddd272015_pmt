@@ -19,18 +19,18 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
 
     // var selectedUser = Session.getUser() (function to be implemented)
 
-    for (var i = 0; i < memberships.length; i++) {     
+    for (var i = 0; i < memberships.length; i++) {
       projectId = memberships[i].project_id;
       userId = memberships[i].user_id;
       projectExists = (selectedProjects.indexOf(projectId) >= 0);
       if (!projectExists && userId == $scope.selectedUser.id) {
-        selectedProjects.push(projectId);   
+        selectedProjects.push(projectId);
       }
     }
   };
 
   $scope.init = function() {
-    $scope.projects = Project.query();
+    $scope.projects = Project.query({ user: window.localStorage.user_name, token: window.localStorage.access_token});
     $scope.users = User.query();
     Membership.query(function(response) {
       for (var i = 0; i < response.length; i++) {
@@ -41,11 +41,11 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
 
   $scope.saveProject = function(elementData, elementId) {
     project = new Project();
-    angular.extend(project, {id: elementId}, elementData);     
+    angular.extend(project, {id: elementId}, elementData);
     project.$update();
   };
 
-  $scope.removeProject = function(project, rowIndex) { 
+  $scope.removeProject = function(project, rowIndex) {
     $scope.projects.splice(rowIndex, 1);
     selectedProjects.splice(selectedProjects.indexOf(project.id), 1);
     project.$delete();

@@ -4,9 +4,21 @@ class ProjectController < ApplicationController
 
   def index
     puts '-----------project#index-----------'
-    @projects = Project.all
+    puts 'user parameter: '
+    puts params[:user]
+    # puts User.find_by_name(params[:user])
+    @user = User.where(name: params[:user])
+    puts @user
+    # @projects = Project.where(memberships: User.where(name: params[:user]))
+    @projects = @user.projects
     render json: @projects
   end
+
+  # def index
+  #   puts '-----------project#index-----------'
+  #   @projects = Project.all
+  #   render json: @projects
+  # end
 
   def create
     puts '-----------project#create-----------'
