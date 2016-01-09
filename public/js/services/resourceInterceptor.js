@@ -5,7 +5,9 @@ app.factory('ResourceInterceptor', function() {
     
   return {
     response: function (data) {
-      console.log("success (" + data.config.method + ' ' + rootUrl + data.config.url + ")", data);
+      if (data.config.url.search("api") > 0 ) {
+        console.log("success (" + data.config.method + ' ' + rootUrl + data.config.url + ")", data);
+      }
       return data;
     },
     responseError: function (data) {

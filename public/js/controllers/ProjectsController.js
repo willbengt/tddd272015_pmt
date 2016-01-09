@@ -1,9 +1,10 @@
-app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'Membership', 'Session', function($scope, $filter, Project, User, Membership, Session){
+app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'Membership', 'Session', 
+function($scope, $filter, Project, User, Membership, Session) {
 
   var memberships = [];
   var selectedProjects = [];
 
-  $scope.filterProjects = function()  {
+  $scope.filterProjects = function() {
     return function(project) {
       return selectedProjects.indexOf(project.id) >= 0;
     };
@@ -32,11 +33,7 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
   $scope.init = function() {
     $scope.projects = Project.query({ user: window.localStorage.user_name, token: window.localStorage.access_token});
     $scope.users = User.query();
-    Membership.query(function(response) {
-      for (var i = 0; i < response.length; i++) {
-        memberships.push(response[i]);
-      }
-    });
+    memberships = Membership.query();
   };
 
   $scope.saveProject = function(elementData, elementId) {
