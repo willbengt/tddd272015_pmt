@@ -5,24 +5,26 @@ function($scope, $rootScope, $stateParams, $filter, Report, Project) {
 
   loadReports = function() {
     Report.query(function(response) {
-      $rootScope.reports = $filter('filter')(response, {project: projectId}); 
-      $scope.tableInformation = response;
-      $scope.set.time = [];
-      $scope.set.x = [];
-      _.times($scope.tableInformation.length, function(n) {
-        if ($scope.tableInformation[n].project == projectId) {
-          $scope.set.time.push($scope.tableInformation[n].time);
-          $scope.set.x.push(n);
-        }
-      });
+        $rootScope.reports = $filter('filter')(response, {project: projectId});
+        $scope.tableInformation = response;
+        $scope.set.time = [];
+        $scope.set.x = [];
+        _.times($scope.tableInformation.length, function (n) {
+          if ($scope.tableInformation[n].project == projectId) {
+            $scope.set.time.push($scope.tableInformation[n].time);
+            $scope.set.x.push(n);
+          }
+        });
     });
   };
+
 
   $scope.init = function() {
     $scope.project = Project.get({id:projectId}, function(resource) {
       $scope.prjtime = resource.time;
+      loadReports();
     });
-    loadReports();
+
   };
 
   $scope.saveReport = function(elementData, elementId) {
