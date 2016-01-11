@@ -69,8 +69,8 @@
             <h4 class="modal-title">Import Calendar Events</h4>
           </div>
           <div class="modal-body">
-            <button type="button" class="btn btn-default" ng-click="handleCalAuthClick()" ng-hide="calendarsFetched">Authorize</button>
-            <form name="selectCalendarForm" ng-submit="fetchCalendarEvents()" ng-show="calendarsFetched">
+            <button type="button" class="btn btn-primary" ng-click="handleCalAuthClick()" ng-hide="calendarsFetched">Authorize</button>
+            <form name="selectCalendarForm" ng-submit="calendarEventsApiCall()" ng-show="calendarsFetched">
               <div class="form-group">
                 <label for="title">Title</label>
                 <select class="form-control" ng-model="calendarSelected" ng-options="c.id as c.title for c in calendars">
@@ -104,7 +104,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-default">Fetch Calendar Events</button>
+                <button type="submit" class="btn btn-primary">Fetch Calendar Events</button>
               </div>          
             </form>
             <table class="table" ng-show="calEventsFetched">
@@ -127,7 +127,9 @@
             </table>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              <span class="glyphicon glyphicon-share-alt"></span> 
+            </button>
           </div>
         </div>
       </div>

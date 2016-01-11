@@ -1,5 +1,5 @@
 <div ng-init="init()">
-	<h1>Projects</h1>
+	<h1>{{selectedUser.name}}'s projects</h1>
 
   <!-- Select User - to be removed -->
   <a href="#" editable-select="selectedUser.name" e-title="Select User" onbeforesave="updateSelectedProjects($data)" e-ng-options="u.id as u.name for u in users">
