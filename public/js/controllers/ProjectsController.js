@@ -31,7 +31,9 @@ function($scope, $filter, Project, User, Membership, Session) {
   };
 
   $scope.init = function() {
-    $scope.projects = Project.query({ user: window.localStorage.user_name, token: window.localStorage.access_token});
+      console.log('window.localStorage.user_name: ' + window.localStorage.user_name.slice(1, -1));
+      console.log('window.localStorage.access_token: ' + window.localStorage.access_token);
+    $scope.projects = Project.query({ user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)});
     $scope.users = User.query();
     memberships = Membership.query();
   };

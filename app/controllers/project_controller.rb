@@ -6,12 +6,16 @@ class ProjectController < ApplicationController
     puts '-----------project#index-----------'
     puts 'user parameter: '
     puts params[:user]
-    # puts User.find_by_name(params[:user])
     @user = User.where(name: params[:user])
     puts @user
+    @memberships = @user.projects
+    puts @memberships
+    # @memberships = Membership.where(user_id: @user)
+    # puts @memberships
+    # @projects = Project.where(@memberships)
     # @projects = Project.where(memberships: User.where(name: params[:user]))
-    @projects = @user.projects
-    render json: @projects
+    # @projects = @user.projects
+    render json: @memberships
   end
 
   # def index
