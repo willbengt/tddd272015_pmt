@@ -1,83 +1,82 @@
 <div ng-init="init()">
-	<h1>{{project.name}}</h1>
-	<div class="col-xs-7">
+  <h1>{{project.name}}</h1>
+  <div class="col-xs-7">
     <h3>Reports</h3>
     <table class="table table-striped table-condensed table-hover">
-	    <thead>
-	      <tr>
-	        <th class="col-md-2">Title</th>
-	        <th class="col-md-1">Time</th>
-	        <th class="col-md-3">Comment</th>
-	        <th class="col-md-1">Edit</th>
-	      </tr>
-	    </thead>
-	    <tbody>
+      <thead>
+        <tr>
+          <th class="col-md-2">Title</th>
+          <th class="col-md-1">Time</th>
+          <th class="col-md-3">Comment</th>
+          <th class="col-md-1">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
         <tr data-ng-repeat="report in reports">
           <td>
-		        <span editable-text="report.name" e-name="name" e-form="rowform" e-required>
-		        	{{report.name}}
-		        </span>
-		      </td>
+            <span editable-text="report.name" e-name="name" e-form="rowform" e-required>
+              {{report.name}}
+            </span>
+          </td>
           <td>
-		        <span editable-text="report.time" e-name="time" e-form="rowform" e-required>
-		        	{{report.time | number : 2}}
-		        </span>
-		      </td>          
+            <span editable-text="report.time" e-name="time" e-form="rowform" e-required>
+              {{report.time | number : 2}}
+            </span>
+          </td>          
           <td>
-		        <span editable-text="report.text" e-name="text" e-form="rowform" e-required>
-		        	{{report.text}}
-		        </span>
-		      </td> 
+            <span editable-text="report.text" e-name="text" e-form="rowform" e-required>
+              {{report.text}}
+            </span>
+          </td> 
           <td>
             <form editable-form name="rowform" onbeforesave="saveReport($data, report.id)" ng-show="rowform.$visible" shown="inserted == report" class="form-buttons form-inline">
-			        <button type="submit" class="btn btn-success">
-			          <span class="glyphicon glyphicon-ok"></span> 
-			        </button>
-		          <button type="button" ng-click="rowform.$cancel()" class="btn btn-default">
-		            <span class="glyphicon glyphicon-share-alt"></span> 
-		          </button>
+              <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-ok"></span> 
+              </button>
+              <button type="button" ng-click="rowform.$cancel()" class="btn btn-default">
+                <span class="glyphicon glyphicon-share-alt"></span> 
+              </button>
             </form>
             <div class="buttons" ng-show="!rowform.$visible">
               <button class="btn btn-primary" ng-click="rowform.$show()">
-            		<span class="glyphicon glyphicon-pencil"></span>
-          		</button>
+                <span class="glyphicon glyphicon-pencil"></span>
+              </button>
               <button class="btn btn-danger" ng-click="removeReport(report, $index)">
-            		<span class="glyphicon glyphicon-remove"></span> 
-          		</button>
+                <span class="glyphicon glyphicon-remove"></span> 
+              </button>
             </div>  
           </td>
         </tr>
     </table>
     <div class="buttons">
-	    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#importModal">
-	  		<span class="glyphicon glyphicon-import"></span> 
-			</button>
-			<button class="btn btn-success" ng-click="addReport()">
-	    	<span class="glyphicon glyphicon-plus"></span> 
-	  	</button>
-  	</div>
-	</div>
-	<div class="col-xs-5">
-		<h3>Burn Down Chart</h3>
-		<div bd-chart="set.time" x="set.x" projecttime="prjtime" class="content"></div>
-	</div>
-	<div class="modal fade" id="importModal">
-	  <div class="modal-dialog" role="document">
-	    <div class="col-md-12">
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#importModal">
+        <span class="glyphicon glyphicon-import"></span> 
+      </button>
+      <button class="btn btn-success" ng-click="addReport()">
+        <span class="glyphicon glyphicon-plus"></span> 
+      </button>
+    </div>
+  </div>
+  <div class="col-xs-5">
+    <h3>Burn Down Chart</h3>
+    <div bd-chart="set.time" x="set.x" projecttime="prjtime" class="content"></div>
+  </div>
+  <div class="modal fade" id="importModal" ng-controller="CalendarController">
+    <div class="modal-dialog" role="document">
+      <div class="col-md-12">
         <div class="modal-content">
-  	      <div class="modal-header">
-  	        <h4 class="modal-title">Import Calendar Events</h4>
-  	      </div>
-  	      <div class="modal-body">
-  	        <button type="button" class="btn btn-default" ng-click = "authorize()" ng-hide="calendarsFetched">Authorize</button>
-  					<button type="button" class="btn btn-default" ng-click = "fetchCalendars()" ng-hide="calendarsFetched">Fetch Calendars</button>
-  					<form name="selectCalendarForm" ng-submit="fetchCalendarEvents()" ng-show="calendarsFetched">
-      			  <div class="form-group">
-  					    <label for="title">Title</label>
-  					    <select class="form-control" ng-model="calendarSelected" ng-options="c.id as c.title for c in calendars">
-  					    	<option value="">-- choose calendar --</option>
-  							</select>
-  					  </div>
+          <div class="modal-header">
+            <h4 class="modal-title">Import Calendar Events</h4>
+          </div>
+          <div class="modal-body">
+            <button type="button" class="btn btn-primary" ng-click="handleCalAuthClick()" ng-hide="calendarsFetched">Authorize</button>
+            <form name="selectCalendarForm" ng-submit="calendarEventsApiCall()" ng-show="calendarsFetched">
+              <div class="form-group">
+                <label for="title">Title</label>
+                <select class="form-control" ng-model="calendarSelected" ng-options="c.id as c.title for c in calendars">
+                  <option value="">-- choose calendar --</option>
+                </select>
+              </div>
               <div class="form-group">
                 <div class="form-group row">
                     <div class="col-md-6">
@@ -104,35 +103,36 @@
                     </div>
                 </div>
               </div>
-  					  <div class="form-group">
-  					    <button type="submit" class="btn btn-default">Fetch Calendar Events</button>
-  					  </div>          
-  					</form>
-  					<table class="table" ng-show="calEventsFetched">
-  					  <thead>
-  				      <th>Add</th>
-  				      <th>Title</th>
-  				      <th>Start</th>
-  				      <th>Duration [hrs]</th>
-  					  </thead>
-  				    <tbody>
-  					    <tr ng-repeat="calendarEvent in calendarEvents">
-  					      <td><button class="btn btn-success btn-xs" ng-hide="calendarEvent.selected" ng-click="addEvent(calendarEvent)">
-      							<span class="glyphicon glyphicon-plus"></span> 
-    							</button></td>
-  					      <td>{{calendarEvent.title}}</td>
-  					      <td>{{calendarEvent.start}}</td>
-  					      <td>{{calendarEvent.duration | number : 2}}</td>
-  					    </tr>
-  						</tbody>
-  					</table>
-  	      </div>
-  	      <div class="modal-footer">
-  	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  	      </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Fetch Calendar Events</button>
+              </div>          
+            </form>
+            <table class="table" ng-show="calEventsFetched">
+              <thead>
+                <th>Add</th>
+                <th>Title</th>
+                <th>Start</th>
+                <th>Duration [hrs]</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="calendarEvent in calendarEvents">
+                  <td><button class="btn btn-success btn-xs" ng-hide="calendarEvent.selected" ng-click="addEvent(calendarEvent)">
+                    <span class="glyphicon glyphicon-plus"></span> 
+                  </button></td>
+                  <td>{{calendarEvent.title}}</td>
+                  <td>{{calendarEvent.start}}</td>
+                  <td>{{calendarEvent.duration | number : 2}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              <span class="glyphicon glyphicon-share-alt"></span> 
+            </button>
+          </div>
         </div>
-	    </div>
-	  </div>
-	</div>
+      </div>
+    </div>
+  </div>
 </div>
-

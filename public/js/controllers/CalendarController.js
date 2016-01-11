@@ -1,81 +1,104 @@
-angular.module('TimeReportApp')
+app.controller('CalendarController', ['$scope', '$rootScope', '$stateParams', 'Report', 
+function($scope, $rootScope, $stateParams, Report){
+  
+  var CLIENT_ID = '711755136597-022n0vgnc4bhgot40ct6ghim4ge594vc.apps.googleusercontent.com';
+  var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 
-    .controller('CalendarController', function($scope, $timeout, Session){
-        var CLIENT_ID = '711755136597-5k4ijen3f7j0003088jjimt8knlre2cm.apps.googleusercontent.com';
-        //var CLIENT_ID = '462878784674-q643pcp1acsrh17m9ms2s84tkpupgbnn.apps.googleusercontent.com';
-        var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
+  var projectId = $stateParams.projectId;
 
-        $scope.calendarsFetched = false;
-        $scope.calendars = [];
+  handleCalAuthResult = function(authResult) {
+    if (authResult && !authResult.error) {
+        calendarApiCall();
+    }
+  }
 
-        listCalendars = function() {
+  $scope.handleCalAuthClick = function(event) {
+      gapi.auth.authorize({
+        'client_id': CLIENT_ID,  
+        'scope': SCOPES, 
+        'immediate': false
+      }, handleCalAuthResult);
+      return false;
+  }
 
-            var request = gapi.client.calendar.calendarList.list({});
-            var singleCalendar = [];
+  calendarApiCall = function() {
 
-            $scope.calendars = [];
-
-            return request.execute(function(response) {
-                console.log(response);
+    $scope.calendars = [];
+      
+      gapi.client.load('calendar', 'v3', function() {
+          var request = gapi.client.calendar.calendarList.list({});
+          request.execute(function(response){
+              $scope.$apply(function() {
                 for (var i = 0; i < response.items.length; i++) {
-                    $scope.calendars.push({
-                        title : response.items[i].summary,
-                        id : response.items[i].id
-                    });
+                  $scope.calendars.push({
+                    title : response.items[i].summary, 
+                    id : response.items[i].id
+                  }); 
                 }
-                $scope.calendarsFetched = true;
+              });
+          });
+      });
+      $scope.calendarsFetched = true;
+  } 
+    
+  $scope.calendarEventsApiCall = function() {
+
+    $scope.calendarEvents = [];
+
+    gapi.client.load('calendar', 'v3', function() {
+      var request = gapi.client.calendar.events.list({ 
+        'calendarId': $scope.calendarSelected,
+        'timeMin': $scope.startDate.toISOString(),
+        'timeMax': $scope.endDate.toISOString(),
+        'singleEvents': true,
+        'orderBy': 'startTime'
+      });   
+      request.execute(function(response){ 
+        $scope.$apply(function() {
+          for (i = 0; i < response.result.items.length; i++) {
+            var startTime = new Date(response.result.items[i].start.dateTime);
+            var endTime = new Date(response.result.items[i].end.dateTime);
+            var timeDiff = endTime.getTime() - startTime.getTime();
+
+            $scope.calendarEvents.push({
+              selected : false,
+              title : response.result.items[i].summary, 
+              start : startTime.toDateString(), 
+              duration : timeDiff/(1000*3600)
             });
-        };
-
-        $scope.calendarEvents = [];
-        listCalendarEvents = function() {
-            var time_min = "2015-06-01T00:00:00+02:00";
-
-            //API: https://developers.google.com/google-apps/calendar/v3/reference/events/list
-            var request = gapi.client.calendar.events.list({
-                'calendarId': $scope.calendarSelected,
-                'timeMin': time_min,
-                'showDeleted': false,
-                'singleEvents': true,
-                'maxResults': $scope.numberOfEvents,
-                'orderBy': 'startTime'
-            });
-
-            $scope.calendarEvents = [];
-
-            //API: https://developers.google.com/google-apps/calendar/v3/reference/events#resource
-            request.then(function(response) {
-
-                for (i = 0; i < $scope.numberOfEvents; i++) {
-                    $scope.calendarEvents.push({
-                        title : response.result.items[i].summary,
-                        start : response.result.items[i].start.dateTime,
-                        end : response.result.items[i].end.dateTime
-                    });
-                }
-                //eventService.events = $scope.calendarsEvents;
-            });
-        };
-
-        callCalendarApi = function() {
-            return gapi.client.load('calendar', 'v3', listCalendars);
-        };
-
-        callCalendarEventsApi = function() {
-            return gapi.client.load('calendar', 'v3', listCalendarEvents);
-        };
-
-        $scope.fetchCalendars = function() {
-            callCalendarApi();
-            //1000 milliseconds delay and then callCalendarApi second time.
-            $timeout(callCalendarApi, 1000);
-        };
-
-        $scope.fetchCalendarEvents = function() {
-            callCalendarEventsApi();
-            //1000 milliseconds delay and then callCalendarEventsApi second time.
-            $timeout(callCalendarEventsApi, 1000);
-        };
-
-        $scope.authorize = Session.Authorize(true, SCOPES);
+          }
+        });
+      });
     });
+    $scope.calEventsFetched = true;
+  };
+
+  $scope.addEvent = function(calEvent) {
+
+    calEvent.selected = true;
+    var newReport = new Report();
+
+    newReport.$save(function(response) {
+      angular.extend(newReport, {
+        id: response.id, 
+        name: calEvent.title, 
+        project: projectId, 
+        time: calEvent.duration, 
+        text: 'Imported from Google Calendar'
+      });
+      newReport.$update(function() {
+        $rootScope.reports.push(newReport);
+      });
+    });
+  }
+
+  $scope.openDatePicker = function($event, opened) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope[opened] = true;
+  };
+
+  $scope.dateOptions = {
+    startingDay: 1
+  };
+}]);

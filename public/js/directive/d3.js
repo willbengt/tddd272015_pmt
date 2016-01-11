@@ -46,7 +46,7 @@ app.directive('bdChart', function($window){
 
         scope.redraw = function() {
             scope.svg.selectAll('*').remove();
-            
+
             var x, y, xAxis, yAxis, dataset, options = scope.getOptions(), yValues = scope.y, xScale, yScale, startTime = scope.startTime, temp;
 
             var amountData = yValues.length

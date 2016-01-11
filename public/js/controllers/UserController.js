@@ -1,20 +1,9 @@
-app.controller('UserController', [
-  '$scope', 
-  '$filter',
-  '$timeout', 
-  'User', 
-  'Project',
-  'Membership', function(
-    $scope,  
-    $filter,
-    $timeout, 
-    User, 
-    Project,
-    Membership){
+app.controller('UserController', ['$scope', '$filter', '$timeout', 'User', 'Project', 'Membership', 
+function($scope, $filter, $timeout, User, Project, Membership) {
 
   var memberships = [];
 
-  function findById(array, id, attr) {
+  findById = function(array, id, attr) {
     for(var i = 0; i < array.length; i += 1) {
       if(array[i].id == id) {
         return (array[i])[attr];
@@ -22,7 +11,7 @@ app.controller('UserController', [
     }
   }
 
-  function filterArray(array, keyAttr, key, valueAttr) {
+  filterArray = function(array, keyAttr, key, valueAttr) {
     var values = [];
     
     for(var i = 0; i < array.length; i += 1) {
@@ -47,9 +36,9 @@ app.controller('UserController', [
     return selected.length ? $filter('orderBy')(selected).join(', ') : 'Not set';
   }; 
 
-  $scope.users = [];
   loadUsers = function() {
     var user = [];
+    $scope.users = [];
 
     User.query(function(response) {
       for (var i = 0; i < response.length; i++) {
@@ -64,10 +53,9 @@ app.controller('UserController', [
   };
 
   $scope.init = function() {
+    $scope.projects = Project.query();
     memberships = Membership.query(function() {
-      $scope.projects = Project.query(function() {
-        loadUsers();
-      });
+      loadUsers();
     });
   };
 
@@ -78,7 +66,6 @@ app.controller('UserController', [
     angular.extend(user, {id: elementId, name: elementData.name, email: elementData.email});
     angular.extend(membership, {user: elementId, userProjects: elementData.userProjects});
     user.$update();
-
     membership.$update();
   };
 
