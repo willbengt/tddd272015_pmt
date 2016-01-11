@@ -8,14 +8,12 @@ class ProjectController < ApplicationController
     puts params[:user]
     @user = User.where(name: params[:user])
     puts @user
-    @memberships = @user.projects
-    puts @memberships
-    # @memberships = Membership.where(user_id: @user)
-    # puts @memberships
-    # @projects = Project.where(@memberships)
-    # @projects = Project.where(memberships: User.where(name: params[:user]))
-    # @projects = @user.projects
-    render json: @memberships
+    @t = User.create(name: 'Test_first', email: 'test@first.com', project: 1)
+    puts @t.name
+    @s = @t.projects.create(name: 'TestProject', time: 52)
+    puts @s.name
+    puts @t.projects
+    render :json => @t.projects
   end
 
   # def index
