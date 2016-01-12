@@ -4,23 +4,9 @@ class ProjectController < ApplicationController
 
   def index
     puts '-----------project#index-----------'
-    puts 'user parameter: '
-    puts params[:user]
-    @user = User.where(name: params[:user])
-    puts @user
-    @t = User.create(name: 'Test_first', email: 'test@first.com', project: 1)
-    puts @t.name
-    @s = @t.projects.create(name: 'TestProject', time: 52)
-    puts @s.name
-    puts @t.projects
-    render :json => @t.projects
+    @user = User.where(:name => params[:user]).first
+    render :json => @user.projects
   end
-
-  # def index
-  #   puts '-----------project#index-----------'
-  #   @projects = Project.all
-  #   render json: @projects
-  # end
 
   def create
     puts '-----------project#create-----------'
