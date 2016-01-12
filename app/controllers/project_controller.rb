@@ -10,32 +10,33 @@ class ProjectController < ApplicationController
 
   def create
     puts '-----------project#create-----------'
-    @project = Project.create(name: params[:name], time: params[:time])
+    @user = User.where(:name => params[:user]).first
+    @project = @user.projects.create(name: params[:name], time: params[:time])
     render :json => {id: @project.id}
   end
 
   def show
     puts '-----------project#show-----------'
-    @project = Project.find(params[:id])
+    @user = User.where(:name => params[:user]).first
+    @user.projects.find(params[:id])
     render json: @project
   end
 
   def update
     puts '-----------project#update-----------'
-    @project = Project.find(params[:id]).update(name: params[:name], time: params[:time])
+    @user = User.where(:name => params[:user]).first
+    @user.projects.find(params[:id]).update(name: params[:name], time: params[:time])
     render nothing: true
   end
 
   def destroy
     puts '-----------project#delete-----------'
-
     @memberships = Membership.where(project_id: params[:id])
     @memberships.each do |membership|
       membership.destroy
     end 
 
     @project = Project.find(params[:id]).destroy
-
     render nothing: true
   end
 
