@@ -37,7 +37,7 @@ function($scope, $filter, Project, User, Membership, Session) {
 
   $scope.saveProject = function(elementData, elementId) {
     project = new Project();
-    angular.extend(project, {id: elementId, user: window.localStorage.user_name.slice(1, -1)}, elementData);
+    angular.extend(project, {id: elementId, user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)}, elementData);
     project.$update();
   };
 
