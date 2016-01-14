@@ -3,3 +3,4 @@ app.factory('Project', function($resource) {
 		'update': {method: 'PUT'}
 	});
 });
+

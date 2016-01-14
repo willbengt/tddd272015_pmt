@@ -6,13 +6,13 @@ function($scope, $rootScope, $stateParams, Report){
 
   var projectId = $stateParams.projectId;
 
-  function handleCalAuthResult(authResult) {
+  handleCalAuthResult = function(authResult) {
     if (authResult && !authResult.error) {
         calendarApiCall();
     }
   }
 
-  $scope.handleCalAuthClick=function (event) {
+  $scope.handleCalAuthClick = function(event) {
       gapi.auth.authorize({
         'client_id': CLIENT_ID,  
         'scope': SCOPES, 
@@ -21,12 +21,11 @@ function($scope, $rootScope, $stateParams, Report){
       return false;
   }
 
-  $scope.calendars = [];
+  calendarApiCall = function() {
 
-  function calendarApiCall() {
+    $scope.calendars = [];
       
       gapi.client.load('calendar', 'v3', function() {
-
           var request = gapi.client.calendar.calendarList.list({});
           request.execute(function(response){
               $scope.$apply(function() {
@@ -42,67 +41,51 @@ function($scope, $rootScope, $stateParams, Report){
       $scope.calendarsFetched = true;
   } 
     
-  listCalendarEvents = function() {
+  $scope.calendarEventsApiCall = function() {
 
-    var timeMin = $scope.startDate.toISOString();
-    var timeMax = $scope.endDate.toISOString();
-
-    //API: https://developers.google.com/google-apps/calendar/v3/reference/events/list
-    var request = gapi.client.calendar.events.list({ 
-      'calendarId': $scope.calendarSelected,
-      'timeMin': timeMin,
-      'timeMax': timeMax,
-      'singleEvents': true,
-      'orderBy': 'startTime'
-    });
-
-    var timeDiff;
-    var startTime;
-    var endTime;
-
-    $scope.calEventsFetched = false;
     $scope.calendarEvents = [];
-    
-    //API: https://developers.google.com/google-apps/calendar/v3/reference/events#resource
-    request.then(function(response) { 
-      for (i = 0; i < response.result.items.length; i++) {
-        startTime = new Date(response.result.items[i].start.dateTime);
-        endTime = new Date(response.result.items[i].end.dateTime);
-        timeDiff = endTime.getTime() - startTime.getTime();
 
-        $scope.calendarEvents.push({
-          selected : false,
-          title : response.result.items[i].summary, 
-          start : startTime.toDateString(), 
-          duration : timeDiff/(1000*3600)
+    gapi.client.load('calendar', 'v3', function() {
+      var request = gapi.client.calendar.events.list({ 
+        'calendarId': $scope.calendarSelected,
+        'timeMin': $scope.startDate.toISOString(),
+        'timeMax': $scope.endDate.toISOString(),
+        'singleEvents': true,
+        'orderBy': 'startTime'
+      });   
+      request.execute(function(response){ 
+        $scope.$apply(function() {
+          for (i = 0; i < response.result.items.length; i++) {
+            var startTime = new Date(response.result.items[i].start.dateTime);
+            var endTime = new Date(response.result.items[i].end.dateTime);
+            var timeDiff = endTime.getTime() - startTime.getTime();
+
+            $scope.calendarEvents.push({
+              selected : false,
+              title : response.result.items[i].summary, 
+              start : startTime.toDateString(), 
+              duration : timeDiff/(1000*3600)
+            });
+          }
         });
-      }
-      $scope.calEventsFetched = true;
+      });
     });
+    $scope.calEventsFetched = true;
   };
 
-  $scope.fetchCalendarEvents = function() {
-    return gapi.client.load('calendar', 'v3', listCalendarEvents);
-  };
+  $scope.addEvent = function(calEvent) {
 
-  $scope.authorize = function() {
-    //Initiates the OAuth 2.0 authorization process
-    gapi.auth.authorize({
-      'client_id': CLIENT_ID, 
-      'immediate': false,
-      'response_type' : "token",
-      'scope': SCOPES
-    }); 
-  };
-
-  $scope.addEvent = function(event) {
-
-    event.selected = true;
-
+    calEvent.selected = true;
     var newReport = new Report();
 
     newReport.$save(function(response) {
-      angular.extend(newReport, {id: response.id, name: event.title, project: projectId, time: event.duration, text: 'Imported from Google Calendar'});
+      angular.extend(newReport, {
+        id: response.id, 
+        name: calEvent.title, 
+        project: projectId, 
+        time: calEvent.duration, 
+        text: 'Imported from Google Calendar'
+      });
       newReport.$update(function() {
         $rootScope.reports.push(newReport);
       });
@@ -112,7 +95,6 @@ function($scope, $rootScope, $stateParams, Report){
   $scope.openDatePicker = function($event, opened) {
     $event.preventDefault();
     $event.stopPropagation();
-
     $scope[opened] = true;
   };
 

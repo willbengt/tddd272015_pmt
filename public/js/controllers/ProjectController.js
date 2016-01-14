@@ -1,22 +1,31 @@
-app.controller('ProjectController', ['$scope', '$rootScope', '$stateParams', '$filter', 'Report', 'Project',
-    function($scope, $rootScope, $stateParams, $filter, Report, Project) {
+app.controller('ProjectController', ['$scope', '$rootScope', '$stateParams', '$filter', 'Report', 'Project', 
+function($scope, $rootScope, $stateParams, $filter, Report, Project) {
+  
+  var projectId = $stateParams.projectId;
 
-        var projectId = $stateParams.projectId;
+  loadReports = function() {
+    Report.query(function(response) {
+        $rootScope.reports = $filter('filter')(response, {project: projectId});
+        $scope.tableInformation = response;
+        $scope.set.time = [];
+        $scope.set.x = [];
+        _.times($scope.tableInformation.length, function (n) {
+          if ($scope.tableInformation[n].project == projectId) {
+            $scope.set.time.push($scope.tableInformation[n].time);
+            $scope.set.x.push(n);
+          }
+        });
+    });
+  };
 
-        loadReports = function() {
-            Report.query({user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)}, function(response) {
-                $rootScope.reports = $filter('filter')(response, {project: projectId});
-                $scope.tableInformation = response;
-                $scope.set.time = [];
-                $scope.set.x = [];
-                _.times($scope.tableInformation.length, function(n) {
-                    if ($scope.tableInformation[n].project == projectId) {
-                        $scope.set.time.push($scope.tableInformation[n].time);
-                        $scope.set.x.push(n);
-                    }
-                });
-            });
-        };
+
+  $scope.init = function() {
+    $scope.project = Project.get({id:projectId}, function(resource) {
+      $scope.prjtime = resource.time;
+      loadReports();
+    });
+
+  };
 
         $scope.init = function() {
             $scope.project = Project.get({id:projectId,
