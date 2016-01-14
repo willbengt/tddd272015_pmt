@@ -24,7 +24,7 @@ angular.module('TimeReportApp')
         };
 
         $scope.fetchData = function() {
-            $scope.tableInformation = Report.query()
+            $scope.tableInformation = Report.query({})
                 /*.$promise.then(
                 function(response) {
 

@@ -27,28 +27,38 @@ function($scope, $rootScope, $stateParams, $filter, Report, Project) {
 
   };
 
-  $scope.saveReport = function(elementData, elementId) {
-    var report = new Report();
-    angular.extend(report, {id: elementId, project: projectId}, elementData);
-    report.$update();
-  };
+        $scope.init = function() {
+            $scope.project = Project.get({id:projectId,
+                    user: window.localStorage.user_name.slice(1, -1),
+                    token: window.localStorage.access_token.slice(1, -1)},
+                function(resource) {
+                    $scope.prjtime = resource.time;
+                });
+            loadReports();
+        };
 
-  $scope.removeReport = function(report, rowIndex){
-    $rootScope.reports.splice(rowIndex, 1);
-    report.$delete();
-  };
+        $scope.saveReport = function(elementData, elementId) {
+            var report = new Report();
+            angular.extend(report, {id: elementId, project: projectId}, elementData);
+            report.$update();
+        };
 
-  $scope.addReport = function() {
-    $scope.inserted = new Report();
+        $scope.removeReport = function(report, rowIndex){
+            $rootScope.reports.splice(rowIndex, 1);
+            report.$delete();
+        };
 
-    $scope.inserted.$save(function(response) {
-      $scope.inserted.id = response.id;
-      $rootScope.reports.push($scope.inserted);
-    });
-  };
+        $scope.addReport = function() {
+            $scope.inserted = new Report();
 
-  $scope.set = {
-    time: [],
-    x: []
-  };
-}]);
+            $scope.inserted.$save(function(response) {
+                $scope.inserted.id = response.id;
+                $rootScope.reports.push($scope.inserted);
+            });
+        };
+
+        $scope.set = {
+            time: [],
+            x: []
+        };
+    }]);

@@ -5,6 +5,8 @@ require 'json'
 
 class Token < ActiveRecord::Base
 
+  belongs_to :user
+
   def to_params
     {'refresh_token' => refresh_token,
      'client_id' => GOOGLE_CONFIG['client_id'],
@@ -26,12 +28,12 @@ class Token < ActiveRecord::Base
   end
 
   def expired?
-    expires_at < Time.now
+    return expires_at < Time.now
   end
 
   def fresh_token
     refresh! if expired?
-    access_token
+    return access_token
   end
 
 end

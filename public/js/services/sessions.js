@@ -38,9 +38,9 @@ angular.module('TimeReportApp')
 
             setUser : function(userName, accessToken){
                 user = userName;
+                //window.localStorage.setItem('userCredentials', JSON.stringify({user_name: userName, access_token: accessToken}));
                 window.localStorage.setItem('access_token', JSON.stringify(accessToken));
                 window.localStorage.setItem('user_name', JSON.stringify(userName));
-                console.log("Logged in as: " + userName)
 
             },
 

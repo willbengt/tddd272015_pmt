@@ -40,7 +40,7 @@ function($scope, $filter, $timeout, User, Project, Membership) {
     var user = [];
     $scope.users = [];
 
-    User.query(function(response) {
+    User.query({user: 'admin', token: null}, function(response) {
       for (var i = 0; i < response.length; i++) {
         user = response[i];
 
@@ -53,7 +53,7 @@ function($scope, $filter, $timeout, User, Project, Membership) {
   };
 
   $scope.init = function() {
-    $scope.projects = Project.query();
+    $scope.projects = Project.query({user: 'admin', token: null});
     memberships = Membership.query(function() {
       loadUsers();
     });
