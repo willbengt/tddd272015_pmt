@@ -25,8 +25,6 @@ class SessionController < ApplicationController
       @t.token.update(access_token: @auth['token'], expires_at: Time.at(@auth['expires_at']).to_datetime)
     end
 
-
-
     # redirect_to('http://tddd27-timereportapp.rhcloud.com?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
 
      redirect_to('http://localhost:3000?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)

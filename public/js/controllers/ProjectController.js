@@ -40,6 +40,7 @@ app.controller('ProjectController', ['$scope', '$rootScope', '$stateParams', '$f
 
         $scope.saveReport = function(elementData, elementId) {
             var report = new Report();
+            console.log('ElementID: ' + elementId);
             angular.extend(report, {
                 id: elementId,
                 project: projectId,
@@ -70,6 +71,7 @@ app.controller('ProjectController', ['$scope', '$rootScope', '$stateParams', '$f
                 user: window.localStorage.user_name.slice(1, -1),
                 token: window.localStorage.access_token.slice(1, -1)
             }, function(response) {
+                console.log(response);
                 $scope.inserted.id = response.id;
                 $rootScope.reports.push($scope.inserted);
             });
