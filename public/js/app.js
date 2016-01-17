@@ -53,7 +53,7 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
                 controller: 'CalendarController'
             });
 
-        $urlRouterProvider.otherwise('/views/home');
+        $urlRouterProvider.otherwise('/home');
     }])
 
     .run(function(editableOptions, $rootScope, Session, $location, $state) {
