@@ -6,12 +6,6 @@ app.controller('CalendarController', ['$scope', '$rootScope', '$stateParams', 'R
 
         var projectId = $stateParams.projectId;
 
-        handleCalAuthResult = function(authResult) {
-            if (authResult && !authResult.error) {
-                calendarApiCall();
-            }
-        }
-
         $scope.handleCalAuthClick = function(event) {
             gapi.auth.authorize({
                 'client_id': CLIENT_ID,
@@ -19,6 +13,12 @@ app.controller('CalendarController', ['$scope', '$rootScope', '$stateParams', 'R
                 'immediate': false
             }, handleCalAuthResult);
             return false;
+        }
+
+        handleCalAuthResult = function(authResult) {
+            if (authResult && !authResult.error) {
+                calendarApiCall();
+            }
         }
 
         calendarApiCall = function() {
