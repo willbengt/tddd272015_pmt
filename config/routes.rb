@@ -86,7 +86,7 @@ Rails.application.routes.draw do
   put 'api/memberships/:userId', to: 'membership#update'
 
   get 'api/authenticate/:id', to: 'session#authenticate'
-  get 'api/session/', to: 'session#update'
+#  get 'api/session/', to: 'session#update'
 
   #get '/project', to: 'project#show'
   #post '/project', to: 'project#create'
