@@ -21,14 +21,12 @@ class SessionController < ApplicationController
       @t.token.update(access_token: @auth['token'], expires_at: Time.at(@auth['expires_at']).to_datetime)
     end
 
-    if (@user.first_name != nil)
-      redirect_to('http://tddd27-timereportapp.rhcloud.com?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
-    else
-      redirect_to('http://tddd27-timereportapp.rhcloud.com?' + @auth['token'] + '&' + "unknown_first_name" + '&' + @auth['expires_at'].to_s)
+    if @user['first_name'].nil?
+      @user['first_name'] = "Unknown"
     end
+
+    redirect_to('http://tddd27-timereportapp.rhcloud.com?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
     
-
-
 #      redirect_to('http://localhost:3000?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
   end
 
