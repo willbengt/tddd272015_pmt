@@ -49,7 +49,7 @@ angular.module('TimeReportApp')
             logOutUser : function(){
                 user = null;
                 console.log("You are now logged out!")
-            },
+            }
 
             //--------------------------------------------
             //The $http created a circle dependency error, will probably need to change to $resource instead
