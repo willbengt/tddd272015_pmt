@@ -8,7 +8,7 @@ class SessionController < ApplicationController
     @user = request.env['omniauth.auth']['info']
     @auth = request.env['omniauth.auth']['credentials']
     if @user['first_name'].nil?
-      @user['first_name'] = "Unknown"
+      @user['first_name'] = @user['email'].split("@").first
     end
 
 
