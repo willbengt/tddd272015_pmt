@@ -3,21 +3,24 @@ Project Management Tool as part of the course TDDD27 Advanced webprogramming at
 Linkoping university during the spring of 2015. The ambition of the project is 
 to be graded 5.
 
+# Screencast
+- The screencast can be found here:
+
+
 # Project members
-- Rasmus Kling rasmus.kling@gmail.com
+- William Bengtsson wilbe075@student.liu.se
+- Rasmus Kling raskl508@student.liu.se
 - Teddy Wallen tedwa306@student.liu.se
-- William Bengtsson mail@williambengtsson.com
 
 # Functional specification
 ## Project vision
-To create an amazing project managment tool intended to help project members 
+To create an amazing project management tool intended to help project members
 keep track of their project’s status.
 
 ## Core functions
 - Timereporting
-- Multiple authentication levels, e.g. admin, project member, project leader etc.
-- Visualization of progress and different metrics for the project, e.g. burn down 
-chart
+- Authentication via Google to fetch your personal calendar as time reports and to secure that you are you!
+- Visualization of progress and different metrics for the project, e.g. burn down chart
 
 # Technological specification
 ## Client-side framework
@@ -30,13 +33,8 @@ Ruby on Rails
 D3.js
 
 ## Authentication
-OpenID/OAuth
+Omniauth/OAuth2
 
 ## Data and user management
-MongoDB
-
-## Testing framework
-Selenium
-
-The OpenShift `ruby` cartridge documentation can be found at:
-http://openshift.github.io/documentation/oo_cartridge_guide.html#ruby
+SQLite in development
+MySQL in production
