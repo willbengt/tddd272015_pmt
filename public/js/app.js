@@ -29,24 +29,6 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
                 controller: 'ProjectController'
             })
 
-            .state('oauth_callback', {
-                url: '/oauth_callback',
-                templateUrl: '/views/oauth_callback.html',
-                controller: 'SessionController'
-            })
-
-            .state('login', {
-                url: '/login',
-                templateUrl: '/views/login_test.html',
-                controller: 'SessionController'
-            })
-
-            .state('calendar', {
-                url: '/calendar',
-                templateUrl: '/views/calendar.html',
-                controller: 'CalendarController'
-            });
-
         $urlRouterProvider.otherwise('/home');
     }])
 
@@ -54,22 +36,13 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
         Session.setUser(null);
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
 
-            console.log("isLoggedIn(): ");
-            console.log(Session.isLoggedIn());
-
              if(!$state.is('home')) {
                 if (!Session.isLoggedIn()) {
-                    console.log('DENY');
                     event.preventDefault();
-                    $location.path('/views/home');
-                }
-                else {
-                    console.log('Allow' + Session.isLoggedIn());
+                    $location.path('/#/home');
                 }
             }
             $rootScope.$state = $state;
-            // transitionTo() promise will be rejected with
-            // a 'transition prevented' error
         });
         editableOptions.theme = 'bs3'; // bootstrap3 theme.
 
