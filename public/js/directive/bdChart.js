@@ -1,6 +1,6 @@
-app.directive('bdChart', function($window){
+app.directive('bdChart', function(/*$window*/){
     // angular.module("d3.directives", []).directive("barChart", function() {
-    var directive = { };
+    var directive = {};
 
     directive.restrict = 'AE';
     directive.scope = {
@@ -41,7 +41,7 @@ app.directive('bdChart', function($window){
             scope.svg.attr('viewBox','0 0 '+ (options.width + options.margins.left + options.margins.right) + ' ' +
             (options.height + options.margins.top + options.margins.bottom))
                 .attr('preserveAspectRatio','xMinYMin');
-            draw();
+            //draw();
         };
 
         draw = function() {
@@ -49,8 +49,7 @@ app.directive('bdChart', function($window){
 
             var x, y, xAxis, yAxis, dataset, options = getOptions(), yValues = scope.y, xScale, yScale, maxTime = scope.time, temp;
 
-            var amountData = yValues.length
-            console.log(yValues)
+            var amountData = yValues.length;
 
 
 
@@ -92,8 +91,27 @@ app.directive('bdChart', function($window){
             }
         };
 
-        scope.$watch('x', draw);
-        scope.$watch('y', draw);
+        /*
+        scope.$watchGroup(['x', 'y', 'data'], function() {
+          if (scope.x && scope.y) {
+            scope.draw(); 
+          }
+        });*/
+
+        scope.$watch('x', function() {
+          if (scope.x) {
+            draw(); 
+          }
+        }, true); //objectEquality == true
+
+        scope.$watch('y', function() {
+          if (scope.y) {
+            draw(); 
+          }
+        }, true); //objectEquality == true
+
+
+/*
         scope.$watch('options', setSvgSize);
 
         scope.$watch(function () {
@@ -101,7 +119,7 @@ app.directive('bdChart', function($window){
         }, function () {
             draw();
         });
-
+*/
         initialize();
     };
 
