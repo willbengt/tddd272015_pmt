@@ -13,6 +13,7 @@ angular.module('TimeReportApp')
         console.log('Username: ' + $scope.tokenParam.split('&')[1]);
         Session.setUser($scope.tokenParam.split('&')[1], $scope.tokenParam.split('&')[0], $scope.tokenParam.split('&')[2]);
 
+        /*
         $scope.login = function () {
            // Ask to the server, do your job and THEN set the user
            Session.Authorize(false, SCOPES);
@@ -20,10 +21,10 @@ angular.module('TimeReportApp')
           // Session.setUser(temp); //Update the state of the user in the app
            return gapi.client.load('plus', 'v1', CallPlusApi);
         };
+*/ //FUSKINLOGG
 
         $scope.logout = function (){
             Session.logOutUser();
-            window.location.href = '/new';
         };
 
         CallPlusApi = function() {
