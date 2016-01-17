@@ -213,7 +213,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mysql2 (~> 0.3.20)
-  nokogiri
   omniauth (~> 1.2.2)
   omniauth-google-oauth2
   rack (= 1.6.0)
