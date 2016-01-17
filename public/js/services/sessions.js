@@ -1,7 +1,3 @@
-/**
- * Created by teddy on 06/10/15.
- */
-
 angular.module('TimeReportApp')
 
     .factory('Session', ['$window', function SessionFactory($window) {
