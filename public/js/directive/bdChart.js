@@ -14,7 +14,7 @@ app.directive('bdChart', function($window){
         scope.svg = null;
         scope.container = null;
 
-        scope.getOptions = function() {
+        getOptions = function() {
             return _.merge({
                 width: 1000,
                 height: 500,
@@ -27,27 +27,27 @@ app.directive('bdChart', function($window){
             }, scope.options || { }); //??????????????????????????????????????????????????????Behövs detta?
         };
 
-        scope.initialize = function() {
+        initialize = function() {
             scope.svg = d3.select(elements[0]).append("svg").attr("class", "chart");
             scope.container = scope.svg.append("g");
             scope.container.append("g").attr("class", "x");
             scope.container.append("g").attr("class", "y");
-            scope.setSvgSize();
+            setSvgSize();
         };
 
-        scope.setSvgSize = function() {
-            var options = scope.getOptions();
+        setSvgSize = function() {
+            var options = getOptions();
             scope.container.attr("transform", "translate(" + options.margins.left + ", " + options.margins.right + ")");
             scope.svg.attr('viewBox','0 0 '+ (options.width + options.margins.left + options.margins.right) + ' ' +
             (options.height + options.margins.top + options.margins.bottom))
                 .attr('preserveAspectRatio','xMinYMin');
-            scope.redraw();
+            draw();
         };
 
-        scope.redraw = function() {
+        draw = function() {
             scope.svg.selectAll('*').remove();
 
-            var x, y, xAxis, yAxis, dataset, options = scope.getOptions(), yValues = scope.y, xScale, yScale, maxTime = scope.time, temp;
+            var x, y, xAxis, yAxis, dataset, options = getOptions(), yValues = scope.y, xScale, yScale, maxTime = scope.time, temp;
 
             var amountData = yValues.length
             console.log(yValues)
@@ -56,7 +56,7 @@ app.directive('bdChart', function($window){
 
             if (yValues) {
                 if (yValues[0] != 0) {
-                    yValues.unshift(0)
+                    yValues.unshift(0)   //??????????????????????Varför detta?
                 }
 
                 xScale = d3.scale.linear().range([options.margins.left, options.width - options.margins.right]).domain([0,amountData-1]),
@@ -92,17 +92,17 @@ app.directive('bdChart', function($window){
             }
         };
 
-        scope.$watch('x', scope.redraw);
-        scope.$watch('y', scope.redraw);
-        scope.$watch('options', scope.setSvgSize);
+        scope.$watch('x', draw);
+        scope.$watch('y', draw);
+        scope.$watch('options', setSvgSize);
 
         scope.$watch(function () {
             return angular.element($window)[0].innerWidth;
         }, function () {
-            scope.redraw();
+            draw();
         });
 
-        scope.initialize();
+        initialize();
     };
 
     return directive;
