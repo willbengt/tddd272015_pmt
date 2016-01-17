@@ -11,7 +11,7 @@ angular.module('TimeReportApp')
         $scope.tokenParam = $location.absUrl().split('?').pop();
         console.log('Token: ' + $scope.tokenParam.split('&')[0]);
         console.log('Username: ' + $scope.tokenParam.split('&')[1]);
-        Session.setUser($scope.tokenParam.split('&')[1], $scope.tokenParam.split('&')[0]);
+        Session.setUser($scope.tokenParam.split('&')[1], $scope.tokenParam.split('&')[0], $scope.tokenParam.split('&')[2]);
 
         $scope.login = function () {
            // Ask to the server, do your job and THEN set the user
