@@ -2,7 +2,7 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
 function($scope, $filter, Project, User, Membership, Session) {
 
   var memberships = [];
-  var selectedProjects = [];
+  var selectedProjects = [1,2,23];
 
   //$scope.filterProjects = function() {
   //  return function(project) {

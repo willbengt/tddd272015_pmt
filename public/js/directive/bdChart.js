@@ -1,20 +1,20 @@
-app.directive('bdChart', function($window){
+app.directive('bdChart', function(/*$window*/){
     // angular.module("d3.directives", []).directive("barChart", function() {
-    var directive = { };
+    var directive = {};
 
     directive.restrict = 'AE';
     directive.scope = {
-        x: '=?',
-        y: '=bdChart',
-        startTime: '=projecttime',
-        options: '=?'
+        x: '=', //?????????????????????????????????????????? Vart används scope.x?
+        y: '=',
+        time: '=',
+        options: '=?'  //??????????????????????????????????????????????????????Behövs detta?
     };
 
     directive.link = function(scope, elements, attr) {
         scope.svg = null;
         scope.container = null;
 
-        scope.getOptions = function() {
+        getOptions = function() {
             return _.merge({
                 width: 1000,
                 height: 500,
@@ -24,43 +24,42 @@ app.directive('bdChart', function($window){
                     bottom: 20,
                     left: 50
                 }
-            }, scope.options || { });
+            }, scope.options || { }); //??????????????????????????????????????????????????????Behövs detta?
         };
 
-        scope.initialize = function() {
+        initialize = function() {
             scope.svg = d3.select(elements[0]).append("svg").attr("class", "chart");
             scope.container = scope.svg.append("g");
             scope.container.append("g").attr("class", "x");
             scope.container.append("g").attr("class", "y");
-            scope.setSvgSize();
+            setSvgSize();
         };
 
-        scope.setSvgSize = function() {
-            var options = scope.getOptions();
+        setSvgSize = function() {
+            var options = getOptions();
             scope.container.attr("transform", "translate(" + options.margins.left + ", " + options.margins.right + ")");
             scope.svg.attr('viewBox','0 0 '+ (options.width + options.margins.left + options.margins.right) + ' ' +
             (options.height + options.margins.top + options.margins.bottom))
                 .attr('preserveAspectRatio','xMinYMin');
-            scope.redraw();
+            //draw();
         };
 
-        scope.redraw = function() {
+        draw = function() {
             scope.svg.selectAll('*').remove();
 
-            var x, y, xAxis, yAxis, dataset, options = scope.getOptions(), yValues = scope.y, xScale, yScale, startTime = scope.startTime, temp;
+            var x, y, xAxis, yAxis, dataset, options = getOptions(), yValues = scope.y, xScale, yScale, maxTime = scope.time, temp;
 
-            var amountData = yValues.length
-            console.log(yValues)
+            var amountData = yValues.length;
 
 
 
             if (yValues) {
                 if (yValues[0] != 0) {
-                    yValues.unshift(0)
+                    yValues.unshift(0)   //??????????????????????Varför detta?
                 }
 
                 xScale = d3.scale.linear().range([options.margins.left, options.width - options.margins.right]).domain([0,amountData-1]),
-                yScale = d3.scale.linear().range([options.height - options.margins.top, options.margins.bottom]).domain([0, startTime]),
+                yScale = d3.scale.linear().range([options.height - options.margins.top, options.margins.bottom]).domain([0, maxTime]),
 
 
                 xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(amountData);
@@ -73,7 +72,7 @@ app.directive('bdChart', function($window){
                     .attr("transform", "translate(" + (options.margins.left) + ",0)")
                     .call(yAxis);
 
-                temp = startTime;
+                temp = maxTime;
                 var lineGen = d3.svg.line()
                     .x(function (d, i) {
                         return xScale(i);
@@ -92,17 +91,36 @@ app.directive('bdChart', function($window){
             }
         };
 
-        scope.$watch('x', scope.redraw);
-        scope.$watch('y', scope.redraw);
-        scope.$watch('options', scope.setSvgSize);
+        /*
+        scope.$watchGroup(['x', 'y', 'data'], function() {
+          if (scope.x && scope.y) {
+            scope.draw(); 
+          }
+        });*/
+
+        scope.$watch('x', function() {
+          if (scope.x) {
+            draw(); 
+          }
+        }, true); //objectEquality == true
+
+        scope.$watch('y', function() {
+          if (scope.y) {
+            draw(); 
+          }
+        }, true); //objectEquality == true
+
+
+/*
+        scope.$watch('options', setSvgSize);
 
         scope.$watch(function () {
             return angular.element($window)[0].innerWidth;
         }, function () {
-            scope.redraw();
+            draw();
         });
-
-        scope.initialize();
+*/
+        initialize();
     };
 
     return directive;

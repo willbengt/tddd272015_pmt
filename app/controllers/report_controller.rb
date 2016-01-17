@@ -3,7 +3,7 @@ class ReportController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    if Project.where(params[:project]).authProjectMember?(params[:user], params[:token]) then
+    if Project.where(params[:project]).first.authProjectMember?(params[:user], params[:token]) then
       @project = Project.where(params[:project]).first
       return render json: @project.timereports
     end
