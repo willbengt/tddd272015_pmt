@@ -59,12 +59,12 @@ function($scope, $filter, $timeout, User, Project, Membership) {
     });
   };
 
-  $scope.saveUser = function(elementData, elementId) {
+  $scope.saveUser = function(elementData, userData) {
     var user = new User();
     var membership = new Membership();
 
-    angular.extend(user, {id: elementId, name: elementData.name, email: elementData.email});
-    angular.extend(membership, {user: elementId, userProjects: elementData.userProjects});
+    angular.extend(user, {id: userData.id, name: userData.name, email: userData.email});
+    angular.extend(membership, {user: userData.id, userProjects: elementData.userProjects});
     user.$update();
     membership.$update();
   };
