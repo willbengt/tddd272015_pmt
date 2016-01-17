@@ -1,15 +1,11 @@
 app.directive('bdChart', function(/*$window*/){
-    // angular.module("d3.directives", []).directive("barChart", function() {
     var directive = {};
 
     directive.restrict = 'AE';
     directive.scope = {
-        //x: '=', //?????????????????????????????????????????? Vart används scope.x?
         y: '=',
-        time: '='  //??????????????????????????????????????????????????????Behövs detta?
+        time: '='
     };
-    //options anvönds om man vill kunna skicka in egna options-parameterar
-    //x används kanske inte längre...
 
     directive.link = function(scope, elements, attr) {
         scope.svg = null;
@@ -25,7 +21,7 @@ app.directive('bdChart', function(/*$window*/){
                     bottom: 20,
                     left: 50
                 }
-            }); //??????????????????????????????????????????????????????Behövs detta?
+            });
         };
 
         initialize = function() {
@@ -42,7 +38,6 @@ app.directive('bdChart', function(/*$window*/){
             scope.svg.attr('viewBox','0 0 '+ (options.width + options.margins.left + options.margins.right) + ' ' +
             (options.height + options.margins.top + options.margins.bottom))
                 .attr('preserveAspectRatio','xMinYMin');
-            //draw();
         };
 
         draw = function() {
@@ -56,13 +51,11 @@ app.directive('bdChart', function(/*$window*/){
 
             if (yValues) {
                 if (yValues[0] != 0) {
-                    yValues.unshift(0)   //??????????????????????Varför detta?
-                    //För att den första delen alltid ska utgå från "starting-time" på y-axeln.
+                    yValues.unshift(0)
                 }
 
                 xScale = d3.scale.linear().range([options.margins.left, options.width - options.margins.right]).domain([0,amountData-1]),
                 yScale = d3.scale.linear().range([options.height - options.margins.top, options.margins.bottom]).domain([0, maxTime]),
-
 
                 xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(amountData);
                 yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(10);
@@ -87,30 +80,17 @@ app.directive('bdChart', function(/*$window*/){
 
                 scope.svg.append('svg:path')
                     .attr('d', lineGen(yValues))
-                    .attr('stroke', 'red')
+                    .attr('stroke', 'blue')
                     .attr('stroke-width', 2)
                     .attr('fill', 'none');
             }
         };
 
-        /*
-        scope.$watchGroup(['x', 'y', 'data'], function() {
-          if (scope.x && scope.y) {
-            scope.draw(); 
-          }
-        });*/
-
-        /*scope.$watch('x', function() {
-          if (scope.x) {
-            draw(); 
-          }
-        }, true); //objectEquality == true*/
-
         scope.$watch('y', function() {
           if (scope.y) {
             draw(); 
           }
-        }, true); //objectEquality == true
+        }, true);
 
         initialize();
     };
