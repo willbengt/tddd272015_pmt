@@ -3,48 +3,65 @@ class ReportController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    puts 'index has been initiated'
-    render json: Timereport.all
+    if Project.where(params[:project]).authProjectMember?(params[:user], params[:token]) then
+      @project = Project.where(params[:project]).first
+      return render json: @project.timereports
+    end
+
+    return render nothing: true
   end
+
 
   def create
-    puts '-----------create-----------'
-    @user = User.where(:name => params[:user]).first
-    @timereport = @user.(Project.where(params[:project])).timereports.create(name: params[:name], time: params[:time], text: params[:text])
-    # @report = Timereport.create(name: params[:name], time: params[:time], text: params[:text])
-    # id = Timereport.last.id
-    # render :json => {id: id}
-    render :json => {id: @timereport.id}
+    puts '-----------timereport#create-----------'
+    if Project.where(params[:project]).first.authProjectMember?(params[:user], params[:token]) then
+      @timereport = Project.find(params[:project]).timereports.create(name: params[:name], time: params[:time], text: params[:text])
+      return render :json => {id: @timereport.id}
+    end
+
+    return render nothing: true
   end
 
-  # def create
-  #   puts '-----------create-----------'
-  #   @report = Timereport.create(name: params[:name], project: params[:project], time: params[:time], text: params[:text])
-  #   id = Timereport.last.id
-  #   render :json => {id: id}
-  # end
 
   def show
-    puts '-----------show-----------'
-    @report = Timereport.find(params[:id])
-    render json: @report
+    puts '-----------timereport#show-----------'
+    @project = Project.find(params[:id])
+
+    if Project.where(params[:id]).first.authProjectMember?(params[:user], params[:token]) then
+      return render json: @project.timereports
+    end
+
+      return render nothing: true
   end
+
 
   def update
-    puts '-----------report#update-----------'
-    Timereport.find(params[:id]).update(name: params[:name], project: params[:project], time: params[:time], text: params[:text])
-    render nothing: true
+    puts '-----------timereport#update-----------'
+    if Project.where(params[:project]).first.authProjectMember?(params[:user], params[:token]) then
+      Timereport.find(params[:id]).update(name: params[:name], time: params[:time], text: params[:text])
+    end
+
+    return render nothing: true
   end
 
+
   def get
-    puts params[:id]
-    @report = Timereport.find(params[:id])
-    render :json => @report
+    if Project.where(params[:project]).authProjectMember?(params[:user], params[:token]) then
+      @report = Timereport.find(params[:id])
+      return render :json => @report
+    end
+
+    return render nothing: true
   end
+
 
   def destroy
     puts '-----------destroy-----------'
-    @report = Timereport.find(params[:id]).destroy
-    render nothing: true
+    if Project.where(params[:project]).first.authProjectMember?(params[:user], params[:token]) then
+      Timereport.find(params[:id]).destroy
+      return render nothing: true
+    end
+
+    return render nothing:  true
   end
 end

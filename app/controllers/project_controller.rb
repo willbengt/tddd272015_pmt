@@ -24,7 +24,7 @@ class ProjectController < ApplicationController
   def show
     puts '-----------project#show-----------'
     @user = User.where(:name => params[:user]).first
-    @user.projects.find(params[:id]) if @user.authenticated?(params[:token])
+    @project = @user.projects.find(params[:id]) if @user.authenticated?(params[:token])
     render json: @project
   end
 
