@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160108145743) do
+ActiveRecord::Schema.define(version: 20160114153053) do
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
@@ -26,9 +26,14 @@ ActiveRecord::Schema.define(version: 20160108145743) do
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.float    "time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+    t.integer  "timereport_id"
   end
+
+  add_index "projects", ["timereport_id"], name: "index_projects_on_timereport_id"
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
 
   create_table "reports", force: :cascade do |t|
     t.string   "name"
@@ -44,7 +49,10 @@ ActiveRecord::Schema.define(version: 20160108145743) do
     t.text     "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "project_id"
   end
+
+  add_index "timereports", ["project_id"], name: "index_timereports_on_project_id"
 
   create_table "tokens", force: :cascade do |t|
     t.string   "access_token"
@@ -53,7 +61,10 @@ ActiveRecord::Schema.define(version: 20160108145743) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "email"
+    t.integer  "user_id"
   end
+
+  add_index "tokens", ["user_id"], name: "index_tokens_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -61,6 +72,11 @@ ActiveRecord::Schema.define(version: 20160108145743) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "project"
+    t.integer  "project_id"
+    t.integer  "token_id"
   end
+
+  add_index "users", ["project_id"], name: "index_users_on_project_id"
+  add_index "users", ["token_id"], name: "index_users_on_token_id"
 
 end

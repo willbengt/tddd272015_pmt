@@ -7,8 +7,7 @@ gem 'tzinfo-data'
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-
-# maybe this will install GEM for mysql??? We'll see
+#install mysql2 GEM
 #gem 'mysql2', '~> 0.4.2'
 gem 'mysql2', '~> 0.3.20'
 # Use SCSS for stylesheets
