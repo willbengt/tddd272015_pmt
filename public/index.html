@@ -68,18 +68,16 @@
                 </button>
             </div>
 
-            <div class="collapse navbar-collapse" id="menu-navbar-collapse">
+            <div class="collapse navbar-collapse" id="menu-navbar-collapse" ng-controller ="LoginController">
                 <ul class="nav navbar-nav">
                     <li ng-class="{active: ($state.current.name == 'home')}"><a href="#/home" ng-if="isLogedIn()">Home</a></li>
                     <li ng-class="{active: ($state.current.name == 'users')}"><a href="#/users" ng-if="isLogedIn()">Users</a></li>
                     <li ng-class="{active: (($state.current.name == 'projects') || ($state.current.name == 'project'))}" ng-if="isLogedIn()"><a href="#/projects">Projects</a></li>
                 </ul>
-                <div ng-controller ="LoginController">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="auth/google_oauth2" ng-if="!isLogedIn()" >Login</a></li>
-                        <li><a href="#/home" ng-click="logout()" ng-if="isLogedIn()">Logout</a></li>
-                    </ul>
-                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="auth/google_oauth2" ng-if="!isLogedIn()" >Login</a></li>
+                    <li><a href="#/home" ng-click="logout()" ng-if="isLogedIn()">Logout</a></li>
+                </ul>
             </div>
         </div>
     </nav>
