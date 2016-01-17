@@ -1,34 +1,22 @@
 app.controller('ProjectController', ['$scope', '$rootScope', '$stateParams', '$filter', 'Report', 'Project', 
 function($scope, $rootScope, $stateParams, $filter, Report, Project) {
-  
-  var projectId = $stateParams.projectId;
 
   loadReports = function() {
     Report.query(function(response) {
-        $rootScope.reports = $filter('filter')(response, {project: projectId});
-        $scope.tableInformation = response;
-        $scope.set.time = [];
+        $rootScope.reports = $filter('filter')(response, {project: $stateParams.projectId});
+        var reports = $rootScope.reports;
+        $scope.set.y = [];
         $scope.set.x = [];
-        _.times($scope.tableInformation.length, function (n) {
-          if ($scope.tableInformation[n].project == projectId) {
-            $scope.set.time.push($scope.tableInformation[n].time);
+        _.times(reports.length, function (n) {
+            $scope.set.y.push(reports[n].time);
             $scope.set.x.push(n);
-          }
         });
     });
   };
 
-
-  $scope.init = function() {
-    $scope.project = Project.get({id:projectId}, function(resource) {
-      $scope.prjtime = resource.time;
-      loadReports();
-    });
-
-  };
-
         $scope.init = function() {
-            $scope.project = Project.get({id:projectId,
+            $scope.project = Project.get({
+                    id: $stateParams.projectId,
                     user: window.localStorage.user_name.slice(1, -1),
                     token: window.localStorage.access_token.slice(1, -1)},
                 function(resource) {
@@ -39,7 +27,7 @@ function($scope, $rootScope, $stateParams, $filter, Report, Project) {
 
         $scope.saveReport = function(elementData, elementId) {
             var report = new Report();
-            angular.extend(report, {id: elementId, project: projectId}, elementData);
+            angular.extend(report, {id: elementId, project: $stateParams.projectId}, elementData);
             report.$update();
         };
 
@@ -58,7 +46,7 @@ function($scope, $rootScope, $stateParams, $filter, Report, Project) {
         };
 
         $scope.set = {
-            time: [],
+            y: [],
             x: []
         };
     }]);
