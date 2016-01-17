@@ -37,10 +37,10 @@ angular.module('TimeReportApp')
            //LOL = gapi.auth.getToken();
            ////console.log(LOL);
            $scope.user = Authenticate.get({id:window.localStorage.userName, token:window.localStorage.accessToken}, function(response) {
-               console.log("success (GET http://127.0.0.1:3000/api/user/" + userId + ")");
+               console.log("success (GET http://tddd27-timereportapp.rhcloud.com/api/user/" + userId + ")");
                return response;
            }, function(error) {
-               console.log("error (GET http://127.0.0.1:3000/api/user/" + userId + ")");
+               console.log("error (GET http://tddd27-timereportapp.rhcloud.com/api/user/" + userId + ")");
            });
         };
 

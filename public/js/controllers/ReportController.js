@@ -16,9 +16,9 @@ angular.module('TimeReportApp')
             Project.query().$promise.then(
                 function(response) {
                     $scope.projects = response;
-                    console.log("success loadProjects (GET http://localhost:3000/project)");
+                    console.log("success loadProjects (GET http://tddd27-timereportapp.rhcloud.com/project)");
                 }, function(error) {
-                    console.log("error loadProjects (GET http://localhost:3000/project)");
+                    console.log("error loadProjects (GET http://tddd27-timereportapp.rhcloud.com/project)");
                 }
             );
         };
@@ -62,9 +62,9 @@ angular.module('TimeReportApp')
             $scope.tableInformation.splice(rowIndex, 1);
             $scope.tempReport.$delete({id: reportId }).then(
                 function(response) {
-                    console.log("success removeReport (DELETE http://localhost:3000/report/" + response.id + ")");
+                    console.log("success removeReport (DELETE http://tddd27-timereportapp.rhcloud.com/report/" + response.id + ")");
                 }, function(error) {
-                    console.log("error removeReoprt (DELETE http://localhost:3000/report/" + error.id + ")");
+                    console.log("error removeReoprt (DELETE http://tddd27-timereportapp.rhcloud.com/report/" + error.id + ")");
                 }
             );
             $scope.fetchData();
@@ -80,9 +80,9 @@ angular.module('TimeReportApp')
 
             $scope.tempReport.$save($scope.inserted).then(
                 function(response) {
-                    console.log("success addReport (POST http://localhost:3000/report/" + response.id + ")");
+                    console.log("success addReport (POST http://tddd27-timereportapp.rhcloud.com/report/" + response.id + ")");
                 }, function(error) {
-                    console.log("error addReport (POST http://localhost:3000/report/" + error.id + ")");
+                    console.log("error addReport (POST http://tddd27-timereportapp.rhcloud.com/report/" + error.id + ")");
                 });
 
             $scope.fetchData(); // If I dont fetch data here I cannot delete it if there is no new fetch.
@@ -91,9 +91,9 @@ angular.module('TimeReportApp')
 
         $scope.saveReport = function(data, id) {
             return $http.put('/report/' + id, data).success(function(response) {
-                console.log("success updateReport (PUT http://localhost:3000/report/" + id + ")");
+                console.log("success updateReport (PUT http://tddd27-timereportapp.rhcloud.com/report/" + id + ")");
             }).error(function() {
-                console.log("error updateReport (PUT http://localhost:3000/report/" + id + ")");
+                console.log("error updateReport (PUT http://tddd27-timereportapp.rhcloud.com/report/" + id + ")");
             });
         };
 
