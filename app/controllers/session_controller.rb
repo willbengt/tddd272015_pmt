@@ -26,10 +26,10 @@ class SessionController < ApplicationController
 #      redirect_to('http://localhost:3000?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
   end
 
-#  def update
-#    puts @token = User.where(name: params[:user]).first.token
-#    @token.refresh!
-#    render JOSN: @token
-#  end
+  def update
+    puts @token = User.where(name: params[:user]).first.token
+    @token.refresh!
+    render JSON: @token
+  end
 
 end
