@@ -9,20 +9,10 @@ class ReportController < ApplicationController
 
   def create
     puts '-----------create-----------'
-    @user = User.where(:name => params[:user]).first
-    @timereport = @user.(Project.where(params[:project])).timereports.create(name: params[:name], time: params[:time], text: params[:text])
-    # @report = Timereport.create(name: params[:name], time: params[:time], text: params[:text])
-    # id = Timereport.last.id
-    # render :json => {id: id}
-    render :json => {id: @timereport.id}
+    @report = Timereport.create(name: params[:name], project: params[:project], time: params[:time], text: params[:text])
+    id = Timereport.last.id
+    render :json => {id: id}
   end
-
-  # def create
-  #   puts '-----------create-----------'
-  #   @report = Timereport.create(name: params[:name], project: params[:project], time: params[:time], text: params[:text])
-  #   id = Timereport.last.id
-  #   render :json => {id: id}
-  # end
 
   def show
     puts '-----------show-----------'
