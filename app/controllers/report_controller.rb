@@ -31,7 +31,7 @@ class ReportController < ApplicationController
       return render json: @project.timereports
     end
 
-      return render nothing: true
+    return render nothing: true
   end
 
 

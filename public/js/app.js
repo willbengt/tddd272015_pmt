@@ -11,12 +11,6 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
                 controller: 'LoginController'
             })
 
-            .state('reports', {
-                url: '/reports',
-                templateUrl: '/views/reports.html',
-                controller: 'ReportController'
-            })
-
             .state('users', {
                 url: '/users',
                 templateUrl: '/views/users.html',

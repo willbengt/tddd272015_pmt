@@ -27,9 +27,9 @@ class SessionController < ApplicationController
 
 
 
-    redirect_to('http://tddd27-timereportapp.rhcloud.com?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
+    # redirect_to('http://tddd27-timereportapp.rhcloud.com?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
 
-#      redirect_to('http://localhost:3000?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
+     redirect_to('http://localhost:3000?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
   end
 
   def update

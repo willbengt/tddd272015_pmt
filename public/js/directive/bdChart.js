@@ -1,4 +1,4 @@
-app.directive('bdChart', function(/*$window*/){
+app.directive('bdChart', function(){
     var directive = {};
 
     directive.restrict = 'AE';
