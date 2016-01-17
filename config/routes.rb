@@ -61,7 +61,6 @@ Rails.application.routes.draw do
   # automatically creates routes for CRUD operations for ReportController
   # resources :report
 
-  get '/new', to: 'session#new'
   get '/auth/:provider/callback', to: 'session#create'
 
   get 'api/reports', to: 'report#index'

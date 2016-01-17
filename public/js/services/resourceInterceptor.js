@@ -3,14 +3,12 @@ angular.module('TimeReportApp')
 
 .factory('ResourceInterceptor', ['Session', function(Session) {
 
-//  var rootUrl = "http://localhost:3000";
-//  var rootUrl = "http://127.0.0.1:3000/";
     var rootUrl = "http://tddd27-timereportapp.rhcloud.com"
 
     return {
         request: function (config) {
             //Session.expired_token();
-            console.log(config)
+            //console.log(config)
             return config
 
         },
