@@ -4,10 +4,10 @@ app.directive('bdChart', function($window){
 
     directive.restrict = 'AE';
     directive.scope = {
-        x: '=?',
-        y: '=bdChart',
-        startTime: '=projecttime',
-        options: '=?'
+        x: '=', //?????????????????????????????????????????? Vart används scope.x?
+        y: '=',
+        time: '=',
+        options: '=?'  //??????????????????????????????????????????????????????Behövs detta?
     };
 
     directive.link = function(scope, elements, attr) {
@@ -24,7 +24,7 @@ app.directive('bdChart', function($window){
                     bottom: 20,
                     left: 50
                 }
-            }, scope.options || { });
+            }, scope.options || { }); //??????????????????????????????????????????????????????Behövs detta?
         };
 
         scope.initialize = function() {
@@ -47,7 +47,7 @@ app.directive('bdChart', function($window){
         scope.redraw = function() {
             scope.svg.selectAll('*').remove();
 
-            var x, y, xAxis, yAxis, dataset, options = scope.getOptions(), yValues = scope.y, xScale, yScale, startTime = scope.startTime, temp;
+            var x, y, xAxis, yAxis, dataset, options = scope.getOptions(), yValues = scope.y, xScale, yScale, maxTime = scope.time, temp;
 
             var amountData = yValues.length
             console.log(yValues)
@@ -60,7 +60,7 @@ app.directive('bdChart', function($window){
                 }
 
                 xScale = d3.scale.linear().range([options.margins.left, options.width - options.margins.right]).domain([0,amountData-1]),
-                yScale = d3.scale.linear().range([options.height - options.margins.top, options.margins.bottom]).domain([0, startTime]),
+                yScale = d3.scale.linear().range([options.height - options.margins.top, options.margins.bottom]).domain([0, maxTime]),
 
 
                 xAxis = d3.svg.axis().scale(xScale).orient("bottom").ticks(amountData);
@@ -73,7 +73,7 @@ app.directive('bdChart', function($window){
                     .attr("transform", "translate(" + (options.margins.left) + ",0)")
                     .call(yAxis);
 
-                temp = startTime;
+                temp = maxTime;
                 var lineGen = d3.svg.line()
                     .x(function (d, i) {
                         return xScale(i);
