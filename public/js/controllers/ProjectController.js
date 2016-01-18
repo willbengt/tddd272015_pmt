@@ -39,7 +39,6 @@ angular.module('TimeReportApp')
 
             $scope.saveReport = function(elementData, elementId) {
                 var report = new Report();
-                console.log('ElementID: ' + elementId);
                 angular.extend(report, {
                     id: elementId,
                     project: projectId,
@@ -70,7 +69,6 @@ angular.module('TimeReportApp')
                     user: window.localStorage.user_name.slice(1, -1),
                     token: window.localStorage.access_token.slice(1, -1)
                 }, function(response) {
-                    console.log(response);
                     $scope.inserted.id = response.id;
                     $scope.reports.push($scope.inserted);
                 });
