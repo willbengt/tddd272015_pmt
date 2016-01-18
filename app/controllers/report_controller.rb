@@ -26,6 +26,7 @@ class ReportController < ApplicationController
   def show
     puts '-----------timereport#show-----------'
     if Project.find(params[:id]).authProjectMember?(params[:user], params[:token]) then
+      @project = Project.find(params[:id])
       return render json: @project.timereports
     end
 
