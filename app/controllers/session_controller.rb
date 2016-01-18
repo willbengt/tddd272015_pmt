@@ -56,7 +56,7 @@ class SessionController < ApplicationController
     end
 
 #    redirect_to('http://localhost:3000?' + @token + '&' + @email.split("@").first + '&' + @expires_at.to_s)
-    redirect_to('http://tddd27-timereportapp.rhcloud.com/?' + @token + '&' + @email.split("@").first + '&' + @expires_at.to_s)
+    redirect_to('http://tddd27-timereportapp.rhcloud.com?' + @token + '&' + @email.split("@").first + '&' + @expires_at.to_s)
 
   end
 
