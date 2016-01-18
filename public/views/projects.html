@@ -11,12 +11,12 @@
     </thead>
     <tr ng-repeat="project in projects">
       <td>
-        <span editable-text="project.name" e-name="name" e-form="rowform" onbeforesave="checkName($data)">
+        <span editable-text="project.name" e-name="name" e-form="rowform" onbeforesave="validateName($data)">
           <a href="#/project/{{project.id}}">{{project.name}}</a>
         </span>
       </td>
       <td>
-        <span editable-text="project.time" e-name="time" e-form="rowform" onbeforesave="checkTime($data)">
+        <span editable-text="project.time" e-name="time" e-form="rowform" onbeforesave="validateTime($data)">
           {{project.time}}
         </span>
       </td>

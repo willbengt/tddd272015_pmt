@@ -4,19 +4,13 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
         var memberships = [];
         var selectedProjects = [];
 
-        $scope.checkName = function(data) {
+        $scope.validateName = function(data) {
             if (!data) {return "Name is required";}
         };
 
-        $scope.checkTime = function(data) {
-            if (!data) {
-              return "Time is required";
-            }
-            
-            var time = parseFloat(data);   
-            if (isNaN(time) || time < 0) {
-              return "The time must be a number greater or equal to zero"; 
-            }
+        $scope.validateTime = function(data) {
+            if (!data) {return "Time is required";} 
+            if (isNaN(parseFloat(data)) || parseFloat(data) < 0) {return "The time must be a number greater or equal to zero";}
         };
 
         $scope.init = function() {

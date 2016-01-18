@@ -36,6 +36,14 @@ angular.module('TimeReportApp')
                     });
             };
 
+            $scope.validateName = function(data) {
+                if (!data) {return "Title is required";}
+            };
+
+            $scope.validateTime = function(data) {
+                if (!data) {return "Time is required";} 
+                if (isNaN(parseFloat(data)) || parseFloat(data) < 0) {return "The time must be a number greater or equal to zero";}
+            };
 
             $scope.saveReport = function(elementData, elementId) {
                 var report = new Report();
