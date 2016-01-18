@@ -40,19 +40,32 @@ angular.module('TimeReportApp')
                 if (!data) {return "Title is required";}
             };
 
-            $scope.validateTime = function(data) {
-                if (!data) {return "Time is required";} 
-                if (isNaN(parseFloat(data)) || parseFloat(data) < 0) {return "The time must be a number greater or equal to zero";}
+            $scope.validateTime = function(newData, oldData) {
+                if (!newData) {return "Time is required";} 
+                if (isNaN(parseFloat(newData)) || parseFloat(newData) < 0) {return "The time must be a number greater or equal to zero";}
+
+                var oldTotalTime = 0;
+
+                for (var i = 0;i < $scope.y.length; i++) {
+                    oldTotalTime += parseFloat($scope.y[i]);
+                }
+
+                var newTotalTime = oldTotalTime + parseFloat(newData) - parseFloat(oldData ? oldData : 0);
+
+                if(newTotalTime > $scope.project.time) {
+                    return "Total reports time exceeding max project time";
+                }
             };
 
-            $scope.saveReport = function(elementData, elementId) {
+            $scope.saveReport = function(newData, oldData) {
+
                 var report = new Report();
                 angular.extend(report, {
-                    id: elementId,
+                    id: oldData.id,
                     project: projectId,
                     user: window.localStorage.user_name.slice(1, -1),
                     token: window.localStorage.access_token.slice(1, -1)
-                }, elementData);
+                }, newData);
                 report.$update(function(response) {
                     updateChartData();
                 });

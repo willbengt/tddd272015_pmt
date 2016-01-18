@@ -19,7 +19,7 @@
             </span>
           </td>
           <td>
-            <span editable-text="report.time" e-name="time" e-form="rowform" onbeforesave="validateTime($data)">
+            <span editable-text="report.time" e-name="time" e-form="rowform" onbeforesave="validateTime($data, report.time)">
               {{report.time | number : 2}}
             </span>
           </td>          
@@ -29,7 +29,7 @@
             </span>
           </td> 
           <td>
-            <form editable-form name="rowform" onbeforesave="saveReport($data, report.id)" ng-show="rowform.$visible" shown="inserted == report" class="form-buttons form-inline">
+            <form editable-form name="rowform" onbeforesave="saveReport($data, report)" ng-show="rowform.$visible" shown="inserted == report" class="form-buttons form-inline">
               <button type="submit" class="btn btn-success">
                 <span class="glyphicon glyphicon-ok"></span> 
               </button>
