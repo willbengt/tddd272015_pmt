@@ -1,4 +1,3 @@
-
 angular.module('TimeReportApp')
 
     .factory('Report', function($resource) {
