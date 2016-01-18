@@ -4,6 +4,20 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
         var memberships = [];
         var selectedProjects = [];
 
+        $scope.checkName = function(data) {
+            if (!data) {return "Name is required";}
+        };
+
+        $scope.checkTime = function(data) {
+            if (!data) {
+              return "Time is required";
+            }
+            
+            var time = parseFloat(data);   
+            if (isNaN(time) || time < 0) {
+              return "The time must be a number greater or equal to zero"; 
+            }
+        };
 
         $scope.init = function() {
             $scope.projects = Project.query({ user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)});
