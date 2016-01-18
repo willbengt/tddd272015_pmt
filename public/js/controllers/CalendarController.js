@@ -1,4 +1,7 @@
-app.controller('CalendarController', ['$scope', '$rootScope', '$stateParams', 'Report',
+
+angular.module('TimeReportApp')
+
+    .controller('CalendarController', ['$scope', '$rootScope', '$stateParams', 'Report',
     function($scope, $rootScope, $stateParams, Report){
 
         var CLIENT_ID = '711755136597-022n0vgnc4bhgot40ct6ghim4ge594vc.apps.googleusercontent.com';
