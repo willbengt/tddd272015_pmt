@@ -1,7 +1,8 @@
 # Project description
 Project Management Tool as part of the course TDDD27 Advanced webprogramming at 
 Linkoping university during the spring of 2015. The ambition of the project is 
-to be graded 5.
+to be graded 5. The application can be found 
+[here](http://tddd27-timereportapp.rhcloud.com/).
 
 # Screencast
 - The screencast can be found here:
@@ -19,8 +20,10 @@ keep track of their project’s status.
 
 ## Core functions
 - Timereporting
-- Authentication via Google to fetch your personal calendar as time reports and to secure that you are you!
-- Visualization of progress and different metrics for the project, e.g. burn down chart
+- Authentication via Google to fetch your personal calendar as time reports and 
+to secure that you are you!
+- Visualization of progress and different metrics for the project, e.g. burn 
+down chart
 
 # Technological specification
 ## Client-side framework
@@ -38,3 +41,7 @@ Omniauth/OAuth2
 ## Data and user management
 SQLite in development
 MySQL in production
+
+# Testing
+[Testing session](http://tddd27-timereportapp.rhcloud.com/test/auth)
+(A testuser is created without the need of any authentication)
