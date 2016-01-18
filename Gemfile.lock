@@ -105,6 +105,7 @@ GEM
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    mysql2 (0.3.20-x86-mingw32)
     nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
     nokogiri (1.6.7.1-x86-mingw32)
@@ -215,6 +216,7 @@ DEPENDENCIES
   google-api-client (~> 0.9.pre1)
   jbuilder (~> 2.0)
   jquery-rails
+  mysql2 (~> 0.3.20)
   omniauth (~> 1.2.2)
   omniauth-google-oauth2
   rack (= 1.6.0)
