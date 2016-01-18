@@ -3,6 +3,14 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
 
         var selectedProjects = [];
 
+        $scope.validateName = function(data) {
+            if (!data) {return "Name is required";}
+        };
+
+        $scope.validateTime = function(data) {
+            if (!data) {return "Time is required";} 
+            if (isNaN(parseFloat(data)) || parseFloat(data) < 0) {return "The time must be a number greater or equal to zero";}
+        };
 
         $scope.init = function() {
             Project.query({user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)},
