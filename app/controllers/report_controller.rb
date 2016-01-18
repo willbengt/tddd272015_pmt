@@ -14,9 +14,6 @@ class ReportController < ApplicationController
 
   def create
     puts '-----------timereport#create-----------'
-    puts params[:project]
-    puts Project.find(params[:project]).id
-
     if Project.find(params[:project]).authProjectMember?(params[:user], params[:token]) then
       @timereport = Project.find(params[:project]).timereports.create(name: params[:name], time: params[:time], text: params[:text])
       return render :json => {id: @timereport.id}
@@ -28,8 +25,6 @@ class ReportController < ApplicationController
 
   def show
     puts '-----------timereport#show-----------'
-    @project = Project.find(params[:id])
-
     if Project.find(params[:id]).authProjectMember?(params[:user], params[:token]) then
       return render json: @project.timereports
     end
