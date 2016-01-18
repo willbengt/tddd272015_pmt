@@ -87,6 +87,8 @@ Rails.application.routes.draw do
   get 'api/authenticate/:id', to: 'session#authenticate'
   get 'api/session/', to: 'session#update'
 
+  get 'test/auth', to: 'session#test'
+
   #get '/project', to: 'project#show'
   #post '/project', to: 'project#create'
   #put '/project/:id', to: 'project#update'
