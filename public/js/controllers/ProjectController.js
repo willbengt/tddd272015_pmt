@@ -20,10 +20,11 @@ angular.module('TimeReportApp')
             }
 
             $scope.init = function() {
-                $scope.project = Project.get({id:projectId,
+                Project.get({id:projectId,
                         user: window.localStorage.user_name.slice(1, -1),
                         token: window.localStorage.access_token.slice(1, -1)},
                     function(resource) {
+                        $scope.project = resource;
                         Report.query({
                                 id:projectId,
                                 user: window.localStorage.user_name.slice(1, -1),

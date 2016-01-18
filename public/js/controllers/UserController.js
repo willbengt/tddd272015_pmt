@@ -65,6 +65,7 @@ function($scope, $filter, $timeout, User, Project, Membership) {
 
     angular.extend(user, {id: userData.id, name: userData.name, email: userData.email});
     angular.extend(membership, {user: userData.id, userProjects: elementData.userProjects});
+      console.log(elementData.userProjects[0]);
     user.$update();
     membership.$update();
   };

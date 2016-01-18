@@ -9,9 +9,11 @@ class Project < ActiveRecord::Base
   def authProjectMember?(inUser, inToken)
     puts '----- authProjectMember? -----'
     if self.users.where(name: inUser).exists? && (User.where(name: inUser).first).authenticated?(inToken) then
+      puts true
       return true
     end
 
+    puts false
     return false
     end
 end

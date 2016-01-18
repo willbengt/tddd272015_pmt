@@ -1,14 +1,14 @@
 app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'Membership', 'Session',
     function($scope, $filter, Project, User, Membership, Session) {
 
-        var memberships = [];
         var selectedProjects = [];
 
 
         $scope.init = function() {
-            $scope.projects = Project.query({ user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)});
-            $scope.users = User.query();
-            memberships = Membership.query();
+            Project.query({user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)},
+            function(response){
+                $scope.projects = response;
+            });
             $scope.userName = window.localStorage.user_name.slice(1, -1)
         };
 

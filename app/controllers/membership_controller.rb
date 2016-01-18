@@ -17,6 +17,11 @@ class MembershipController < ApplicationController
     puts '-----------membership#update-----------'
 
     @memberships = Membership.where(user_id: params[:userId])
+    puts @memberships
+    # puts Project.find(1).users
+    # puts Project.find(2).users
+    # puts Project.find(4).users
+    # puts User.find(1).projects
 
     if @memberships
       puts @memberships.count
@@ -32,6 +37,11 @@ class MembershipController < ApplicationController
         Membership.create(user_id: params[:userId], project_id: project)
       end 
     end
+
+    # puts Project.find(1).users
+    # puts Project.find(2).users
+    # puts Project.find(4).users
+    # puts User.find(1).projects
   
     render nothing: true
   end
