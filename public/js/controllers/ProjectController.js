@@ -8,9 +8,10 @@ angular.module('TimeReportApp')
             var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
             var projectId = $stateParams.projectId;
             $scope.reports = [];
+            $scope.totalTime = 0;
 
 
-            updateChartData = function() {
+            updateChartDataAndTotalTime = function() {
                 $scope.y = [];
                 var reports = $scope.reports;
 
@@ -38,7 +39,7 @@ angular.module('TimeReportApp')
                             },
                             function(response){
                                 $scope.reports = response;
-                                updateChartData();
+                                updateChartDataAndTotalTime();
                             });
                     });
             };
@@ -51,16 +52,15 @@ angular.module('TimeReportApp')
                 if (!newData) {return "Time is required";} 
                 if (isNaN(parseFloat(newData)) || parseFloat(newData) < 0) {return "The time must be a number greater or equal to zero";}
 
-                var oldTotalTime = 0;
-
-                for (var i = 0;i < $scope.y.length; i++) {
-                    oldTotalTime += parseFloat($scope.y[i]);
-                }
+                var oldTotalTime = $scope.totalTime;
 
                 var newTotalTime = oldTotalTime + parseFloat(newData) - parseFloat(oldData ? oldData : 0);
 
                 if(newTotalTime > $scope.project.time) {
                     return "Total reports time exceeding max project time";
+                }
+                else {
+                  return true;
                 }
             };
 
@@ -74,7 +74,7 @@ angular.module('TimeReportApp')
                     token: window.localStorage.access_token.slice(1, -1)
                 }, newData);
                 report.$update(function(response) {
-                    updateChartData();
+                    updateChartDataAndTotalTime();
                 });
             };
 
@@ -85,7 +85,7 @@ angular.module('TimeReportApp')
                     user: window.localStorage.user_name.slice(1, -1),
                     token: window.localStorage.access_token.slice(1, -1)
                 }, function(response) {
-                    updateChartData();
+                    updateChartDataAndTotalTime();
                 });
             };
 
@@ -169,6 +169,10 @@ angular.module('TimeReportApp')
                 $scope.calEventsFetched = true;
             };
 
+            $scope.eventInvalid = function(duration) {
+                return ($scope.validateTime(duration, 0) == "Total reports time exceeding max project time");
+            }
+
             $scope.addEvent = function(calEvent) {
 
                 calEvent.selected = true;
@@ -191,7 +195,7 @@ angular.module('TimeReportApp')
                         });
                         newReport.$update(function() {
                             $scope.reports.push(newReport);
-                            updateChartData();
+                            updateChartDataAndTotalTime();
                         });
                     });
             }

@@ -117,7 +117,7 @@
               </thead>
               <tbody>
                 <tr ng-repeat="calendarEvent in calendarEvents">
-                  <td><button class="btn btn-success btn-xs" ng-hide="calendarEvent.selected" ng-click="addEvent(calendarEvent)">
+                  <td><button class="btn btn-success btn-xs" ng-hide="calendarEvent.selected" ng-click="addEvent(calendarEvent)" ng-disabled="eventInvalid(calendarEvent.duration)">
                     <span class="glyphicon glyphicon-plus"></span> 
                   </button></td>
                   <td>{{calendarEvent.title}}</td>
