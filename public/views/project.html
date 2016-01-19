@@ -1,66 +1,70 @@
 <div ng-init="init()">
-  <h1>{{project.name}}</h1>
-  <div class="col-xs-7">
-    <h3>Reports</h3>
-    <p>Reported time: <strong>{{totalTime | number:1}}</strong> of <strong>{{project.time | number:1}}</strong> hours.</p>
-    <table class="table table-striped table-condensed table-hover">
-      <thead>
-        <tr>
-          <th class="col-md-2">Title</th>
-          <th class="col-md-1">Time</th>
-          <th class="col-md-3">Comment</th>
-          <th class="col-md-1">Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr data-ng-repeat="report in reports track by $index">
-          <td>
-            <span editable-text="report.name" e-name="name" e-form="rowform" onbeforesave="validateName($data)">
-              {{report.name}}
-            </span>
-          </td>
-          <td>
-            <span editable-text="report.time" e-name="time" e-form="rowform" onbeforesave="validateTime($data, report.time)">
-              {{report.time | number : 2}}
-            </span>
-          </td>          
-          <td>
-            <span editable-text="report.text" e-name="text" e-form="rowform">
-              {{report.text || 'empty' }}
-            </span>
-          </td> 
-          <td>
-            <form editable-form name="rowform" onbeforesave="saveReport($data, report)" ng-show="rowform.$visible" shown="inserted == report" class="form-buttons form-inline">
-              <button type="submit" class="btn btn-success">
-                <span class="glyphicon glyphicon-ok"></span> 
-              </button>
-              <button type="button" ng-click="rowform.$cancel()" class="btn btn-default">
-                <span class="glyphicon glyphicon-share-alt"></span> 
-              </button>
-            </form>
-            <div class="buttons" ng-show="!rowform.$visible">
-              <button class="btn btn-primary" ng-click="rowform.$show()">
-                <span class="glyphicon glyphicon-pencil"></span>
-              </button>
-              <button class="btn btn-danger" ng-click="removeReport(report, $index)">
-                <span class="glyphicon glyphicon-remove"></span> 
-              </button>
-            </div>  
-          </td>
-        </tr>
-    </table>
-    <div class="buttons">
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#importModal">
-        <span class="glyphicon glyphicon-import"></span> 
-      </button>
-      <button class="btn btn-success" ng-click="addReport()">
-        <span class="glyphicon glyphicon-plus"></span> 
-      </button>
+  <div class="container-fluid">
+    <h1>{{project.name}}</h1>
+    <div class="row">
+      <div class="col-md-7">
+        <h3>Reports</h3>
+        <p>Reported time: <strong>{{totalTime | number:1}}</strong> of <strong>{{project.time | number:1}}</strong> hours.</p>
+        <table class="table table-striped table-condensed table-hover">
+          <thead>
+            <tr>
+              <th class="col-md-2">Title</th>
+              <th class="col-md-1">Time</th>
+              <th class="col-md-3">Comment</th>
+              <th class="col-md-1">Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-ng-repeat="report in reports track by $index">
+              <td>
+                <span editable-text="report.name" e-name="name" e-form="rowform" onbeforesave="validateName($data)">
+                  {{report.name}}
+                </span>
+              </td>
+              <td>
+                <span editable-text="report.time" e-name="time" e-form="rowform" onbeforesave="validateTime($data, report.time)">
+                  {{report.time | number : 2}}
+                </span>
+              </td>          
+              <td>
+                <span editable-text="report.text" e-name="text" e-form="rowform">
+                  {{report.text || 'empty' }}
+                </span>
+              </td> 
+              <td>
+                <form editable-form name="rowform" onbeforesave="saveReport($data, report)" ng-show="rowform.$visible" shown="inserted == report" class="form-buttons form-inline">
+                  <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> 
+                  </button>
+                  <button type="button" ng-click="rowform.$cancel()" class="btn btn-default">
+                    <span class="glyphicon glyphicon-share-alt"></span> 
+                  </button>
+                </form>
+                <div class="buttons" ng-show="!rowform.$visible">
+                  <button class="btn btn-primary" ng-click="rowform.$show()">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                  </button>
+                  <button class="btn btn-danger" ng-click="removeReport(report, $index)">
+                    <span class="glyphicon glyphicon-remove"></span> 
+                  </button>
+                </div>  
+              </td>
+            </tr>
+        </table>
+        <div class="buttons">
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#importModal">
+            <span class="glyphicon glyphicon-import"></span> 
+          </button>
+          <button class="btn btn-success" ng-click="addReport()">
+            <span class="glyphicon glyphicon-plus"></span> 
+          </button>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <h3>Burn Down Chart</h3>
+        <bd-chart y="y" time="project.time" class="content"></bd-chart>
+      </div>
     </div>
-  </div>
-  <div class="col-xs-5">
-    <h3>Burn Down Chart</h3>
-    <bd-chart y="y" time="project.time" class="content"></bd-chart>
   </div>
   <div class="modal fade" id="importModal">
     <div class="modal-dialog" role="document">
