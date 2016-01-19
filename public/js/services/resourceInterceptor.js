@@ -1,6 +1,6 @@
 angular.module('TimeReportApp')
 
-    .factory('ResourceInterceptor', ['Session', function(Session) {
+    .factory('ResourceInterceptor', function() {
 
       var rootUrl = "http://tddd27-timereportapp.rhcloud.com"
 
@@ -23,4 +23,4 @@ angular.module('TimeReportApp')
               return data;
           }
       };
-}]);
+});

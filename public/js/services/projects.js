@@ -5,4 +5,3 @@ angular.module('TimeReportApp')
             'update': {method: 'PUT'}
         });
     });
-
