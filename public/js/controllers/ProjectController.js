@@ -17,6 +17,12 @@ angular.module('TimeReportApp')
                 for (var i = 0; i < reports.length; i++) {
                     reports[i].time ? $scope.y.push(reports[i].time) : $scope.y.push(0);
                 };
+
+                $scope.totalTime = 0;
+
+                for (var i = 0;i < $scope.y.length; i++) {
+                    $scope.totalTime += parseFloat($scope.y[i]);
+                }
             }
 
             $scope.init = function() {
