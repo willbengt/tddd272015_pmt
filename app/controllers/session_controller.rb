@@ -24,9 +24,9 @@ class SessionController < ApplicationController
     else
       @t.token.update(access_token: @auth['token'], expires_at: Time.at(@auth['expires_at']).to_datetime)
     end
-      redirect_to('http://tddd27-timereportapp.rhcloud.com?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
-
+    redirect_to('http://tddd27-timereportapp.rhcloud.com?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
     # redirect_to('http://localhost:3000?' + @auth['token'] + '&' + @user['first_name'] + '&' + @auth['expires_at'].to_s)
+
   end
 
   def update
@@ -48,11 +48,8 @@ class SessionController < ApplicationController
       @t = User.create(name: @email.split("@").first, email: @email)
       @t.create_token(
         access_token: @token,
-        #refresh_token: @auth['refresh_token'],
         expires_at: Time.at(@expires_at).to_datetime
       )
-    else
-      #@t.token.update(access_token: @auth['token'], expires_at: Time.at(@auth['expires_at']).to_datetime)
     end
 
 #    redirect_to('http://localhost:3000?' + @token + '&' + @email.split("@").first + '&' + @expires_at.to_s)

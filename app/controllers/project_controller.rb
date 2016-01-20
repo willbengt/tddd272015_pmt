@@ -37,11 +37,6 @@ class ProjectController < ApplicationController
 
   def destroy
     puts '-----------project#delete-----------'
-   # @memberships = Membership.where(project_id: params[:id])
-   # @memberships.each do |membership|
-   #   membership.destroy
-   # end
-
     @project = Project.find(params[:id]).destroy
     render nothing: true
   end
