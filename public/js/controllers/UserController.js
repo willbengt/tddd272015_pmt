@@ -1,85 +1,88 @@
-app.controller('UserController', ['$scope', '$filter', '$timeout', 'User', 'Project', 'Membership', 
-function($scope, $filter, $timeout, User, Project, Membership) {
 
-  var memberships = [];
+angular.module('TimeReportApp')
 
-  findById = function(array, id, attr) {
-    for(var i = 0; i < array.length; i += 1) {
-      if(array[i].id == id) {
-        return (array[i])[attr];
-      }
-    }
-  }
+    .controller('UserController', ['$scope', '$filter', 'User', 'Project', 'Membership', 
+        function($scope, $filter, User, Project, Membership) {
 
-  filterArray = function(array, keyAttr, key, valueAttr) {
-    var values = [];
-    
-    for(var i = 0; i < array.length; i += 1) {
-      if((array[i])[keyAttr] == key) {
-        values.push((array[i])[valueAttr]);
-      }
-    }
-    return values;
-  }
+            var memberships = [];
 
-  $scope.showProjects = function(user) {
-    var selected = [];
-    var project;
+            findById = function(array, id, attr) {
+              for(var i = 0; i < array.length; i += 1) {
+                if(array[i].id == id) {
+                  return (array[i])[attr];
+                }
+              }
+            }
 
-    if(user.projects) {
-      for (var i = 0; i < user.projects.length; i++) {
-        project = findById($scope.projects, user.projects[i], "name"); 
-        selected.push(project);
-      }
-    }
+            filterArray = function(array, keyAttr, key, valueAttr) {
+              var values = [];
+              
+              for(var i = 0; i < array.length; i += 1) {
+                if((array[i])[keyAttr] == key) {
+                  values.push((array[i])[valueAttr]);
+                }
+              }
+              return values;
+            }
 
-    return selected.length ? $filter('orderBy')(selected).join(', ') : 'Not set';
-  }; 
+            $scope.showProjects = function(user) {
+              var selected = [];
+              var project;
 
-  loadUsers = function() {
-    var user = [];
-    $scope.users = [];
+              if(user.projects) {
+                for (var i = 0; i < user.projects.length; i++) {
+                  project = findById($scope.projects, user.projects[i], "name"); 
+                  selected.push(project);
+                }
+              }
 
-    User.query({user: 'admin', token: null}, function(response) {
-      for (var i = 0; i < response.length; i++) {
-        user = response[i];
+              return selected.length ? $filter('orderBy')(selected).join(', ') : 'Not set';
+            }; 
 
-        projects = filterArray(memberships, "user_id", user.id, "project_id");
-        angular.extend(user, {projects: projects});
+            loadUsers = function() {
+              var user = [];
+              $scope.users = [];
 
-        $scope.users.push(user); 
-      }
-    });
-  };
+              User.query({user: 'admin', token: null}, function(response) {
+                for (var i = 0; i < response.length; i++) {
+                  user = response[i];
 
-  $scope.init = function() {
-    $scope.projects = Project.query({user: 'admin', token: null});
-    memberships = Membership.query(function() {
-      loadUsers();
-    });
-  };
+                  projects = filterArray(memberships, "user_id", user.id, "project_id");
+                  angular.extend(user, {projects: projects});
 
-  $scope.saveUser = function(elementData, userData) {
-    var user = new User();
-    var membership = new Membership();
+                  $scope.users.push(user); 
+                }
+              });
+            };
 
-    angular.extend(user, {id: userData.id, name: userData.name, email: userData.email});
-    angular.extend(membership, {user: userData.id, userProjects: elementData.userProjects});
-    user.$update();
-    membership.$update();
-  };
+            $scope.init = function() {
+              $scope.projects = Project.query({user: 'admin', token: null});
+              memberships = Membership.query(function() {
+                loadUsers();
+              });
+            };
 
-  $scope.removeUser = function(user, rowIndex) {
-    $scope.users.splice(rowIndex, 1);
-    user.$delete();
-  };
+            $scope.saveUser = function(elementData, userData) {
+              var user = new User();
+              var membership = new Membership();
 
-  $scope.addUser = function() {
-    $scope.inserted = new User();
+              angular.extend(user, {id: userData.id, name: userData.name, email: userData.email});
+              angular.extend(membership, {user: userData.id, userProjects: elementData.userProjects});
+              user.$update();
+              membership.$update();
+            };
 
-    $scope.inserted.$save(function(response) {
-      $scope.inserted.id = response.id;
-      $scope.users.push($scope.inserted);
-    });
-  };
-}]);
+            $scope.removeUser = function(user, rowIndex) {
+              $scope.users.splice(rowIndex, 1);
+              user.$delete();
+            };
+
+            $scope.addUser = function() {
+              $scope.inserted = new User();
+
+              $scope.inserted.$save(function(response) {
+                $scope.inserted.id = response.id;
+                $scope.users.push($scope.inserted);
+              });
+            };
+        }]);
