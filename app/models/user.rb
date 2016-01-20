@@ -4,12 +4,10 @@ class User < ActiveRecord::Base
   has_one :token
 
   def authenticated?(inToken)
-   if self.token.access_token == inToken then
-     return true
-      # puts self.token.fresh_token
+    if self.token.access_token == inToken then
+      return true
     end
 
-      return false
+    return false
   end
-
 end
