@@ -1,6 +1,6 @@
 angular.module('TimeReportApp')
 
-    .factory('Session', function($window) {
+    .factory('Session', function($window, $location) {
         var user = null;
 
         return {
@@ -18,6 +18,7 @@ angular.module('TimeReportApp')
 
             logOutUser : function(){
                 user = null;
+                window.location.href = '/#/home';
             }
         };
     });

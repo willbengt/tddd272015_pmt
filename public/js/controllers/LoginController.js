@@ -8,7 +8,6 @@ angular.module('TimeReportApp')
 
             $scope.logout = function (){
                 Session.logOutUser();
-                window.location.href = '/#/home';
             };
 
             isNewUser = function() {

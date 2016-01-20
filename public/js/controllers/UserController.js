@@ -1,8 +1,8 @@
 
 angular.module('TimeReportApp')
 
-    .controller('UserController', ['$scope', '$filter', 'User', 'Project', 'Membership', 
-        function($scope, $filter, User, Project, Membership) {
+    .controller('UserController', ['$scope', '$filter', 'User', 'Project', 'Membership', 'Session', 
+        function($scope, $filter, User, Project, Membership, Session) {
 
             var memberships = [];
 
@@ -74,7 +74,9 @@ angular.module('TimeReportApp')
 
             $scope.removeUser = function(user, rowIndex) {
               $scope.users.splice(rowIndex, 1);
-              user.$delete();
+              user.$delete(function() {
+                Session.logOutUser();
+              });
             };
 
             $scope.addUser = function() {
