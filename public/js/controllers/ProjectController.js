@@ -50,7 +50,7 @@ angular.module('TimeReportApp')
 
             $scope.validateTime = function(newData, oldData) {
                 if (!newData) {return "Time is required";} 
-                if (isNaN(parseFloat(newData)) || parseFloat(newData) < 0) {return "The time must be a number greater or equal to zero";}
+                if (isNaN(newData) || parseFloat(newData) < 0) {return "The time must be a number greater or equal to zero";}
 
                 var oldTotalTime = $scope.totalTime;
 
