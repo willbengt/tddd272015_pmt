@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'session#create'
 
-  get 'api/reports', to: 'report#index'
-  post 'api/reports', to: 'report#create'
-  get 'api/reports/:id', to: 'report#show'
-  put 'api/reports/:id', to: 'report#update'
-  delete 'api/reports/:id', to: 'report#destroy'
+  get 'api/reports', to: 'timereport#index'
+  post 'api/reports', to: 'timereport#create'
+  get 'api/reports/:id', to: 'timereport#show'
+  put 'api/reports/:id', to: 'timereport#update'
+  delete 'api/reports/:id', to: 'timereport#destroy'
 
   get 'api/users', to: 'user#index'
   post 'api/users', to: 'user#create'
