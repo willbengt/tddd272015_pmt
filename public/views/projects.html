@@ -15,8 +15,8 @@
         </span>
       </td>
       <td>
-        <span editable-text="project.time" e-name="time" e-form="rowform" onbeforesave="validateTime($data)">
-          {{project.time}}
+        <span editable-text="project.time" e-name="time" e-form="rowform" onbeforesave="validateTime($data, project)">
+          {{project.time | number : 2}}
         </span>
       </td>
       <td>

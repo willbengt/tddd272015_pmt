@@ -33,6 +33,8 @@ function($scope, $filter, $timeout, User, Project, Membership) {
       }
     }
 
+    console.log(selected);
+
     return selected.length ? $filter('orderBy')(selected).join(', ') : 'Not set';
   }; 
 

@@ -21,19 +21,20 @@ angular.module('TimeReportApp')
 
                 $scope.totalTime = 0;
 
-                for (var i = 0;i < $scope.y.length; i++) {
+                for (var i = 0; i < $scope.y.length; i++) {
                     $scope.totalTime += parseFloat($scope.y[i]);
                 }
             }
 
             $scope.init = function() {
-                Project.get({id:projectId,
+                Project.get({
+                        id: projectId,
                         user: window.localStorage.user_name.slice(1, -1),
                         token: window.localStorage.access_token.slice(1, -1)},
                     function(resource) {
                         $scope.project = resource;
                         Report.query({
-                                id:projectId,
+                                id: projectId,
                                 user: window.localStorage.user_name.slice(1, -1),
                                 token: window.localStorage.access_token.slice(1, -1)
                             },

@@ -1,22 +1,40 @@
-app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'Membership', 'Session',
-    function($scope, $filter, Project, User, Membership, Session) {
+app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'Membership', 'Session', 'Report',
+    function($scope, $filter, Project, User, Membership, Session, Report) {
 
         var selectedProjects = [];
+        var reports = [];
 
         $scope.validateName = function(data) {
             if (!data) {return "Name is required";}
         };
 
-        $scope.validateTime = function(data) {
+        $scope.validateTime = function(data, project) {
             if (!data) {return "Time is required";} 
             if (isNaN(parseFloat(data)) || parseFloat(data) < 0) {return "The time must be a number greater or equal to zero";}
+
+            var totalReportedTime = 0;
+
+            for (var i = 0; i < reports.length; i++) {
+                if(reports[i].project_id == project.id) {
+                    totalReportedTime += reports[i].time;
+                }
+            }
+
+            if(data < totalReportedTime) {
+              return "The time must be greater than the total reported time (" + totalReportedTime.toFixed(1) + " hours)";
+            }
         };
 
         $scope.init = function() {
+            Report.query({user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)},
+              function(response){
+                  reports = response;
+                  console.log(reports);
+              });
             Project.query({user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)},
-            function(response){
-                $scope.projects = response;
-            });
+              function(response){
+                  $scope.projects = response;
+              });
             $scope.userName = window.localStorage.user_name.slice(1, -1)
         };
 

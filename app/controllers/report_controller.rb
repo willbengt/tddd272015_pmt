@@ -3,12 +3,18 @@ class ReportController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
-    if Project.find(params[:project]).authProjectMember?(params[:user], params[:token]) then
-      @project = Project.find(params[:project]).first
-      return render json: @project.timereports
-    end
+    puts '-----------timereport#index-----------'
 
-    return render nothing: true
+    @user = User.where(:name => params[:user]).first
+
+    if @user.authenticated?(params[:token])
+      @reports = Timereport.all 
+
+      render :json => @reports
+    else
+      return render nothing: true
+    end 
+
   end
 
 
@@ -25,8 +31,9 @@ class ReportController < ApplicationController
 
   def show
     puts '-----------timereport#show-----------'
-    if Project.find(params[:id]).authProjectMember?(params[:user], params[:token]) then
-      @project = Project.find(params[:id])
+    @project_id = params[:id]
+    if Project.find(@project_id).authProjectMember?(params[:user], params[:token]) then
+      @project = Project.find(@project_id)
       return render json: @project.timereports
     end
 
