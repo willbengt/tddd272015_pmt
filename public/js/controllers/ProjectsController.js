@@ -1,7 +1,7 @@
 app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'Membership', 'Session', 'Report',
     function($scope, $filter, Project, User, Membership, Session, Report) {
 
-        //var reports = [];
+        var reports = [];
 
         $scope.validateName = function(data) {
             if (!data) {return "Name is required";}
@@ -9,7 +9,8 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
 
         $scope.validateTime = function(data, project) {
             if (!data) {return "Time is required";} 
-            if (isNaN(parseFloat(data)) || parseFloat(data) < 0) {return "The time must be a number greater or equal to zero";}
+
+            if (isNaN(data) || parseFloat(data) < 0) {return "The time must be a number greater or equal to zero";}
 
             var totalReportedTime = 0;
 

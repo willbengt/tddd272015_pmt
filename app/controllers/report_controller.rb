@@ -10,11 +10,10 @@ class ReportController < ApplicationController
     if @user.authenticated?(params[:token])
       @reports = Timereport.all 
 
-      render :json => @reports
-    else
-      return render nothing: true
-    end 
+      return render :json => @reports
+    end
 
+    return render nothing: true
   end
 
 
@@ -51,18 +50,8 @@ class ReportController < ApplicationController
   end
 
 
-  def get
-    if Project.find(params[:project]).authProjectMember?(params[:user], params[:token]) then
-      @report = Timereport.find(params[:id])
-      return render :json => @report
-    end
-
-    return render nothing: true
-  end
-
-
   def destroy
-    puts '-----------destroy-----------'
+    puts '-----------timereport#destroy-----------'
     if Project.find(params[:project]).authProjectMember?(params[:user], params[:token]) then
       Timereport.find(params[:id]).destroy
       return render nothing: true

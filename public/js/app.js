@@ -28,8 +28,6 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
                 templateUrl: '/views/project.html',  
                 controller: 'ProjectController'
             })
-
-        //$urlRouterProvider.otherwise('/home');
     }])
 
     .run(function(editableOptions, $rootScope, Session, $location, $state) {
@@ -44,6 +42,5 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
             }
             $rootScope.$state = $state;
         });
-        editableOptions.theme = 'bs3'; // bootstrap3 theme.
-
+        editableOptions.theme = 'bs3'; 
     });
