@@ -1,8 +1,7 @@
 app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'Membership', 'Session', 'Report',
     function($scope, $filter, Project, User, Membership, Session, Report) {
 
-        var selectedProjects = [];
-        var reports = [];
+        //var reports = [];
 
         $scope.validateName = function(data) {
             if (!data) {return "Name is required";}
@@ -28,8 +27,7 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
         $scope.init = function() {
             Report.query({user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)},
               function(response){
-                  reports = response;
-                  console.log(reports);
+                  var reports = response;
               });
             Project.query({user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)},
               function(response){
@@ -46,7 +44,6 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
 
         $scope.removeProject = function(project, rowIndex) {
             $scope.projects.splice(rowIndex, 1);
-            selectedProjects.splice(selectedProjects.indexOf(project.id), 1);
             project.$delete();
         };
 
@@ -57,7 +54,6 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
 
             $scope.inserted.$save(function(response) {
                 $scope.inserted.id = response.id;
-                selectedProjects.push(response.id);
                 $scope.projects.push($scope.inserted);
             });
         };
