@@ -4,13 +4,12 @@ class TimereportController < ApplicationController
 
   def index
     puts '-----------timereport#index-----------'
-
     @user = User.where(:name => params[:user]).first
 
     if @user.authenticated?(params[:token])
-      @reports = Timereport.all 
+      @timereports = Timereport.all 
 
-      return render :json => @reports
+      return render :json => @timereports
     end
 
     return render nothing: true
