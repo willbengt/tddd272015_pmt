@@ -6,7 +6,7 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
         
         $stateProvider
             .state('home', {
-                url: '/home?token&name',
+                url: '/home',
                 templateUrl: '/views/home.html',
                 controller: 'LoginController'
             })
