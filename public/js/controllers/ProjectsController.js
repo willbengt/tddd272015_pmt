@@ -28,7 +28,7 @@ app.controller('ProjectsController', ['$scope', '$filter', 'Project', 'User', 'M
         $scope.init = function() {
             Report.query({user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)},
               function(response){
-                  var reports = response;
+                  reports = response;
               });
             Project.query({user: window.localStorage.user_name.slice(1, -1), token: window.localStorage.access_token.slice(1, -1)},
               function(response){
