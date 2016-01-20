@@ -29,7 +29,7 @@ var app = angular.module("TimeReportApp", ['ui.router', 'angular-oauth2', 'xedit
                 controller: 'ProjectController'
             })
 
-        $urlRouterProvider.otherwise('/home');
+        //$urlRouterProvider.otherwise('/home');
     }])
 
     .run(function(editableOptions, $rootScope, Session, $location, $state) {
