@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120172152) do
+ActiveRecord::Schema.define(version: 20160120173554) do
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
@@ -26,18 +26,12 @@ ActiveRecord::Schema.define(version: 20160120172152) do
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.float    "time"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "user_id"
-    t.integer  "timereport_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "projects", ["timereport_id"], name: "index_projects_on_timereport_id"
-  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
 
   create_table "timereports", force: :cascade do |t|
     t.string   "name"
-    t.integer  "project"
     t.float    "time"
     t.text     "text"
     t.datetime "created_at", null: false
@@ -53,7 +47,6 @@ ActiveRecord::Schema.define(version: 20160120172152) do
     t.datetime "expires_at"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.string   "email"
     t.integer  "user_id"
   end
 
@@ -64,12 +57,6 @@ ActiveRecord::Schema.define(version: 20160120172152) do
     t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "project"
-    t.integer  "project_id"
-    t.integer  "token_id"
   end
-
-  add_index "users", ["project_id"], name: "index_users_on_project_id"
-  add_index "users", ["token_id"], name: "index_users_on_token_id"
 
 end

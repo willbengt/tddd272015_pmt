@@ -17,7 +17,7 @@ class UserController < ApplicationController
 
   def update
     puts '-----------user#update-----------'
-    User.find(params[:id]).update(:name => params[:name], :email => params[:email], :project => params[:project])
+    User.find(params[:id]).update(:name => params[:name], :email => params[:email])
     render nothing: true
   end
 
