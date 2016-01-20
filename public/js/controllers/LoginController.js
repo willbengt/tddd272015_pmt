@@ -20,7 +20,7 @@ angular.module('TimeReportApp')
                     });
             };
 
-            $scope.isLogedIn = function() {
+            $scope.isLoggedIn = function() {
                 return Session.isLoggedIn();
             }
       }]);
