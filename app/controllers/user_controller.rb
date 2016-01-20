@@ -2,8 +2,8 @@ class UserController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
 
-  def show
-    puts '-----------user#show-----------'
+  def index
+    puts '-----------user#index-----------'
     data = User.all
     render json: data
   end
