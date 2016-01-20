@@ -3,6 +3,7 @@ class ReportController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def index
+    puts '-----------timereport#index-----------'
     if Project.find(params[:project]).authProjectMember?(params[:user], params[:token]) then
       @project = Project.find(params[:project]).first
       return render json: @project.timereports
@@ -44,18 +45,8 @@ class ReportController < ApplicationController
   end
 
 
-  def get
-    if Project.find(params[:project]).authProjectMember?(params[:user], params[:token]) then
-      @report = Timereport.find(params[:id])
-      return render :json => @report
-    end
-
-    return render nothing: true
-  end
-
-
   def destroy
-    puts '-----------destroy-----------'
+    puts '-----------timereport#destroy-----------'
     if Project.find(params[:project]).authProjectMember?(params[:user], params[:token]) then
       Timereport.find(params[:id]).destroy
       return render nothing: true
