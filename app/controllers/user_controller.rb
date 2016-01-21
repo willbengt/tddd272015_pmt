@@ -22,10 +22,8 @@ class UserController < ApplicationController
   end
 
   def destroy
-    puts '-----------user#delete-----------' 
-    
+    puts '-----------user#delete-----------'
     User.find(params[:id]).destroy
-
     render nothing: true
   end
 

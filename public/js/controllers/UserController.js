@@ -73,10 +73,13 @@ angular.module('TimeReportApp')
             };
 
             $scope.removeUser = function(user, rowIndex) {
-              $scope.users.splice(rowIndex, 1);
-              user.$delete(function() {
-                Session.logOutUser();
-              });
+                $scope.users.splice(rowIndex, 1);
+                var currentUser = window.localStorage.user_name.slice(1, -1);
+                user.$delete(function() {
+                    if (currentUser == user.name) {
+                        Session.logOutUser();
+                    }
+                });
             };
 
             $scope.addUser = function() {
