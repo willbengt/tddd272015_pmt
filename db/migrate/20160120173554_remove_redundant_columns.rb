@@ -5,7 +5,7 @@ class RemoveRedundantColumns < ActiveRecord::Migration
     remove_column :timereports, :project
     remove_column :tokens, :email
     remove_column :users, :project
-    remove_column :users, :project_id
-    remove_column :users, :token_id
+ #   remove_column :users, :project_id
+ #   remove_column :users, :token_id
   end
 end
